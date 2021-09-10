@@ -1,0 +1,14 @@
+.signInBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-self: center;
+  width: 20rem;
+  margin: auto;
+
+  &__header {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}

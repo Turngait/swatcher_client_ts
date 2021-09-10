@@ -1,0 +1,10 @@
+.headBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+
+  &__pageName {
+    font-size: 2rem;
+  }
+}

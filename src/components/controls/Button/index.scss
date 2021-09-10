@@ -1,0 +1,17 @@
+@import '../../../styles/colors.scss';
+
+.button {
+  border: none;
+  border-radius: 5px;
+  background-color: $green;
+  color: $white;
+  padding: 0.4rem 1rem;
+  box-sizing: border-box;
+  font-size: 1.3rem;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.largeBtn {
+  width: 100%;
+}

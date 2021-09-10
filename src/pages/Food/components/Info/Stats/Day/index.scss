@@ -1,0 +1,29 @@
+@import '../../../../../../styles/colors.scss';
+
+.foodStatDay {
+  &__header {
+    background-color: $white;
+    padding: 0.6rem 1.2rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(67, 67, 67, 0.25);
+    font-weight: 700;
+  }
+
+  &__info {
+    margin-top: 1rem;
+    background-color: $white;
+    padding: 0.6rem 1.2rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(67, 67, 67, 0.25);
+
+    &__foods {
+      padding: 0.8rem 0;
+      &__item {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

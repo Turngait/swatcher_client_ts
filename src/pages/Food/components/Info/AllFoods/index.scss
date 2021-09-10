@@ -1,0 +1,61 @@
+@import '../../../../../styles/colors.scss';
+
+.allFoods {
+  width: 34rem;
+  &__header {
+    background-color: $white;
+    padding: 0.6rem 1.2rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(67, 67, 67, 0.25);
+    font-weight: 700;
+  }
+
+  &__infoBox {
+    margin-top: 1rem;
+    background-color: $white;
+    padding: 0.6rem 1.2rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(67, 67, 67, 0.25);
+    height: 70vh;
+
+    &__foods {
+      padding: 0.8rem 0;
+      &__item {
+        background-color: $dark-green;
+        padding: 0.6rem 1.2rem;
+        border-radius: 10px;
+        color: $white;
+
+        display: flex;
+        justify-content: space-between;
+
+        &__title {
+          flex-grow: 1;
+        }
+
+        &__colories {
+          width: 5rem;
+        }
+
+        &__contolls {
+          display: flex;
+          justify-content: space-between;
+          gap: 0.8rem;
+
+          &__ico {
+            width: 1.4rem;
+            height: 1.4rem;
+            cursor: pointer;
+            transition-duration: 0.4s;
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+  }
+}

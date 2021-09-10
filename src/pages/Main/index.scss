@@ -1,0 +1,85 @@
+@import '../../styles/colors.scss';
+
+.mainBox {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  background-image: url('../../assets/img/main_bcg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__leftBox {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    &__info {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      align-self: flex-end;
+    }
+  }
+
+  &__rightBox {
+    flex-basis: 26rem;
+    box-shadow: -2px 0px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 0px 0px 10px;
+    padding: 2rem 2rem;
+    box-sizing: border-box;
+    background-color: $white;
+
+    &__nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      &__item {
+        border: none;
+        background: none;
+        text-decoration: underline;
+        font-size: 1rem;
+        color: $black;
+        cursor: pointer;
+      }
+    }
+
+    &__header {
+      text-align: center;
+      margin-top: 6rem;
+      margin-bottom: 3rem;
+      font-size: 3rem;
+      font-weight: 200;
+    }
+
+    &__msg {
+      text-align: center;
+      padding: 0.4rem 1rem;
+      border: 1px solid $black;
+      color: $black;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &__descr {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    &__switchBtn {
+      display: block;
+      border: none;
+      background: none;
+      margin: auto;
+      text-decoration: underline;
+      color: $black;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+  }
+}
