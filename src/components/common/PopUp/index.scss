@@ -1,0 +1,22 @@
+@import '../../../styles/colors.scss';
+
+.popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.404);
+  z-index: 100;
+}
+
+.modal {
+  background-color: $white;
+  padding: 2rem;
+  width: 50rem;
+  margin: auto;
+  margin-top: 7rem;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}

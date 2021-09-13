@@ -3,4 +3,8 @@
   border: 1px solid #6D6D6D;
   border-radius: 5px;
   font-size: 1.1rem;
+
+  &:focus {
+    outline: none;
+  }
 }
