@@ -22,6 +22,10 @@
 
     &__foods {
       padding: 0.8rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
       &__item {
         background-color: $dark-green;
         padding: 0.6rem 1.2rem;

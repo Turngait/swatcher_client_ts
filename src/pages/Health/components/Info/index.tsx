@@ -5,11 +5,11 @@ import AllIllness from './AllIllness';
 
 import './index.scss';
 
-const Info: React.FC = () => {
+const Info: React.FC<{setIsAddIllnessOpen: (isOpen: boolean) => void}> = ({setIsAddIllnessOpen}) => {
   return(
     <div className="healthInfo">
       <Stats />
-      <AllIllness />
+      <AllIllness setIsAddIllnessOpen={setIsAddIllnessOpen}/>
     </div>
   )
 }

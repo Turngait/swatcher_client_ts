@@ -1,27 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RouteComponentProps } from "react-router-dom";
 
 import LeftMenu from '../../components/common/LeftMenu';
 import Header from '../../components/common/Header';
 import Info from './components/Info';
 import FirstSetUp from './components/FirstSetUp';
 import Loader from 'components/common/Loader';
+import {IUserData} from 'types/common';
 
 import {saveFirstSetupData, getInitData} from './services';
+import { setUserData } from 'store/User/user.actions';
 import './index.scss';
 
 const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
+  const dispatch = useDispatch();
+  const userData: IUserData = useSelector((state: any) => state.user.userData);
+
   const [token, setToken] = useState('');
-  const [isFirstSetUpOpen, setIsFirstSetUpOpen] = useState(true);
+  const [isFirstSetUpOpen, setIsFirstSetUpOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function init(token: string) {
     setLoading(true);
-    const data = await getInitData(token);
-    console.log(data);
+    const { user } = await getInitData(token);
+    if (user) dispatch(setUserData(user));
     setToken(token);
     setLoading(false);
   }
+
+  useEffect(() => {
+    console.log(userData);
+    if(userData && userData.data.sex === '') setIsFirstSetUpOpen(true);
+  }, [userData]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -30,7 +42,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
     } else {
       history.push('/');
     }
-  }, [history]);
+  }, []);
 
   const saveFirstSetUp = async (sex: string, age: number, weight: number, height: number) => {
     const { status } = await saveFirstSetupData(sex, age, weight, height, token);

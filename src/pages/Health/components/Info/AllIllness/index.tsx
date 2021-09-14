@@ -6,12 +6,12 @@ import EditIco from 'assets/icons/edit-ico.png';
 import DelIco from 'assets/icons/delete-ico.png';
 import './index.scss';
 
-const AllIllness = () => {
+const AllIllness: React.FC<{setIsAddIllnessOpen: (isOpen: boolean) => void}> = ({setIsAddIllnessOpen}) => {
   return (
     <div className="allHealth">
       <div className="allHealth__header">All my illness</div>
       <div className="allHealth__infoBox">
-        <Button size={BtnSize.largeBtn} title="Add illness"/>
+        <Button size={BtnSize.largeBtn} title="Новое недомогание" onClick={() => setIsAddIllnessOpen(true)}/>
         <div className="allHealth__infoBox__health">
           <div className="allHealth__infoBox__health__item">
             <p className="allHealth__infoBox__health__item__title">Cofee</p>
