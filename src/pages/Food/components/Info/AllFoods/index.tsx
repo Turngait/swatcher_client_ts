@@ -8,10 +8,12 @@ import { IFood } from 'types/common';
 
 import './index.scss';
 
-const AllFoods: React.FC<{setIsAddFoodOpen: (isOpen: boolean) => void}> = ({ setIsAddFoodOpen }) => {
+const AllFoods: React.FC<{
+    setIsAddFoodOpen: (isOpen: boolean) => void,
+    onDeleteFood: (id: string) => Promise<void>
+  }> = ({ setIsAddFoodOpen, onDeleteFood }) => {
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
 
-  console.log(foods);
   return (
     <div className="allFoods">
       <div className="allFoods__header">All my food</div>
@@ -23,7 +25,7 @@ const AllFoods: React.FC<{setIsAddFoodOpen: (isOpen: boolean) => void}> = ({ set
             ?
             foods.map((food: IFood) => {
               return (
-                <Food key={food.id} food={food}/>
+                <Food onDeleteFood={onDeleteFood} key={food.id} food={food}/>
               );
             })
             : <p>Вы пока не добавили себе ни одного продукта</p>

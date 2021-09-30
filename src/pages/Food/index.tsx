@@ -6,8 +6,9 @@ import LeftMenu from '../../components/common/LeftMenu';
 import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
+import AddFoodForDayModal from './components/Modals/AddFoodForDay';
 
-import { addNewFoodService, getAllFoodsDataService } from './services';
+import { addNewFoodService, getAllFoodsDataService, deleteFood } from './services';
 import { setAllFoods } from 'store/Food/food.action';
 import { IFood } from 'types/common';
 
@@ -18,6 +19,7 @@ const FoodPage: React.FC = () => {
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
 
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
+  const [isAddFoodForDayOpen, setIsAddFoodForDayOpen] = useState(false);
   const [token, setToken] = useState<string | null>(null);
 
   const init = async (token: string): Promise<void> => {
@@ -46,15 +48,37 @@ const FoodPage: React.FC = () => {
     }
   }
 
+  const deleteFoodHandler = async (id: string): Promise<void> => {
+    const {status} = await deleteFood(id, token || '');
+    // TODO добавить вывод ошибки сервера на экран
+    if (status === 200) {
+      const newFoods = foods.filter((food) => food.id !== id);
+      dispatch(setAllFoods(newFoods));
+    }
+  }
+
+  const addFoodForDay = async (foodId: string, amount: number, date: string, time: string, description: string): Promise<void> => {
+    console.log(foodId);
+    console.log(amount);
+    console.log(time);
+    console.log(date);
+    console.log(description);
+  }
+
   return (
     <div className="foodPage">
       {
-        isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood}/> : null
+        isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
+      {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDay} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
       <LeftMenu />
       <div className="foodPage__info">
         <Header title="Food"/>
-        <Info setIsAddFoodOpen={setIsAddFoodOpen} />
+        <Info
+          onDeleteFood={deleteFoodHandler}
+          setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}
+          setIsAddFoodOpen={setIsAddFoodOpen} 
+        />
       </div>
     </div>
   )

@@ -6,14 +6,14 @@ import DelIco from 'assets/icons/delete-ico.png';
 import { IFood } from 'types/common';
 import './index.scss';
 
-const Food: React.FC<{food: IFood}> = ({ food }) => {
+const Food: React.FC<{food: IFood, onDeleteFood: (id: string) => Promise<void>}> = ({ food, onDeleteFood }) => {
   return (
     <div className="item">
       <p className="item__title">{food.title}</p>
       <p className="item__colories">{food.callories}kkl</p>
       <div className="item__contolls">
         <img className="item__contolls__ico" src={EditIco} alt="edit food"/>
-        <img className="item__contolls__ico" src={DelIco} alt="delete food"/>
+        <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
       </div>
     </div>
   )

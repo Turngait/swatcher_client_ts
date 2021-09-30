@@ -1,4 +1,5 @@
 import { API_URL } from 'config/api';
+import { API_KEY } from 'config/keys';
 import { IFood } from 'types/common';
 
 export async function addNewFoodService(title: string, callories: number, descr: string, token: string | null): Promise<{status: number}> {
@@ -6,6 +7,7 @@ export async function addNewFoodService(title: string, callories: number, descr:
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
     },
     mode: "cors",
     body: JSON.stringify({
@@ -23,9 +25,26 @@ export async function getAllFoodsDataService(token: string): Promise<{foods: [IF
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
     },
     mode: "cors",
     body: JSON.stringify({
+      token
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function deleteFood(id: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/food/delfood', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      id,
       token
     }),
   })

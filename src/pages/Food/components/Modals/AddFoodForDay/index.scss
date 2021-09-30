@@ -1,6 +1,6 @@
 @import '../../../../../styles/colors.scss';
 
-.addNewFood {
+.addFoodForDay {
   &__header {
     text-align: center;
     font-size: 1.4rem;
@@ -28,6 +28,17 @@
       border-radius: 5px;
       font-size: 1rem;
       background: $white;
+      box-sizing: border-box;
+    }
+
+    &__time {
+      width: 30%;
+      padding: 0.4rem 1rem;
+      border: 1px solid #6D6D6D;
+      border-radius: 5px;
+      font-size: 1rem;
+      background: $white;
+      box-sizing: border-box;
     }
   }
 }

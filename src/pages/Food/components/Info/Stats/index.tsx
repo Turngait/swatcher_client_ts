@@ -4,10 +4,10 @@ import Day from './Day';
 
 import './index.scss';
 
-const Stats = () => {
+const Stats: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void}> = ({ setIsAddFoodForDayOpen }) => {
   return (
     <div className="foodStats">
-      <Day />
+      <Day setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}/>
     </div>
   )
 }

@@ -24,14 +24,18 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
 
   async function init(token: string) {
     setLoading(true);
-    const { user } = await getInitData(token);
+    const { user, status } = await getInitData(token);
+    if(status === 403) {
+      localStorage.removeItem('token');
+      history.push('/');
+    }
     if (user) dispatch(setUserData(user));
     setToken(token);
     setLoading(false);
   }
 
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
     if(userData && userData.data.sex === '') setIsFirstSetUpOpen(true);
   }, [userData]);
 

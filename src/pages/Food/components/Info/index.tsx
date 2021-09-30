@@ -5,11 +5,15 @@ import AllFoods from './AllFoods';
 
 import './index.scss';
 
-const Info: React.FC<{setIsAddFoodOpen: (isOpne: boolean) => void}> = ({ setIsAddFoodOpen }) => {
+const Info: React.FC<{
+    setIsAddFoodOpen: (isOpne: boolean) => void,
+    setIsAddFoodForDayOpen: (isOpen: boolean) => void,
+    onDeleteFood: (id: string) => Promise<void>
+  }> = ({ setIsAddFoodOpen, setIsAddFoodForDayOpen, onDeleteFood }) => {
   return(
     <div className="foodInfo">
-      <Stats />
-      <AllFoods setIsAddFoodOpen={setIsAddFoodOpen} />
+      <Stats setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}/>
+      <AllFoods onDeleteFood={onDeleteFood} setIsAddFoodOpen={setIsAddFoodOpen} />
     </div>
   )
 }
