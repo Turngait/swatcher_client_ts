@@ -27,3 +27,18 @@ export interface IUserData {
   },
   createdAt: string
 }
+
+export interface IFoodStat {
+  id?: string,
+  food_id: string,
+  description: string,
+  amount: number,
+  time: string
+}
+
+export interface IStat {
+  id?: string,
+  date: string,
+  foods: IFoodStat[] | [],
+  health: [string]
+}

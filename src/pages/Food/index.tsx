@@ -8,9 +8,9 @@ import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
 import AddFoodForDayModal from './components/Modals/AddFoodForDay';
 
-import { addNewFoodService, getAllFoodsDataService, deleteFood } from './services';
+import { addNewFoodService, getAllFoodsDataService, deleteFood, addFoodForDay } from './services';
 import { setAllFoods } from 'store/Food/food.action';
-import { IFood } from 'types/common';
+import { IFood, IFoodStat } from 'types/common';
 
 import './index.scss';
 
@@ -57,12 +57,16 @@ const FoodPage: React.FC = () => {
     }
   }
 
-  const addFoodForDay = async (foodId: string, amount: number, date: string, time: string, description: string): Promise<void> => {
-    console.log(foodId);
-    console.log(amount);
-    console.log(time);
-    console.log(date);
-    console.log(description);
+  const addFoodForDayHandler = async (foodId: string, amount: number, date: string, time: string, description: string): Promise<void> => {
+    const food:IFoodStat = {
+      food_id: foodId,
+      amount,
+      time,
+      description
+    };
+    const { status, stats } = await addFoodForDay(food, date, token || '');
+    console.log(status);
+    console.log(stats);
   }
 
   return (
@@ -70,7 +74,7 @@ const FoodPage: React.FC = () => {
       {
         isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
-      {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDay} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
+      {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
       <LeftMenu />
       <div className="foodPage__info">
         <Header title="Food"/>
