@@ -8,8 +8,9 @@ import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
 import AddFoodForDayModal from './components/Modals/AddFoodForDay';
 
-import { addNewFoodService, getAllFoodsDataService, deleteFood, addFoodForDay } from './services';
+import { addNewFoodService, getAllFoodsDataService, deleteFood, addFoodForDay, getStatForPeriod } from './services';
 import { setAllFoods } from 'store/Food/food.action';
+import { setPeriod, setStat } from 'store/User/user.actions';
 import { IFood, IFoodStat } from 'types/common';
 
 import './index.scss';
@@ -17,12 +18,13 @@ import './index.scss';
 const FoodPage: React.FC = () => {
   const dispatch = useDispatch();
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
+  const period: string = useSelector((state: any) => state.user.period);
 
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
   const [isAddFoodForDayOpen, setIsAddFoodForDayOpen] = useState(false);
   const [token, setToken] = useState<string | null>(null);
 
-  const init = async (token: string): Promise<void> => {
+  const init = async (token: string, period: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
       const { foods } = await getAllFoodsDataService(token);
       if (foods) dispatch(setAllFoods(foods));
@@ -33,7 +35,7 @@ const FoodPage: React.FC = () => {
     const token = localStorage.getItem('token');
     if(token) {
       setToken(token);
-      init(token);
+      init(token, period);
     }
   }, []);
 
@@ -68,6 +70,15 @@ const FoodPage: React.FC = () => {
     console.log(status);
     console.log(stats);
   }
+  async function changePeriod(period: string): Promise<void> {
+    console.log(period);
+    const {stat} = await getStatForPeriod(period, token || '');
+    if(stat) {
+      dispatch(setStat(stat));
+      dispatch(setPeriod(period));
+    }
+    console.log(stat);
+  }
 
   return (
     <div className="foodPage">
@@ -77,7 +88,7 @@ const FoodPage: React.FC = () => {
       {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
       <LeftMenu />
       <div className="foodPage__info">
-        <Header title="Food"/>
+        <Header changePeriod={changePeriod} title="Food"/>
         <Info
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}

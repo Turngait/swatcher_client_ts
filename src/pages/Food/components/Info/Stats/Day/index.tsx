@@ -1,23 +1,34 @@
 import React from 'react';
 
-import Button from 'components/controls/Button';
-import {BtnSize} from 'types/components';
-
 import './index.scss';
 
-const Day: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void}> = ({ setIsAddFoodForDayOpen }) => {
+const Day: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void, stat: any}> = ({ stat, setIsAddFoodForDayOpen }) => {
+  function showDate (initDate: string): string {
+    const d = new Date(initDate);
+    let ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('ru', { month: 'long' }).format(d);
+    let da = new Intl.DateTimeFormat('ru', { day: '2-digit' }).format(d);
+    return `${da} ${mo} ${ye}`;
+  }
+
   return (
     <div className="foodStatDay">
-      <div className="foodStatDay__header">Today</div>
+      <div className="foodStatDay__header">{showDate(stat.date)}</div>
       <div className="foodStatDay__info">
-        <Button onClick={() => setIsAddFoodForDayOpen(true)} size={BtnSize.largeBtn} title="Add"/>
         <div className="foodStatDay__info__foods">
-          <div className="foodStatDay__info__foods__item">
-            <p>Coffee</p>
-            <p>with Milk</p>
-            <p>150ml</p>
-            <p>14 00</p>
-          </div>
+          {
+            stat.foods.map((food: any) => {
+              return (
+                <div className="foodStatDay__info__foods__item" key={food.id}>
+                  <p>{food.title}</p>
+                  <p>{food.description}</p>
+                  <p>{food.amount} шт.</p>
+                  <p>{food.time}</p>
+                </div>
+              )
+            })
+          }
+
         </div>
       </div>
     </div>

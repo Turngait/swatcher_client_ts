@@ -23,6 +23,11 @@ const HealthPage:React.FC<any> = () => {
     console.log(status);
     if (status === 200) setIsAddIllnessOpen(false);
   }
+
+  async function changePeriod(period: string): Promise<void> {
+    console.log(period);
+  }
+
   return (
     <div className="healthPage">
       {
@@ -30,7 +35,7 @@ const HealthPage:React.FC<any> = () => {
       }
       <LeftMenu />
       <div className="foodPage__info">
-        <Header title="Health"/>
+        <Header changePeriod={changePeriod} title="Health"/>
         <Info setIsAddIllnessOpen={setIsAddIllnessOpen}/>
       </div>
     </div>

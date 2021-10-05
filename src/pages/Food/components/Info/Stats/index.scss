@@ -2,4 +2,8 @@
 
 .foodStats {
   flex-grow: 1;
+
+  &__controlBox {
+    margin-bottom: 1rem;
+  }
 }

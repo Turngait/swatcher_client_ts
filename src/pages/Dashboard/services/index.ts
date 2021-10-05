@@ -21,7 +21,7 @@ export async function saveFirstSetupData(sex: string, age: number, weight: numbe
   .then(res => res.json());
 }
 
-export async function getInitData(token: string): Promise<{user: IUserData | null, status: number}> {
+export async function getInitData(token: string, period: string): Promise<{user: IUserData | null, status: number, stat: [any] | [] | null, foods: any}> {
   return await fetch(API_URL + '/getdata', {
     method: "POST",
     headers: {
@@ -30,7 +30,24 @@ export async function getInitData(token: string): Promise<{user: IUserData | nul
     },
     mode: "cors",
     body: JSON.stringify({
-      token
+      token,
+      period
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function getStat(token: string, period: string): Promise<{stat: [any]}> {
+  return await fetch(API_URL + '/stats/getstat', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      token,
+      period
     }),
   })
   .then(res => res.json());

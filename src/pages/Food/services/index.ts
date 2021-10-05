@@ -67,3 +67,19 @@ export async function addFoodForDay(food: IFoodStat, date: string, token: string
   })
   .then(res => res.json());
 }
+
+export async function getStatForPeriod(period: string, token: string): Promise<{stat: any | []}> {
+  return await fetch(API_URL + '/stats/getstat', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      token,
+      period
+    }),
+  })
+  .then(res => res.json());
+}
