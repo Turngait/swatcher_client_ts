@@ -20,6 +20,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
       <div className="day__info">
         <div className="day__info__food">
         {
+          stat.foods.length > 0 ?
           stat.foods.map((food: any) => {
             return (
               <div className="day__info__food__item" key={food.id}>
@@ -29,6 +30,10 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
               </div>
             )
           })
+          :
+          <div className="day__info__food__item">
+            <p>Тут пока пусто</p>
+          </div>
         }
 
         </div>

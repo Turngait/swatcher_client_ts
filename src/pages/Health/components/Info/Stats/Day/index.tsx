@@ -5,12 +5,12 @@ import {BtnSize} from 'types/components';
 
 import './index.scss';
 
-const Day = () => {
+const Day:React.FC<{setIsAddIllnessForDayOpen: (isOpne: boolean) => void}> = ({setIsAddIllnessForDayOpen}) => {
   return (
     <div className="healthStatDay">
       <div className="healthStatDay__header">Today</div>
       <div className="healthStatDay__info">
-        <Button size={BtnSize.largeBtn} title="Add"/>
+        <Button size={BtnSize.largeBtn} title="Add" onClick={() => setIsAddIllnessForDayOpen(true)}/>
         <div className="healthStatDay__info__healths">
           <div className="healthStatDay__info__healths__item">
             <p>Coffee</p>

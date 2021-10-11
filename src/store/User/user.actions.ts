@@ -1,10 +1,11 @@
-import {IUserData} from 'types/common';
+import {IUserData, IIllness, IFood} from 'types/common';
 
-export function setUserData(data: IUserData, stat: [any] | [], foods: any):  (dispatch: any) => void {
+export function setUserData(data: IUserData, stat: [any] | [], foods: IFood[], health: IIllness[]):  (dispatch: any) => void {
   return (dispatch: any) => {
     dispatch({type: 'SET_USER_DATA', payload: data});
     dispatch({type: 'SET_STAT', payload: stat});
     dispatch({type: 'SET_FOODS', payload: foods});
+    dispatch({type: 'SET_HEALTH', payload: health});
   }
 }
 

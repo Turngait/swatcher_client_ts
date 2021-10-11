@@ -4,10 +4,10 @@ import Day from './Day';
 
 import './index.scss';
 
-const Stats = () => {
+const Stats: React.FC<{setIsAddIllnessForDayOpen: (isOpne: boolean) => void}> = ({setIsAddIllnessForDayOpen}) => {
   return (
     <div className="healthStats">
-      <Day />
+      <Day setIsAddIllnessForDayOpen={setIsAddIllnessForDayOpen}/>
     </div>
   )
 }

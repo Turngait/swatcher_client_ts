@@ -7,6 +7,13 @@ export interface IFood {
   createdAt: string
 }
 
+export interface IIllness {
+  id?: string,
+  title: string,
+  danger: string,
+  descr: string
+}
+
 export interface IUserData {
   name: string,
   email: string,
@@ -36,9 +43,17 @@ export interface IFoodStat {
   time: string
 }
 
+export interface IIllnessStat {
+  health_id?: string,
+  power: number,
+  begin: string,
+  duration: string,
+  description: string
+}
+
 export interface IStat {
   id?: string,
   date: string,
   foods: IFoodStat[] | [],
-  health: [string]
+  health: [IIllnessStat] | []
 }
