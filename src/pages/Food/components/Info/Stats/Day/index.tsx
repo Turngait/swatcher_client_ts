@@ -1,8 +1,13 @@
 import React from 'react';
 
+import DelIco from 'assets/icons/delete-ico.png';
+
 import './index.scss';
 
-const Day: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void, stat: any}> = ({ stat, setIsAddFoodForDayOpen }) => {
+const Day: React.FC<{
+    stat: any,
+    onDeleteFoodForDay: (id: string, date: string) => void
+  }> = ({ stat, onDeleteFoodForDay }) => {
   function showDate (initDate: string): string {
     const d = new Date(initDate);
     let ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
@@ -24,6 +29,7 @@ const Day: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void, stat: an
                   <p>{food.description}</p>
                   <p>{food.amount} шт.</p>
                   <p>{food.time}</p>
+                  <img onClick={() => onDeleteFoodForDay(food.id, stat.date)} className="healthStatDay__info__healths__item__delIco" src={DelIco} alt="delete health"/>
                 </div>
               )
             })

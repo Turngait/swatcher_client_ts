@@ -1,6 +1,7 @@
 @import '../../../../../../styles/colors.scss';
 
 .healthStatDay {
+  margin-bottom: 2rem;
   &__header {
     background-color: $white;
     padding: 0.6rem 1.2rem;
@@ -11,7 +12,7 @@
   }
 
   &__info {
-    margin-top: 1rem;
+    margin-top: 0.7rem;
     background-color: $white;
     padding: 0.6rem 1.2rem;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
@@ -23,6 +24,22 @@
       &__item {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 1rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &__delIco {
+          width: 1.6rem;
+          height: 1.6rem;
+          filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 0.562));
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
       }
     }
   }

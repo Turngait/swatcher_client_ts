@@ -7,12 +7,14 @@ import './index.scss';
 
 const Info: React.FC<{
     setIsAddIllnessOpen: (isOpen: boolean) => void,
-    setIsAddIllnessForDayOpen: (isOpen: boolean) => void
-  }> = ({setIsAddIllnessOpen, setIsAddIllnessForDayOpen}) => {
+    setIsAddIllnessForDayOpen: (isOpen: boolean) => void,
+    deleteIllness: (id: string) => void,
+    deleteIllnessForDay: (id: string, date: string) => void
+  }> = ({setIsAddIllnessOpen, setIsAddIllnessForDayOpen, deleteIllness, deleteIllnessForDay}) => {
   return(
     <div className="healthInfo">
-      <Stats setIsAddIllnessForDayOpen={setIsAddIllnessForDayOpen}/>
-      <AllIllness setIsAddIllnessOpen={setIsAddIllnessOpen}/>
+      <Stats  deleteIllnessForDay={deleteIllnessForDay} setIsAddIllnessForDayOpen={setIsAddIllnessForDayOpen}/>
+      <AllIllness deleteIllness={deleteIllness} setIsAddIllnessOpen={setIsAddIllnessOpen}/>
     </div>
   )
 }

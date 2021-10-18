@@ -38,12 +38,25 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
 
         </div>
         <div className="day__info__health">
-          <div className="day__info__health__item">
-            <p>Migraine</p>
-            <p>medium</p>
-            <p>from 14 00</p>
-            <p>2 hours</p>
-          </div>
+          {
+            stat.health.length > 0 ?
+            stat.health.map((item: any) => {
+              return (
+                <div className="day__info__health__item" key={item.id}>
+                  <p>{item.title}</p>
+                  <p>{item.power}</p>
+                  <p>с {item.begin}</p>
+                  <p>{item.duration} часов</p>
+                </div>
+              )
+            })
+            :
+            (
+              <div className="day__info__health__item">
+                <p>Тут пока пусто</p>
+            </div>
+            )
+          }
         </div>
       </div>
     </div>

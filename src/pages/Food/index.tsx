@@ -8,7 +8,15 @@ import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
 import AddFoodForDayModal from './components/Modals/AddFoodForDay';
 
-import { addNewFoodService, getAllFoodsDataService, deleteFood, addFoodForDay, getStatForPeriod } from './services';
+import { 
+  addNewFoodService,
+  getAllFoodsDataService,
+  deleteFood,
+  addFoodForDay,
+  getStatForPeriod,
+  deleteFoodForDayService
+} from './services';
+
 import { setAllFoods } from 'store/Food/food.action';
 import { setPeriod, setStat } from 'store/User/user.actions';
 import { IFood, IFoodStat } from 'types/common';
@@ -19,6 +27,7 @@ const FoodPage: React.FC = () => {
   const dispatch = useDispatch();
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
   const period: string = useSelector((state: any) => state.user.period);
+  const stats = useSelector((state: any) => state.user.stat);
 
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
   const [isAddFoodForDayOpen, setIsAddFoodForDayOpen] = useState(false);
@@ -59,6 +68,20 @@ const FoodPage: React.FC = () => {
     }
   }
 
+  //TODO добавить обработку ошибок и вывод ошибок и добавить реактивности
+  const deleteFoodForDayHandler = async (id: string, date: string): Promise<void> => {
+    const { status } = await deleteFoodForDayService(id, date, token || '');
+    console.log(status);
+    if (status === 200) {
+      for (const stat of stats) {
+        if (stat.date === date) {
+          stat.foods = stat.foods.filter((food: any) => food.id !== id);
+        }
+      }
+      dispatch(setStat(stats));
+    }
+  }
+
   const addFoodForDayHandler = async (foodId: string, amount: number, date: string, time: string, description: string): Promise<void> => {
     const food:IFoodStat = {
       food_id: foodId,
@@ -92,7 +115,8 @@ const FoodPage: React.FC = () => {
         <Info
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}
-          setIsAddFoodOpen={setIsAddFoodOpen} 
+          setIsAddFoodOpen={setIsAddFoodOpen}
+          onDeleteFoodForDay={deleteFoodForDayHandler}
         />
       </div>
     </div>

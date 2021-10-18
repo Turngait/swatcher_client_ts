@@ -7,7 +7,10 @@ import EditIco from 'assets/icons/edit-ico.png';
 import DelIco from 'assets/icons/delete-ico.png';
 import './index.scss';
 
-const AllIllness: React.FC<{setIsAddIllnessOpen: (isOpen: boolean) => void}> = ({setIsAddIllnessOpen}) => {
+const AllIllness: React.FC<{
+    setIsAddIllnessOpen: (isOpen: boolean) => void,
+    deleteIllness: (id: string) => void
+  }> = ({setIsAddIllnessOpen, deleteIllness}) => {
   const illnesses = useSelector((state: any) => state.health.illnesses);
 
   return (
@@ -24,7 +27,7 @@ const AllIllness: React.FC<{setIsAddIllnessOpen: (isOpen: boolean) => void}> = (
                   <p className="allHealth__infoBox__health__item__colories">{item.danger}</p>
                   <div className="allHealth__infoBox__health__item__contolls">
                     <img className="allHealth__infoBox__health__item__contolls__ico" src={EditIco} alt="edit food"/>
-                    <img className="allHealth__infoBox__health__item__contolls__ico" src={DelIco} alt="delete food"/>
+                    <img onClick={() => deleteIllness(item.id)} className="allHealth__infoBox__health__item__contolls__ico" src={DelIco} alt="delete food"/>
                   </div>
                 </div>
               );

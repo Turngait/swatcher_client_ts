@@ -51,6 +51,23 @@ export async function deleteFood(id: string, token: string): Promise<{status: nu
   .then(res => res.json());
 }
 
+export async function deleteFoodForDayService(id: string, date: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/stats/delfood', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      id,
+      date,
+      token
+    }),
+  })
+  .then(res => res.json());
+}
+
 export async function addFoodForDay(food: IFoodStat, date: string, token: string): Promise<{status: number, stats: IStat}> {
   return await fetch(API_URL + '/stats/addfoodforday', {
     method: "POST",

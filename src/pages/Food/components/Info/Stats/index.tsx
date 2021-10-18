@@ -7,7 +7,11 @@ import Day from './Day';
 
 import './index.scss';
 
-const Stats: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void}> = ({ setIsAddFoodForDayOpen }) => {
+const Stats: React.FC<{
+    setIsAddFoodForDayOpen: (isOpen: boolean) => void,
+    onDeleteFoodForDay: (id: string, date: string) => void
+  }> = ({ setIsAddFoodForDayOpen, onDeleteFoodForDay }) => {
+    //TODO Затипизировать стат
   const stats = useSelector((state: any) => state.user.stat);
 
   return (
@@ -16,7 +20,7 @@ const Stats: React.FC<{setIsAddFoodForDayOpen: (isOpen: boolean) => void}> = ({ 
         <Button onClick={() => setIsAddFoodForDayOpen(true)} size={BtnSize.largeBtn} title="Add"/>
       </div>
       {
-        stats.map((stat: any) => <Day setIsAddFoodForDayOpen={setIsAddFoodForDayOpen} stat={stat} key={stat.id} />)
+        stats.map((stat: any) => <Day onDeleteFoodForDay={onDeleteFoodForDay} stat={stat} key={stat.id} />)
       }
       
     </div>

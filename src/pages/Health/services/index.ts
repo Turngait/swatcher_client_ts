@@ -35,3 +35,36 @@ export async function addIllnessForDayService(illness: IIllnessStat, date: strin
   })
   .then(res => res.json());
 }
+
+export async function deleteIllnessService(id: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/health/deleteillness', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      id,
+      token
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function deleteIllnessForDayService(id: string, date: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/stats/deleteillness', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      id,
+      date,
+      token
+    }),
+  })
+  .then(res => res.json());
+}
