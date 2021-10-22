@@ -83,3 +83,19 @@
     }
   }
 }
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .mainBox {
+    flex-direction: column;
+  }
+  .mainBox__rightBox {
+    flex-basis: 15rem;
+    border-radius: 0;
+    padding: 0.5rem;
+  }
+  .mainBox__rightBox__header {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+}

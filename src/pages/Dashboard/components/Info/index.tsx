@@ -9,7 +9,7 @@ const Info: React.FC = () => {
   const stats = useSelector((state: any) => state.user.stat);
 
   return(
-    <div>
+    <div className="dashboardInfo">
       {
         stats.map((stat: any) => <Day stat={stat} key={stat.id} />)
       }

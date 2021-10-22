@@ -12,7 +12,7 @@ import './index.scss';
 const AddIllnessForDayModal: React.FC<{
     illnesses: IIllness[],
     closeModal: (isOpen: boolean) => void,
-    addIllnesForDay: (illnesId: string, power: number, duration: string, descr: string, time: string, date: string) => void
+    addIllnesForDay: (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void) => void
   }> = ({illnesses, closeModal, addIllnesForDay}) => {
     const [selectedIll, setSelectedIll] = useState(illnesses[0].id || '');
     const [power, setPower] = useState(1);
@@ -20,11 +20,16 @@ const AddIllnessForDayModal: React.FC<{
     const [descr, setDescr] = useState('');
     const [time, setTime] = useState('');
     const [date, setDate] = useState('');
+    const [msg, setMsg] = useState<string | null>(null);
+    
   return (
     <PopUp>
       <img onClick={() => closeModal(false)} className="addNewFood__closeBtn" src={DelIco} alt="close modal"/>
 
-      <h2 className="addNewIllnessForDay__header">Добавить недомогание на</h2>
+      <h2 className="addNewIllnessForDay__header">Добавить недомогание на день</h2>
+      {
+        msg ? <p className="addNewIllnessForDay__msg">{msg}</p> : null
+      }
       <div className="addFoodForDay__form">
         <label>
           <p>Введите день:</p>
@@ -63,7 +68,7 @@ const AddIllnessForDayModal: React.FC<{
           onChange={(event) => setDescr(event.target.value)}
         >
         </textarea>
-        <Button title="Добавить" onClick={() => addIllnesForDay(selectedIll, power, duration, descr, time, date)} />
+        <Button title="Добавить" onClick={() => addIllnesForDay(selectedIll, power, duration, descr, time, date, setMsg)} />
       </div>
     </PopUp>
   )

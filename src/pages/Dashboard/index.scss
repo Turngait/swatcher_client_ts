@@ -15,3 +15,18 @@
     box-sizing: border-box;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .dashboard {
+    flex-direction: column-reverse;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 540px) {
+  .day__info {
+    flex-direction: column;
+  }
+  .dashboard__info {
+    height: 80%;
+  }
+}

@@ -30,12 +30,16 @@ const HealthPage:React.FC<any> = () => {
     if(token) setToken(token);
    }, []);
 
-  const addNewIllness = async (title: string, descr: string): Promise<void> => {
+  const addNewIllness = async (title: string, descr: string, setMsg: (msg: string | null) => void): Promise<void> => {
     const { status } = await addNewIllnessService(title, descr, token);
-    if (status === 200) setIsAddIllnessOpen(false);
+    if (status === 200) {
+      setIsAddIllnessOpen(false);
+    } else {
+      setMsg('Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
+    }
   }
-  const addIllnesForDay = async (illnesId: string, power: number, duration: string, descr: string, time: string, date: string): Promise<void> => {
-    console.log(date);
+  const addIllnesForDay = async (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void): Promise<void> => {
     const illness = {
       health_id: illnesId,
       power,
@@ -45,7 +49,12 @@ const HealthPage:React.FC<any> = () => {
     };
     const {status} = await addIllnessForDayService(illness, date, token);
     console.log(status);
-    setIsAddIllnessForDayOpen(false);
+    if (status === 200) {
+      setIsAddIllnessForDayOpen(false);
+    } else {
+      setMsg('Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
+    }
   }
 
   async function changePeriod(period: string): Promise<void> {
@@ -78,7 +87,7 @@ const HealthPage:React.FC<any> = () => {
   return (
     <div className="healthPage">
       {
-        isAddIllnessOpen ? <AddNewIllnessModal addNewIllness={addNewIllness}/> : null
+        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness}/> : null
       }
       {
         isAddIllnessForDayOpen ? <AddIllnessForDayModal illnesses={illnesses} addIllnesForDay={addIllnesForDay} closeModal={setIsAddIllnessForDayOpen} /> : null

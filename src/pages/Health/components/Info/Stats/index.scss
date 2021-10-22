@@ -2,4 +2,8 @@
 
 .healthStats {
   flex-grow: 1;
+
+  &__btnBox {
+    margin-bottom: 1rem;
+  }
 }

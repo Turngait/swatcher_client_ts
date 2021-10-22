@@ -6,6 +6,13 @@
     font-size: 1.4rem;
   }
 
+  &__msg {
+    color: $red;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
   &__form {
     margin-top: 1rem;
     display: flex;
