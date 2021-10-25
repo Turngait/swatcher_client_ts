@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import SignUp from './components/SingUp';
 import Loader from 'components/common/Loader';
+import RestorePass from './components/Restore';
 
 import {signInService, signUpService} from './services';
 
@@ -13,6 +14,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [restoreOpen, setRestoreOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -58,6 +60,9 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
       {
         loading ? <Loader /> : null
       }
+      {
+        restoreOpen ? <RestorePass closeRestore={setRestoreOpen}/> : null
+      }
       <div className="mainBox__leftBox">
         <div className="mainBox__leftBox__info">
           <p>Terms of condition</p>
@@ -78,16 +83,17 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
             (
               <>
                 <SignUp registartion={registartion}/>
-                <p className="mainBox__rightBox__descr">Do you have an account?</p>
-                <button onClick={() => setIsSignUpOpen(false)} className="mainBox__rightBox__switchBtn">SignIn!</button>
+                <p className="mainBox__rightBox__descr">Уже есть аккаунт?</p>
+                <button onClick={() => setIsSignUpOpen(false)} className="mainBox__rightBox__switchBtn">Войдите!</button>
               </>
             )
             :
             (
               <>
                 <SignIn login={login}/>
-                <p className="mainBox__rightBox__descr">Do not have an account?</p>
-                <button onClick={() => setIsSignUpOpen(true)} className="mainBox__rightBox__switchBtn">SignUp!</button>
+                <button onClick={() => setRestoreOpen(true)} className="mainBox__rightBox__switchBtn">Восстановить пароль</button>
+                <p className="mainBox__rightBox__descr">Нет еще аккаунта?</p>
+                <button onClick={() => setIsSignUpOpen(true)} className="mainBox__rightBox__switchBtn">Регестрация!</button>
               </>
             ) 
         }

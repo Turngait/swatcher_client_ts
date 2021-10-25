@@ -1,0 +1,27 @@
+.restorePass {
+  &__closeBtn {
+    float: right;
+    filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 0.562));
+    width: 1.6rem;
+    cursor: pointer;
+  }
+
+  &__header {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  &__complite {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+}

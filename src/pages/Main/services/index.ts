@@ -33,3 +33,21 @@ export async function signInService (email: string, pass: string): Promise<{stat
   })
   .then(res => res.json());
 }
+
+export async function restoreUserPass (email: string, pass: string, code: string, start = true): Promise<{status: number, errors?: [{msg: string, param: string}]}> {
+  return await fetch(API_URL + '/users/restorepass', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      email,
+      pass,
+      code,
+      start
+    }),
+  })
+  .then(res => res.json());
+}
