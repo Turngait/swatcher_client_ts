@@ -50,12 +50,19 @@ const FoodPage: React.FC = () => {
 
   // TODO Добавить обработку ошибок и вывод сообщений
   const addNewFood = async (title: string, callories: number, descr: string): Promise<void> => {
-    const { status } = await addNewFoodService(title, callories, descr, token);
+    const { status, id } = await addNewFoodService(title, callories, descr, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
-      // TODO возвращать со статусом ID нового продукта и не делать еще один запрос к АПИ
-      const { foods } = await getAllFoodsDataService(token || '');
-      if (foods) dispatch(setAllFoods(foods));
+      const food: IFood = {
+        id,
+        title,
+        callories,
+        groupId: '',
+        descr,
+        createdAt: new Date().toISOString().slice(0,10)
+      };
+
+      dispatch(setAllFoods([...foods, food]));
     }
   }
 

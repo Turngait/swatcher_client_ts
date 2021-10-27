@@ -26,6 +26,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   async function init(token: string, period: string) {
     setLoading(true);
     const { user, status, stat, foods, health } = await getInitData(token, period);
+
     if(status === 403) {
       localStorage.removeItem('token');
       history.push('/');

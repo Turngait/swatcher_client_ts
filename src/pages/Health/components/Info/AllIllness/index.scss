@@ -60,3 +60,15 @@
     }
   }
 }
+
+@media all and (min-width: 0) and (max-width: 1100px) {
+  .allHealth {
+    width: 20rem;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 650px) {
+  .allHealth {
+    width: auto;
+  }
+}

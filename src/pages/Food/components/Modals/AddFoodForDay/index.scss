@@ -42,3 +42,9 @@
     }
   }
 }
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .addFoodForDay__form__time {
+    width: 100%;
+  }
+}

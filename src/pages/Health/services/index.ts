@@ -3,7 +3,7 @@ import { API_KEY } from 'config/keys';
 
 import {IIllnessStat} from 'types/common';
 
-export async function addNewIllnessService(title: string, descr: string, token: string | null): Promise<{status: number}> {
+export async function addNewIllnessService(title: string, descr: string, danger: string, token: string | null): Promise<{status: number, id: string}> {
   return await fetch(API_URL + '/health/addillness', {
     method: "POST",
     headers: {
@@ -14,6 +14,7 @@ export async function addNewIllnessService(title: string, descr: string, token: 
     body: JSON.stringify({
       title,
       descr,
+      danger,
       token
     }),
   })

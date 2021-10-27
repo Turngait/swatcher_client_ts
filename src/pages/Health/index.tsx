@@ -30,10 +30,20 @@ const HealthPage:React.FC<any> = () => {
     if(token) setToken(token);
    }, []);
 
-  const addNewIllness = async (title: string, descr: string, setMsg: (msg: string | null) => void): Promise<void> => {
-    const { status } = await addNewIllnessService(title, descr, token);
+  const addNewIllness = async (title: string, descr: string, danger: string, setMsg: (msg: string | null) => void): Promise<void> => {
+    const { status, id } = await addNewIllnessService(title, descr, danger, token);
     if (status === 200) {
       setIsAddIllnessOpen(false);
+
+      const ill: IIllness = {
+        id,
+        title,
+        danger: '',
+        descr
+      };
+
+      const newIllnesses = [...illnesses, ill];
+      dispatch(setAllHealth(newIllnesses));
     } else {
       setMsg('Что то пошло не так. Попробуйте позже');
       setTimeout(() => setMsg(null), 3000)
@@ -64,8 +74,8 @@ const HealthPage:React.FC<any> = () => {
   const deleteIllness = async (id: string): Promise<void> => {
     const { status } = await deleteIllnessService(id, token || '');
     if(status === 200) {
-      const newFoods = illnesses.filter((item) => item.id !== id);
-      dispatch(setAllHealth(newFoods));
+      const newIlls = illnesses.filter((item) => item.id !== id);
+      dispatch(setAllHealth(newIlls));
     }
   }
 

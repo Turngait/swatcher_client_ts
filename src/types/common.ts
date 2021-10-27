@@ -57,3 +57,11 @@ export interface IStat {
   foods: IFoodStat[] | [],
   health: [IIllnessStat] | []
 }
+
+export enum illsDangerEnum {
+  none = 'Незначительная',
+  small = 'Небольшая',
+  medium = 'Средняя',
+  high = 'Высокая',
+  mortal = 'Смертелньая'
+}

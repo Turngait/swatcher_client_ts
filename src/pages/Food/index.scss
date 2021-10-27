@@ -15,3 +15,14 @@
     box-sizing: border-box;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .foodPage {
+    flex-direction: column-reverse;
+  }
+
+  .foodPage__info {
+    height: 70%;
+    overflow-y: auto;
+  }
+}

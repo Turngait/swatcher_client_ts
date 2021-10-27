@@ -15,3 +15,14 @@
     box-sizing: border-box;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .healthPage {
+    flex-direction: column-reverse;
+  }
+
+  .healthPage__info {
+    height: 70%;
+    overflow-y: auto;
+  }
+}

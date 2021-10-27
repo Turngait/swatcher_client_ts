@@ -4,6 +4,7 @@
   display: flex;
   justify-content: flex-start;
   gap: 2rem;
+  flex-wrap: wrap;
   &__item {
     padding: 1.2rem 1.1rem;
     border: 1px solid rgba(67, 67, 67, 0.25);
