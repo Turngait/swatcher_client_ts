@@ -38,6 +38,11 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
+  const exit = () => {
+    localStorage.removeItem('token');
+    history.push('/');
+  }
+
   async function changePeriod(period: string): Promise<void> {
     init(token, period);
   }
@@ -65,12 +70,12 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
       {
         loading ? <Loader /> : null
       }
-      <LeftMenu />
+      <LeftMenu exit={exit}/>
       <div className="dashboard__info">
         {
           isFirstSetUpOpen ? <FirstSetUp saveData={saveFirstSetUp}/> : null
         }
-        <Header changePeriod={changePeriod} title="Dashboard"/>
+        <Header changePeriod={changePeriod} title="Статистика"/>
         <Info />
       </div>
     </div>

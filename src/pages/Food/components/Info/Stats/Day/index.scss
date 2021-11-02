@@ -23,6 +23,11 @@
       &__item {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 0.4rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }

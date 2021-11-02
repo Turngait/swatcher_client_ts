@@ -7,11 +7,13 @@ import './index.scss';
 
 const Info: React.FC = () => {
   const stats = useSelector((state: any) => state.user.stat);
-
   return(
     <div className="dashboardInfo">
       {
-        stats.map((stat: any) => <Day stat={stat} key={stat.id} />)
+        stats.length ?
+          stats.map((stat: any) => <Day stat={stat} key={stat.id} />)
+        :
+        <p>Нет данных. Начните добавлять данные в оостветсвующих разделах</p>
       }
     </div>
   )

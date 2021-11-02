@@ -6,19 +6,25 @@ import Button from 'components/controls/Button';
 import './index.scss';
 
 const Settings: React.FC<{
-  changeUserName: (name: string) => void,
+  userName: string,
+  changeUserName: (name: string, setMsg: (msg: string | null) => void) => void,
   changeUserPass: (oldPass: string, pass: string) => void
-}> = ({ changeUserName, changeUserPass }) => {
-  const [userName, setUserName] = useState('');
+}> = ({ userName, changeUserName, changeUserPass }) => {
+  const [userNameInp, setUserNameInp] = useState(userName);
   const [oldPass, setOldPass] = useState('');
   const [pass, setPass] = useState('');
+  const [msg, setMsg] = useState<string | null>(null);
+
   return (
     <div className="settings">
         <div className="settings__item">
           <h3 className="settings__item__header">Сменить имя</h3>
+          {
+            msg ? <p className="settings__msg">{msg}</p> : null
+          }
           <div className="settings__item__form">
-            <Textinput onChange={(event) => setUserName(event.target.value)} placeholder="Ваше имя..."/>
-            <Button onClick={() => changeUserName(userName)} title="Сохранить"/>
+            <Textinput value={userNameInp} onChange={(event) => setUserNameInp(event.target.value)} placeholder="Ваше имя..."/>
+            <Button onClick={() => changeUserName(userNameInp, setMsg)} title="Сохранить"/>
           </div>
         </div>
         <div className="settings__item">

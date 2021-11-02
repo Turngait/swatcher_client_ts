@@ -68,7 +68,7 @@ export async function deleteFoodForDayService(id: string, date: string, token: s
   .then(res => res.json());
 }
 
-export async function addFoodForDay(food: IFoodStat, date: string, token: string): Promise<{status: number, stats: IStat}> {
+export async function addFoodForDay(food: IFoodStat, date: string, token: string): Promise<{status: number, statsForday: IStat}> {
   return await fetch(API_URL + '/stats/addfoodforday', {
     method: "POST",
     headers: {

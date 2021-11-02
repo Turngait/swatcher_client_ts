@@ -1,7 +1,7 @@
 import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
 
-export async function changeUserNameService(name: string, token: string): Promise<{status: number}> {
+export async function changeUserNameService(name: string, token: string): Promise<{status: number, errors: [{msg: string, param: string}]}> {
   return await fetch(API_URL + '/users/changename', {
     method: "PUT",
     headers: {
@@ -17,7 +17,7 @@ export async function changeUserNameService(name: string, token: string): Promis
   .then(res => res.json());
 }
 
-export async function changeUserPassService(oldPass: string, pass: string, token: string): Promise<{status: number}> {
+export async function changeUserPassService(oldPass: string, pass: string, token: string): Promise<{status: number, errors: [{msg: string, param: string}]}> {
   return await fetch(API_URL + '/users/changepass', {
     method: "PUT",
     headers: {

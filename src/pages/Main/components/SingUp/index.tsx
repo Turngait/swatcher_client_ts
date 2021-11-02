@@ -16,11 +16,13 @@ const SignUp: React.FC<{registartion: (name: string, email: string, pass: string
 
   return (
     <form className='signInBox'>
-      <h3 className='signInBox__header'>SignUp</h3>
-      <TextInput placeholder="Name..." onChange={(event) => {setName(event.target.value)}} />
+      <h3 className='signInBox__header'>Создать</h3>
+      <TextInput placeholder="Имя..." onChange={(event) => {setName(event.target.value)}} />
       <TextInput type="email" name="email" placeholder="E-mail..." onChange={(event) => {setEmail(event.target.value)}} />
-      <TextInput type="password" placeholder="Password..." onChange={(event) => {setPass(event.target.value)}} />
-      <Button title="SignUp" onClick={signUpService}/>
+      <TextInput type="password" placeholder="Пароль..." onChange={(event) => {setPass(event.target.value)}} />
+      <Button title="Создать" onClick={signUpService}/>
+      <p className='signInBox__desclimer'>
+        Нажимая кнопку "Создать" Вы соглашаетесь с <a href="policy.html" className="policyLink" target="_blank">"Политиикой обработки персональных данных"</a> на этом сайте.</p>
     </form>
   )
 }

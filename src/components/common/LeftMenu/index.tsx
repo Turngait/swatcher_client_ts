@@ -5,18 +5,18 @@ import ExitIco from '../../../assets/icons/exit-ico.png';
 
 import './index.scss';
 
-const LeftMenu: React.FC = () => {
+const LeftMenu: React.FC<{exit?: () => void}> = ({exit}) => {
   return (
     <div className="leftMenu">
         <h1 className="leftMenu__header">SelfWatcher</h1>
         <nav className="leftMenu__nav">
-          <NavLink to="/dashboard" className="leftMenu__nav__item">Dashboard</NavLink>
-          <NavLink to="/food" className="leftMenu__nav__item">Food</NavLink>
-          <NavLink to="/health" className="leftMenu__nav__item">Health</NavLink>
-          <NavLink to="/profile" className="leftMenu__nav__item">Profile</NavLink>
+          <NavLink to="/dashboard" className="leftMenu__nav__item">Статистика</NavLink>
+          <NavLink to="/food" className="leftMenu__nav__item">Еда</NavLink>
+          <NavLink to="/health" className="leftMenu__nav__item">Здоровье</NavLink>
+          <NavLink to="/profile" className="leftMenu__nav__item">Профиль</NavLink>
         </nav>
         <div>
-          <img className="leftMenu__exitBtn" src={ExitIco} alt="ExitBtn" />
+          <img className="leftMenu__exitBtn" src={ExitIco} alt="ExitBtn" onClick={exit}/>
         </div>
     </div>
   )

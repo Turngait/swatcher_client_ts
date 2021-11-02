@@ -1,5 +1,6 @@
 import React, {useState, useEffect}  from 'react';
 import {useSelector} from 'react-redux';
+import { RouteComponentProps } from "react-router-dom";
 
 import LeftMenu from 'components/common/LeftMenu';
 import Header from '../../components/common/Header';
@@ -11,8 +12,7 @@ import { IUserData } from 'types/common';
 
 import './index.scss';
 
-//TODO Добавить вывод сообщений, проверку на валидацию и отображение старого имени
-const Profile:React.FC = () => {
+const Profile:React.FC<RouteComponentProps> = ({ history }) => {
   const [token, setToken] = useState<string | null>(null);
   const userData: IUserData | null = useSelector((state: any) => state.user.userData);
 
@@ -23,16 +23,25 @@ const Profile:React.FC = () => {
     }
   }, []);
 
-  async function changePeriod(period: string): Promise<void> {
-    console.log(period);
+  const exit = () => {
+    localStorage.removeItem('token');
+    history.push('/');
   }
 
-  const changeUserName = async (name: string): Promise<void> => {
-    const { status } = await changeUserNameService(name, token || '');
-    if(status === 200 && userData) {
-      userData.name = name;
-      setUserInfoData(userData);
+  const changeUserName = async (name: string, setMsg: (msg: string | null) => void): Promise<void> => {
+    const { status, errors } = await changeUserNameService(name, token || '');
+    if (errors) {
+      setMsg(errors[0].msg);
+    } else {
+      if(status === 200 && userData) {
+        userData.name = name;
+        setUserInfoData(userData);
+        setMsg('Имя успешно изменено');
+      } else {
+        setMsg('Что то пошло не так, попробуйте позже');
+      }
     }
+    setTimeout(() => setMsg(null), 4000);
   }
   const changeUserPass = async (oldPass: string, pass: string): Promise<void> => {
     const { status } = await changeUserPassService(oldPass, pass, token || '');
@@ -41,10 +50,10 @@ const Profile:React.FC = () => {
 
   return (
     <div className="profilePage">
-      <LeftMenu />
+      <LeftMenu exit={exit}/>
       <div className="profilePage__info">
-        <Header changePeriod={changePeriod} title="Profile"/>
-        <Settings changeUserName={changeUserName} changeUserPass={changeUserPass}/>
+        <Header title="Profile"/>
+        <Settings userName={userData ? userData.name : ''} changeUserName={changeUserName} changeUserPass={changeUserPass}/>
       </div>
     </div>
   )

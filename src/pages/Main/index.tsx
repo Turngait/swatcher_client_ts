@@ -26,7 +26,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
     const data = await signInService(email, pass);
     if(data.errors) {
       setMsg(data.errors[0].msg);
-      setTimeout(() => setMsg(null), 3000);
+      setTimeout(() => setMsg(null), 4000);
     } else {
       if (data.status === 200 && data.token) {
         localStorage.setItem("token", data.token);
@@ -34,7 +34,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
       } else if(data.status === 403) {
         setLoading(false);
         setMsg('Неверный e-mail или пароль');
-        setTimeout(() => setMsg(null), 3000);
+        setTimeout(() => setMsg(null), 4000);
       }
     }
   }
@@ -65,14 +65,15 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
       }
       <div className="mainBox__leftBox">
         <div className="mainBox__leftBox__info">
-          <p>Terms of condition</p>
+          <p><a href="policy.html" target="_blank" className="mainBox__leftBox__info__link">Политика обработки персональных данных</a></p>
+          <p><a className="mainBox__leftBox__info__link" href="mailto:info@ilya-r.ru">Напишите нам</a></p>
           <p>2021</p>
         </div>
       </div>
       <div className="mainBox__rightBox">
         <nav className="mainBox__rightBox__nav">
-          <button className="mainBox__rightBox__nav__item">About</button>
-          <button className="mainBox__rightBox__nav__item">Contacts</button>
+          {/* <button className="mainBox__rightBox__nav__item">About</button>
+          <button className="mainBox__rightBox__nav__item">Contacts</button> */}
         </nav>
         <h1 className="mainBox__rightBox__header">SelfWatcher</h1>
         {

@@ -20,11 +20,10 @@
     border: 1px solid rgba(67, 67, 67, 0.25);
 
     &__healths {
-      padding: 0.8rem 0;
       &__item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
 
         &:last-child {
           margin-bottom: 0;

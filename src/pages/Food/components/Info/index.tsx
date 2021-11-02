@@ -9,7 +9,7 @@ const Info: React.FC<{
     setIsAddFoodOpen: (isOpne: boolean) => void,
     setIsAddFoodForDayOpen: (isOpen: boolean) => void,
     onDeleteFood: (id: string) => Promise<void>,
-    onDeleteFoodForDay: (id: string, date: string) => void
+    onDeleteFoodForDay: (id: string, date: string) => void,
   }> = ({ setIsAddFoodOpen, setIsAddFoodForDayOpen, onDeleteFood, onDeleteFoodForDay }) => {
   return(
     <div className="foodInfo">

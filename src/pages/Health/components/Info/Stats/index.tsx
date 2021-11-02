@@ -15,7 +15,7 @@ const Stats: React.FC<{
   return (
     <div className="healthStats">
       <div className="healthStats__btnBox">
-        <Button size={BtnSize.largeBtn} title="Add" onClick={() => setIsAddIllnessForDayOpen(true)}/>
+        <Button size={BtnSize.largeBtn} title="Добавить" onClick={() => setIsAddIllnessForDayOpen(true)}/>
       </div>
 
       {

@@ -16,9 +16,9 @@ const AllFoods: React.FC<{
 
   return (
     <div className="allFoods">
-      <div className="allFoods__header">All my food</div>
+      <div className="allFoods__header">Вся моя еда</div>
       <div className="allFoods__infoBox">
-        <Button size={BtnSize.largeBtn} title="Add food" onClick={() => setIsAddFoodOpen(true)}/>
+        <Button size={BtnSize.largeBtn} title="Добавить еду" onClick={() => setIsAddFoodOpen(true)}/>
         <div className="allFoods__infoBox__foods">
           {
             Array.isArray(foods) && foods.length > 0 

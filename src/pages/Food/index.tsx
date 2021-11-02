@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import { RouteComponentProps } from "react-router-dom";
 
 import LeftMenu from '../../components/common/LeftMenu';
 import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
 import AddFoodForDayModal from './components/Modals/AddFoodForDay';
+import Loader from 'components/common/Loader';
 
 import { 
   addNewFoodService,
@@ -19,21 +21,22 @@ import {
 
 import { setAllFoods } from 'store/Food/food.action';
 import { setPeriod, setStat } from 'store/User/user.actions';
-import { IFood, IFoodStat } from 'types/common';
+import { IFood, IFoodStat, IStat } from 'types/common';
 
 import './index.scss';
 
-const FoodPage: React.FC = () => {
+const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
   const period: string = useSelector((state: any) => state.user.period);
-  const stats = useSelector((state: any) => state.user.stat);
+  const stats: IStat[] = useSelector((state: any) => state.user.stat);
 
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
   const [isAddFoodForDayOpen, setIsAddFoodForDayOpen] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const init = async (token: string, period: string): Promise<void> => {
+  const init = async (token: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
       const { foods } = await getAllFoodsDataService(token);
       if (foods) dispatch(setAllFoods(foods));
@@ -44,12 +47,13 @@ const FoodPage: React.FC = () => {
     const token = localStorage.getItem('token');
     if(token) {
       setToken(token);
-      init(token, period);
+      init(token);
     }
   }, []);
 
   // TODO Добавить обработку ошибок и вывод сообщений
   const addNewFood = async (title: string, callories: number, descr: string): Promise<void> => {
+    setLoading(true);
     const { status, id } = await addNewFoodService(title, callories, descr, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
@@ -64,19 +68,28 @@ const FoodPage: React.FC = () => {
 
       dispatch(setAllFoods([...foods, food]));
     }
+    setLoading(false);
+  }
+
+  const exit = () => {
+    localStorage.removeItem('token');
+    history.push('/');
   }
 
   const deleteFoodHandler = async (id: string): Promise<void> => {
+    setLoading(true);
     const {status} = await deleteFood(id, token || '');
     // TODO добавить вывод ошибки сервера на экран
     if (status === 200) {
       const newFoods = foods.filter((food) => food.id !== id);
       dispatch(setAllFoods(newFoods));
     }
+    setLoading(false);
   }
 
   //TODO добавить обработку ошибок и вывод ошибок и добавить реактивности
   const deleteFoodForDayHandler = async (id: string, date: string): Promise<void> => {
+    setLoading(true);
     const { status } = await deleteFoodForDayService(id, date, token || '');
     console.log(status);
     if (status === 200) {
@@ -85,40 +98,53 @@ const FoodPage: React.FC = () => {
           stat.foods = stat.foods.filter((food: any) => food.id !== id);
         }
       }
+      console.log('deleteFoodForDayHandler', stats);
       dispatch(setStat(stats));
     }
+    setLoading(false);
   }
 
   const addFoodForDayHandler = async (foodId: string, amount: number, date: string, time: string, description: string): Promise<void> => {
+    setLoading(true);
     const food:IFoodStat = {
       food_id: foodId,
       amount,
       time,
       description
     };
-    const { status, stats } = await addFoodForDay(food, date, token || '');
-    console.log(status);
-    console.log(stats);
+    const { status } = await addFoodForDay(food, date, token || '');
+    if (status === 200) {
+      // dispatch(setStat(stats));
+      setIsAddFoodForDayOpen(false);
+      const {stat} = await getStatForPeriod(period, token || '');
+      if(stat) {
+        dispatch(setStat(stat));
+      }
+    }
+    setLoading(false);
   }
   async function changePeriod(period: string): Promise<void> {
-    console.log(period);
+    setLoading(true);
     const {stat} = await getStatForPeriod(period, token || '');
     if(stat) {
       dispatch(setStat(stat));
       dispatch(setPeriod(period));
     }
-    console.log(stat);
+    setLoading(false);
   }
 
   return (
     <div className="foodPage">
       {
+        loading ? <Loader /> : null
+      }
+      {
         isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
-      <LeftMenu />
+      <LeftMenu exit={exit}/>
       <div className="foodPage__info">
-        <Header changePeriod={changePeriod} title="Food"/>
+        <Header changePeriod={changePeriod} title="Еда"/>
         <Info
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}

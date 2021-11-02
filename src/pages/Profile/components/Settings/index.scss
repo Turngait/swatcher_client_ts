@@ -23,4 +23,10 @@
       gap: 1rem;
     }
   }
+
+  &__msg {
+    text-align: center;
+    color: $dark-green;
+    padding: 0.7rem;
+  }
 }

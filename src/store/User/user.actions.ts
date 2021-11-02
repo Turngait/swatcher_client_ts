@@ -1,4 +1,4 @@
-import {IUserData, IIllness, IFood} from 'types/common';
+import {IUserData, IIllness, IFood, IStat} from 'types/common';
 
 export function setUserData(data: IUserData, stat: [any] | [], foods: IFood[], health: IIllness[]):  (dispatch: any) => void {
   return (dispatch: any) => {
@@ -15,7 +15,7 @@ export function setPeriod(period: string) {
   }
 }
 
-export function setStat(stat: any) {
+export function setStat(stat: IStat[]) {
   return (dispatch: any) => {
     dispatch({type: 'SET_STAT', payload: stat});
   }

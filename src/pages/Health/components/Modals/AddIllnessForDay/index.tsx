@@ -16,10 +16,10 @@ const AddIllnessForDayModal: React.FC<{
   }> = ({illnesses, closeModal, addIllnesForDay}) => {
     const [selectedIll, setSelectedIll] = useState(illnesses[0].id || '');
     const [power, setPower] = useState(1);
-    const [duration, setDuration] = useState('0');
+    const [duration, setDuration] = useState('1');
     const [descr, setDescr] = useState('');
-    const [time, setTime] = useState('');
-    const [date, setDate] = useState('');
+    const [time, setTime] = useState('09:00');
+    const [date, setDate] = useState(new Date().toISOString().slice(0,10));
     const [msg, setMsg] = useState<string | null>(null);
     
   return (
@@ -57,10 +57,10 @@ const AddIllnessForDayModal: React.FC<{
             <option value={5}>5</option>
           </select>
         </label>
-        <Textinput type="number" placeholder="Продолжительность в мин (примерно)..." onChange={(event) => setDuration(event.target.value)}/>
+        <Textinput value={duration} type="number" placeholder="Продолжительность в мин (примерно)..." onChange={(event) => setDuration(event.target.value)}/>
         <label>
           <p>Введите время начала (примерное):</p>
-          <input className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
+          <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
         </label>
         <textarea
           className="addFoodForDay__form__textarea"

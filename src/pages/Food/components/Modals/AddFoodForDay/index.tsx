@@ -14,10 +14,10 @@ const AddFoodForDayModal: React.FC<{
     addFoodForDay: (foodId: string, amount: number, date:string,  time: string, description: string) => Promise<void>
   }> = ({ addFoodForDay, closeModal, foods }) => {
   const [selectedFood, setSelectedFood] = useState(foods[0].id || '');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [descr, setDescr] = useState('');
-  const [time, setTime] = useState('');
-  const [date, setDate] = useState('');
+  const [time, setTime] = useState('09:00');
+  const [date, setDate] = useState(new Date().toISOString().slice(0,10));
 
   return (
     <PopUp>
@@ -42,10 +42,10 @@ const AddFoodForDayModal: React.FC<{
           </select>
         </label>
 
-        <Textinput type="number" placeholder="Колличество..." onChange={(event) => setAmount(+event.target.value)}/>
+        <Textinput value={amount} type="number" placeholder="Колличество..." onChange={(event) => setAmount(+event.target.value)}/>
         <label>
           <p>Введите время приема пищи:</p>
-          <input className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
+          <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
         </label>
         <textarea
           className="addFoodForDay__form__textarea"

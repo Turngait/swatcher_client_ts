@@ -14,9 +14,9 @@ const SignIn: React.FC<{login: (email: string, pass: string)=> Promise<void>}> =
   }
   return (
     <form className='signInBox'>
-      <h3 className='signInBox__header'>SignIn</h3>
+      <h3 className='signInBox__header'>Войти</h3>
       <TextInput type="email" name="email" placeholder="E-mail..." onChange={(event) => {setEmail(event.target.value)}}/>
-      <TextInput type="password" placeholder="Password..." onChange={(event) => {setPass(event.target.value)}}/>
+      <TextInput type="password" placeholder="Пароль..." onChange={(event) => {setPass(event.target.value)}}/>
       <Button title="Go!" onClick={signInService}/>
     </form>
   )
