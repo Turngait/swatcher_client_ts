@@ -8,7 +8,10 @@ import './index.scss';
 const LeftMenu: React.FC<{exit?: () => void}> = ({exit}) => {
   return (
     <div className="leftMenu">
-        <h1 className="leftMenu__header">SelfWatcher</h1>
+        <h1 className="leftMenu__header">
+          SelfWatcher
+          <p className="leftMenu__mini">Beta</p>
+        </h1>
         <nav className="leftMenu__nav">
           <NavLink to="/dashboard" className="leftMenu__nav__item">Статистика</NavLink>
           <NavLink to="/food" className="leftMenu__nav__item">Еда</NavLink>

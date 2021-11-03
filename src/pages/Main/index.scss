@@ -13,7 +13,15 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-end;
+    gap: 26rem;
     padding: 2rem;
+
+    &__text {
+      text-align: right;
+      width: 50%;
+      font-size: 1.1rem;
+    }
     &__info {
       display: flex;
       justify-content: flex-end;
@@ -52,9 +60,14 @@
     &__header {
       text-align: center;
       margin-top: 6rem;
-      margin-bottom: 3rem;
       font-size: 3rem;
       font-weight: 200;
+    }
+
+    &__mini {
+      text-align: center;
+      font-size: 0.8rem;
+      margin-bottom: 3rem;
     }
 
     &__msg {

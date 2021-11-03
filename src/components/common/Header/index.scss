@@ -7,6 +7,17 @@
   &__pageName {
     font-size: 2rem;
   }
+
+  &__dataPicker {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #6d6d6d62;
+    border-radius: 5px;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 @media all and (min-width: 0) and (max-width: 400px) {

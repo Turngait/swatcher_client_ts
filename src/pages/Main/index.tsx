@@ -64,6 +64,16 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
         restoreOpen ? <RestorePass closeRestore={setRestoreOpen}/> : null
       }
       <div className="mainBox__leftBox">
+        <p className="mainBox__leftBox__text">
+          Добро пожаловать в приложение SelfWatcher.
+          <br/>
+          <br/>
+          Данное приложение позволит Вам вести учет потребляемой Вами еды и Вашего физического состояния. Все функции абсолютно бесплатны. Что бы
+          начать пользоваться необходимо просто пройти регистрацию.
+          <br/>
+          <br/>
+          Но, помните - данное приложение не является заменой медицинского заключения специалиста. Оно всего лишь позволяет вести статистику Вашей жизнедеятельнсоти.
+        </p>
         <div className="mainBox__leftBox__info">
           <p><a href="policy.html" target="_blank" className="mainBox__leftBox__info__link">Политика обработки персональных данных</a></p>
           <p><a className="mainBox__leftBox__info__link" href="mailto:info@ilya-r.ru">Напишите нам</a></p>
@@ -76,6 +86,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
           <button className="mainBox__rightBox__nav__item">Contacts</button> */}
         </nav>
         <h1 className="mainBox__rightBox__header">SelfWatcher</h1>
+        <p className="mainBox__rightBox__mini">Beta</p>
         {
           msg ? <p className="mainBox__rightBox__msg">{msg}</p> : null
         }

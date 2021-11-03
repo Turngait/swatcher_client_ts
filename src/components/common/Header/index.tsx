@@ -13,7 +13,7 @@ const Header:React.FC<{title: string, changePeriod?: (period: string) => void}> 
       <h2 className="headBox__pageName">{title}</h2>
       <div>
         {
-          changePeriod ? <input type="month" value={period} onChange={(event) => changePeriod(event.target.value)}/> : null
+          changePeriod ? <input className="headBox__dataPicker" type="month" value={period} onChange={(event) => changePeriod(event.target.value)}/> : null
         }
       </div>
     </div>
