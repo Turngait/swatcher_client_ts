@@ -12,10 +12,18 @@ const Stats: React.FC<{
     deleteIllnessForDay: (id: string, date: string) => void
   }> = ({setIsAddIllnessForDayOpen, deleteIllnessForDay}) => {
   const stats = useSelector((state: any) => state.user.stat);
+  const illnesses = useSelector((state: any) => state.health.illnesses);
   return (
     <div className="healthStats">
       <div className="healthStats__btnBox">
-        <Button size={BtnSize.largeBtn} title="Добавить" onClick={() => setIsAddIllnessForDayOpen(true)}/>
+        {
+          illnesses.length 
+            ? 
+            <Button size={BtnSize.largeBtn} title="Добавить" onClick={() => setIsAddIllnessForDayOpen(true)}/> 
+            : 
+            <p>У вас не добавлено ни одного недомагания</p>
+        }
+        
       </div>
 
       {

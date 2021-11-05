@@ -4,9 +4,9 @@ import { IInputProps } from '../../../types/components';
 
 import './index.scss';
 
-const Textinput: React.FC<IInputProps> = ({placeholder, type, name, onChange, value}) => {
+const Textinput: React.FC<IInputProps> = ({placeholder, type, name, maxlength=100, maxValue, onChange, value}) => {
   return (
-    <input value={value} onChange={onChange} placeholder={placeholder} className="textInput" type={type || 'text'} name={name} />
+    <input max={maxValue} maxLength={maxlength} value={value} onChange={onChange} placeholder={placeholder} className="textInput" type={type || 'text'} name={name} />
   )
 }
 

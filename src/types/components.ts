@@ -15,5 +15,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
   type?: string,
   name?: string,
-  value?: string | number
+  value?: string | number,
+  maxlength?: number,
+  maxValue?: number,
 }

@@ -22,7 +22,7 @@ const SignUp: React.FC<{registartion: (name: string, email: string, pass: string
       <TextInput type="password" placeholder="Пароль..." onChange={(event) => {setPass(event.target.value)}} />
       <Button title="Создать" onClick={signUpService}/>
       <p className='signInBox__desclimer'>
-        Нажимая кнопку "Создать" Вы соглашаетесь с <a href="policy.html" className="policyLink" target="_blank">"Политиикой обработки персональных данных"</a> на этом сайте.</p>
+        Нажимая кнопку "Создать" Вы соглашаетесь с <a href="policy.html" className="policyLink" target="_blank">"Политикой обработки персональных данных"</a> на этом сайте.</p>
     </form>
   )
 }

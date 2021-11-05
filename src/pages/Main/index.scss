@@ -104,19 +104,50 @@
 .policyLink {
   color: $black;
 }
-
-@media all and (min-width: 0) and (max-width: 800px) {
-  .mainBox {
-    flex-direction: column;
+@media all and (min-width: 0) and (max-width: 1200px) {
+  .mainBox__leftBox {
+    gap: 10rem;
   }
+}
+@media all and (min-width: 0) and (max-width: 900px) {
+  .mainBox {
+    flex-direction: column-reverse;
+    // height: auto;
+  }
+  .mainBox__leftBox{
+    gap:2rem;
+  }
+  .mainBox__leftBox__text {
+    width: auto;
+  }
+  .mainBox {
+    background-image: none;
+    background-color: $green;
+  }
+  .mainBox__leftBox__text,
+  .mainBox__leftBox__info,
+  .mainBox__leftBox__info__link {
+    color: #fff;
+  }
+}
+@media all and (min-width: 0) and (max-width: 800px) {
+
   .mainBox__rightBox {
     flex-basis: 15rem;
     border-radius: 0;
     padding: 0.5rem;
   }
   .mainBox__rightBox__header {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 0rem;
     padding: 0.5rem;
+  }
+  .mainBox__rightBox__mini {
+    margin-bottom: 1rem;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 500px) {
+  .mainBox {
+    height: auto;
   }
 }

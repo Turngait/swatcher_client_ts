@@ -28,7 +28,7 @@ const AddNewIllnessModal: React.FC<{
         msg ? <p className="addNewIllness__msg">{msg}</p> : null
       }
       <div className="addNewIllness__form">
-        <Textinput placeholder="Название..." onChange={(event) => setTitle(event.target.value)}/>
+        <Textinput maxlength={20} placeholder="Название..." onChange={(event) => setTitle(event.target.value)}/>
         <textarea
           className="addNewIllness__form__textarea"
           placeholder="Описание..."

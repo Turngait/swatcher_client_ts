@@ -43,9 +43,15 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
     }
     setTimeout(() => setMsg(null), 4000);
   }
-  const changeUserPass = async (oldPass: string, pass: string): Promise<void> => {
+  const changeUserPass = async (oldPass: string, pass: string, setMsg: (msg: string | null) =>void): Promise<void> => {
     const { status } = await changeUserPassService(oldPass, pass, token || '');
     console.log(status);
+    if(status === 200) {
+      setMsg('Пароль успешно изменен');
+    } else {
+      setMsg('Что то пошло не так, попробуйте позже');
+    }
+    setTimeout(() => setMsg(null), 4000);
   }
 
   return (
