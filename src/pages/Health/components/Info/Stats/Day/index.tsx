@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DelIco from 'assets/icons/delete-ico.png';
+import DelIco from 'assets/icons/close_ico.png';
 
 import './index.scss';
 
@@ -17,10 +17,10 @@ const Day:React.FC<{
             stat.health.map((item: any) => {
               return (
                 <div key={item.id} className="healthStatDay__info__healths__item">
-                  <p>{item.title}</p>
+                  <p className="healthStatDay__info__healths__item__title">{item.title}</p>
                   <p>{item.description}</p>
                   <p>с {item.begin}</p>
-                  <p>{item.duration} часов</p>
+                  <p className="healthStatDay__info__healths__item__duration">{item.duration} часов</p>
                   <p>{item.power}</p>
                   <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="healthStatDay__info__healths__item__delIco" src={DelIco} alt="delete health"/>
                 </div>

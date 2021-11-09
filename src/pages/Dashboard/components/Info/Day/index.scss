@@ -35,6 +35,13 @@
         &:last-child {
           margin-bottom: 0;
         }
+
+        &__title {
+          width: 18rem;
+        }
+        &__duration {
+          width: 10rem;
+        }
       }
     }
   }

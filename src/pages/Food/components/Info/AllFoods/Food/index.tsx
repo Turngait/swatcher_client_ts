@@ -8,13 +8,24 @@ import './index.scss';
 
 const Food: React.FC<{food: IFood, onDeleteFood: (id: string) => Promise<void>}> = ({ food, onDeleteFood }) => {
   return (
-    <div className="item">
-      <p className="item__title">{food.title}</p>
-      <p className="item__colories">{food.callories}kkl</p>
-      <div className="item__contolls">
-        {/* <img className="item__contolls__ico" src={EditIco} alt="edit food"/> */}
-        <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
+    <div className="item__box">
+      <div className={`item ${food.descr ? 'decriptionOpen' : ''}`}>
+        <p className="item__title">{food.title}</p>
+        <p className="item__colories">{food.callories}kkl</p>
+        <div className="item__contolls">
+          {/* <img className="item__contolls__ico" src={EditIco} alt="edit food"/> */}
+          <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
+        </div>
       </div>
+      {
+        food.descr ?
+        (
+          <div className="allHealth__infoBox__health__item__decription">
+            {food.descr}
+          </div>
+        )
+        : null
+      }
     </div>
   )
 }

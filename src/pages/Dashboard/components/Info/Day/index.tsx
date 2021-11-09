@@ -43,10 +43,10 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
             stat.health.map((item: any) => {
               return (
                 <div className="day__info__health__item" key={item.id}>
-                  <p>{item.title}</p>
+                  <p className="day__info__health__item__title">{item.title}</p>
                   <p>{item.power}</p>
                   <p>с {item.begin}</p>
-                  <p>{item.duration} часов</p>
+                  <p className="day__info__health__item__duration">{item.duration} часов</p>
                 </div>
               )
             })

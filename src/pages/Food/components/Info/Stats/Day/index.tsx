@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DelIco from 'assets/icons/delete-ico.png';
+import DelIco from 'assets/icons/close_ico.png';
 
 import './index.scss';
 
@@ -25,7 +25,7 @@ const Day: React.FC<{
             stat.foods.map((food: any) => {
               return (
                 <div className="foodStatDay__info__foods__item" key={food.id}>
-                  <p>{food.title}</p>
+                  <p className="foodStatDay__info__foods__item__title">{food.title}</p>
                   <p>{food.description}</p>
                   <p>{food.amount} шт.</p>
                   <p>{food.time}</p>
