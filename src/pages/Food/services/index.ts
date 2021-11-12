@@ -2,7 +2,7 @@ import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
 import { IFood, IFoodStat, IStat } from 'types/common';
 
-export async function addNewFoodService(title: string, callories: number, descr: string, token: string | null): Promise<{status: number, id: string}> {
+export async function addNewFoodService(title: string, callories: number, harmfulness: number, descr: string, token: string | null): Promise<{status: number, id: string}> {
   return await fetch(API_URL + '/food/addfood', {
     method: "POST",
     headers: {
@@ -13,6 +13,7 @@ export async function addNewFoodService(title: string, callories: number, descr:
     body: JSON.stringify({
       title,
       callories,
+      harmfulness,
       descr,
       token
     }),
