@@ -14,17 +14,19 @@ export interface IIllness {
   descr: string
 }
 
+export interface IUserPersonalData {
+  sex?: string,
+  age: number,
+  weight: number,
+  height: number
+}
+
 export interface IUserData {
   name: string,
   email: string,
   status: string,
   isBanned: boolean,
-  data: {
-    sex: string,
-    age: number,
-    weight: number,
-    height: number,
-  },
+  data: IUserPersonalData,
   settings: {
     lang: string,
     theme: string,

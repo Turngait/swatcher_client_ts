@@ -6,9 +6,9 @@ import LeftMenu from 'components/common/LeftMenu';
 import Header from '../../components/common/Header';
 import Settings from './components/Settings';
 
-import { changeUserNameService, changeUserPassService } from './services';
+import { changeUserNameService, changeUserPassService, changeUserPersonalData } from './services';
 import { setUserInfoData } from 'store/User/user.actions';
-import { IUserData } from 'types/common';
+import { IUserData, IUserPersonalData } from 'types/common';
 
 import './index.scss';
 
@@ -45,11 +45,24 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
   }
   const changeUserPass = async (oldPass: string, pass: string, setMsg: (msg: string | null) =>void): Promise<void> => {
     const { status } = await changeUserPassService(oldPass, pass, token || '');
-    console.log(status);
     if(status === 200) {
       setMsg('Пароль успешно изменен');
     } else {
       setMsg('Что то пошло не так, попробуйте позже');
+    }
+    setTimeout(() => setMsg(null), 4000);
+  }
+
+  const changeUserData = async(data: IUserPersonalData, setMsg: (msg: string | null) =>void) => {
+    const {status, errors } = await changeUserPersonalData(data, token || '');
+    if (errors) {
+      setMsg(errors[0].msg);
+    } else {
+      if(status === 200) {
+        setMsg('Данные успешно изменены');
+      } else {
+        setMsg('Что то пошло не так, попробуйте позже');
+      }
     }
     setTimeout(() => setMsg(null), 4000);
   }
@@ -59,7 +72,13 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
       <LeftMenu exit={exit}/>
       <div className="profilePage__info">
         <Header title="Profile"/>
-        <Settings userName={userData ? userData.name : ''} changeUserName={changeUserName} changeUserPass={changeUserPass}/>
+        <Settings
+          userData={userData ? userData.data : null}
+          userName={userData ? userData.name : ''}
+          changeUserName={changeUserName}
+          changeUserPass={changeUserPass}
+          changeUserData={changeUserData}
+        />
       </div>
     </div>
   )
