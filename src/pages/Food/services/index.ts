@@ -36,6 +36,22 @@ export async function getAllFoodsDataService(token: string): Promise<{foods: [IF
   .then(res => res.json());
 }
 
+export async function editFood(food: IFood, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/food/edit', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      token,
+      food
+    }),
+  })
+  .then(res => res.json());
+}
+
 export async function deleteFood(id: string, token: string): Promise<{status: number}> {
   return await fetch(API_URL + '/food/delfood', {
     method: "DELETE",

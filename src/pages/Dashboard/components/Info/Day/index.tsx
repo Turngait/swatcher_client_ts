@@ -15,7 +15,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
     <div className="day">
       <div className="day__header">
         <p>{showDate(stat.date)}</p>
-        <p>+20C Sunny</p>
+        {/* <p>+20C Sunny</p> */}
       </div>
       <div className="day__info">
         <div className="day__info__food">

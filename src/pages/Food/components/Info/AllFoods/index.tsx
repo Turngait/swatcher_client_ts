@@ -10,8 +10,9 @@ import './index.scss';
 
 const AllFoods: React.FC<{
     setIsAddFoodOpen: (isOpen: boolean) => void,
+    onEditFood: (id: string) => void,
     onDeleteFood: (id: string) => Promise<void>
-  }> = ({ setIsAddFoodOpen, onDeleteFood }) => {
+  }> = ({ setIsAddFoodOpen, onEditFood, onDeleteFood }) => {
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
 
   return (
@@ -25,7 +26,7 @@ const AllFoods: React.FC<{
             ?
             foods.map((food: IFood) => {
               return (
-                <Food onDeleteFood={onDeleteFood} key={food.id} food={food}/>
+                <Food onEditFood={onEditFood} onDeleteFood={onDeleteFood} key={food.id} food={food}/>
               );
             })
             : <p>Вы пока не добавили себе ни одного продукта</p>

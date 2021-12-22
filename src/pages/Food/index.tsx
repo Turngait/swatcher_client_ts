@@ -8,6 +8,7 @@ import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
 import AddFoodForDayModal from './components/Modals/AddFoodForDay';
+import EditFoodModal from './components/Modals/EditFood';
 import Loader from 'components/common/Loader';
 
 import { 
@@ -16,7 +17,8 @@ import {
   deleteFood,
   addFoodForDay,
   getStatForPeriod,
-  deleteFoodForDayService
+  deleteFoodForDayService,
+  editFood
 } from './services';
 
 import { setAllFoods } from 'store/Food/food.action';
@@ -33,6 +35,8 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
 
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
   const [isAddFoodForDayOpen, setIsAddFoodForDayOpen] = useState(false);
+  const [isEditFoodOpen, setIsEditFoodOpen] = useState(false);
+  const [editableFood, setEditableFood] = useState<IFood | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -87,11 +91,31 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
+  const editFoodOpener = (id: string): void => {
+    const editableFood = foods.filter((food: IFood) => food.id === id);
+    if (editableFood[0]) {
+      setEditableFood(editableFood[0]);
+      setIsEditFoodOpen(true);
+    }
+  }
+
+  const editFoodHandler = async (food: IFood) => {
+    setLoading(true);
+    const {status} = await editFood(food, token || '');
+    if (status === 200) {
+      for (const idx in foods) {
+        if (foods[idx].id === food.id) foods[idx] = food; 
+      }
+      dispatch(setAllFoods(foods));
+      setIsEditFoodOpen(false);
+    }
+    setLoading(false);
+  }
+
   //TODO добавить обработку ошибок и вывод ошибок и добавить реактивности
   const deleteFoodForDayHandler = async (id: string, date: string): Promise<void> => {
     setLoading(true);
     const { status } = await deleteFoodForDayService(id, date, token || '');
-    console.log(status);
     if (status === 200) {
       for (const stat of stats) {
         if (stat.date === date) {
@@ -139,6 +163,9 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         loading ? <Loader /> : null
       }
       {
+        isEditFoodOpen && editableFood ? <EditFoodModal food={editableFood} editFoodHandler={editFoodHandler} closeModal={setIsEditFoodOpen}/> : null
+      }
+      {
         isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
@@ -149,6 +176,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}
           setIsAddFoodOpen={setIsAddFoodOpen}
+          onEditFood={editFoodOpener}
           onDeleteFoodForDay={deleteFoodForDayHandler}
         />
       </div>
