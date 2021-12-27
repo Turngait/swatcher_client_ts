@@ -20,6 +20,7 @@ export async function addNewIllnessService(title: string, descr: string, danger:
   })
   .then(res => res.json());
 }
+
 export async function addIllnessForDayService(illness: IIllnessStat, date: string, token: string | null): Promise<{status: number}> {
   return await fetch(API_URL + '/stats/addillnessforday', {
     method: "POST",
@@ -81,6 +82,24 @@ export async function getStatForPeriod(period: string, token: string): Promise<{
     body: JSON.stringify({
       token,
       period
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function editIllnessService(title: string, descr: string, id: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/health/editillness', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      token,
+      title,
+      descr,
+      id
     }),
   })
   .then(res => res.json());

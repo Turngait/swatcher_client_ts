@@ -7,9 +7,17 @@ import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewIllnessModal from './components/Modals/AddNewIllness';
 import AddIllnessForDayModal from './components/Modals/AddIllnessForDay';
+import EditIllnessModal from './components/Modals/EditIllnessModal';
 import Loader from 'components/common/Loader';
 
-import {addNewIllnessService, addIllnessForDayService, deleteIllnessService, deleteIllnessForDayService, getStatForPeriod} from './services';
+import {
+  addNewIllnessService,
+  addIllnessForDayService,
+  deleteIllnessService,
+  deleteIllnessForDayService,
+  getStatForPeriod,
+  editIllnessService
+} from './services';
 import {setAllHealth} from 'store/Health/health.actions';
 import { setStat, setPeriod } from 'store/User/user.actions';
 
@@ -23,8 +31,11 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
 
   const [isAddIllnessOpen, setIsAddIllnessOpen] = useState(false);
   const [isAddIllnessForDayOpen, setIsAddIllnessForDayOpen] = useState(false);
+  const [isEditIllnessOpen, setIsEditIllnessOpen] = useState(false);
+
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [editableIllness, setEditableIllness] = useState<IIllness | null>(null);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
   const stats = useSelector((state: any) => state.user.stat);
@@ -103,6 +114,28 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
+  const openEditIllness = (id: string) => {
+    const editableIllness = illnesses.filter(((item: IIllness) => item.id === id));
+    if(editableIllness) {
+      setEditableIllness(editableIllness[0]);
+      setIsEditIllnessOpen(true);
+    }
+  }
+
+  const saveChangesOnIllness = async(title: string, descr: string, id: string) => {
+    const { status } = await editIllnessService(title, descr, id, token || '');
+    if (status === 200) {
+      for (const idx in illnesses) {
+        if (illnesses[idx].id === id) {
+          illnesses[idx].title = title;
+          illnesses[idx].descr = descr;
+        } 
+      }
+      dispatch(setAllHealth(illnesses));
+    }
+    setIsEditIllnessOpen(false);
+  }
+
   //TODO добавить обработку ошибок и вывод ошибок и добавить реактивности
   const deleteIllnessForDay = async (id: string, date: string): Promise<void> => {
     setLoading(true);
@@ -126,6 +159,11 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         loading ? <Loader /> : null
       }
       {
+        isEditIllnessOpen && editableIllness ?
+          <EditIllnessModal illness={editableIllness} closeModal={setIsEditIllnessOpen} saveChangesOnIllness={saveChangesOnIllness}/>
+        : null
+      }
+      {
         isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness}/> : null
       }
       {
@@ -139,6 +177,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
           deleteIllness={deleteIllness}
           setIsAddIllnessForDayOpen={setIsAddIllnessForDayOpen}
           setIsAddIllnessOpen={setIsAddIllnessOpen}
+          openEditIllness={openEditIllness}
         />
       </div>
     </div>
