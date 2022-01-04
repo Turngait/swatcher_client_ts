@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import PopUp from 'components/common/PopUp';
-import DelIco from 'assets/icons/delete-ico.png';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 import {IFood} from 'types/common';
@@ -20,9 +19,7 @@ const AddFoodForDayModal: React.FC<{
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
 
   return (
-    <PopUp>
-      <img onClick={() => closeModal(false)} className="addFoodForDay__closeBtn" src={DelIco} alt="close modal"/>
-      <h2 className="addFoodForDay__header">Добавить еду на день</h2>
+    <PopUp title="Добавить еду на день" closeModal={() => closeModal(false)}>
       <div className="addFoodForDay__form">
         {/* TODO перенести все инпуты и селект в отдельный компонент */}
         <label>

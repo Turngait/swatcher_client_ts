@@ -1,18 +1,6 @@
 @import '../../../../../styles/colors.scss';
 
 .addFoodForDay {
-  &__header {
-    text-align: center;
-    font-size: 1.4rem;
-  }
-
-  &__closeBtn {
-    float: right;
-    filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 0.562));
-    width: 1.6rem;
-    cursor: pointer;
-  }
-
   &__form {
     margin-top: 1rem;
     display: flex;

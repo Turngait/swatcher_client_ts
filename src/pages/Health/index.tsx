@@ -50,7 +50,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     localStorage.removeItem('token');
     history.push('/');
   }
-  const addNewIllness = async (title: string, descr: string, danger: string, setMsg: (msg: string | null) => void): Promise<void> => {
+  const addNewIllness = async (title: string, descr: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
     const { status, id } = await addNewIllnessService(title, descr, danger, token);
     if (status === 200) {
@@ -59,7 +59,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       const ill: IIllness = {
         id,
         title,
-        danger: '',
+        danger,
         descr
       };
 
@@ -122,13 +122,14 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     }
   }
 
-  const saveChangesOnIllness = async(title: string, descr: string, id: string) => {
-    const { status } = await editIllnessService(title, descr, id, token || '');
+  const saveChangesOnIllness = async(title: string, descr: string, danger: number, id: string) => {
+    const { status } = await editIllnessService(title, descr, danger, id, token || '');
     if (status === 200) {
       for (const idx in illnesses) {
         if (illnesses[idx].id === id) {
           illnesses[idx].title = title;
           illnesses[idx].descr = descr;
+          illnesses[idx].danger = danger;
         } 
       }
       dispatch(setAllHealth(illnesses));

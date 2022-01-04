@@ -13,8 +13,7 @@ const FirstSetUp:React.FC<{saveData: (sex: string, age: number, weight: number, 
   const [height, setHeight] = useState(0);
 
   return (
-    <PopUp>
-      <h2 className="firstSU__header">Заполните свои данные</h2>
+    <PopUp title="Заполните свои данные">
       <div className="firstSU__form">
         <label>
           <p className="firstSU__form__desc">Ваш пол</p>

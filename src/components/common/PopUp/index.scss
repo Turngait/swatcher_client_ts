@@ -19,6 +19,18 @@
   box-sizing: border-box;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+
+  &__header {
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  &__closeBtn {
+    float: right;
+    filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 0.562));
+    width: 1.3rem;
+    cursor: pointer;
+  }
 }
 
 @media all and (min-width: 0) and (max-width: 830px) {

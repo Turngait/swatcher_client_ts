@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
-import DelIco from 'assets/icons/delete-ico.png';
 
 import {IIllness} from 'types/common';
 
@@ -23,10 +22,7 @@ const AddIllnessForDayModal: React.FC<{
     const [msg, setMsg] = useState<string | null>(null);
     
   return (
-    <PopUp>
-      <img onClick={() => closeModal(false)} className="addNewFood__closeBtn" src={DelIco} alt="close modal"/>
-
-      <h2 className="addNewIllnessForDay__header">Добавить недомогание на день</h2>
+    <PopUp title="Добавить недомогание на день" closeModal={() => closeModal(false)}>
       {
         msg ? <p className="addNewIllnessForDay__msg">{msg}</p> : null
       }

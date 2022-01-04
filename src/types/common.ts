@@ -2,6 +2,7 @@ export interface IFood {
   id: string,
   title: string,
   callories: number,
+  harmfulness?: number,
   groupId: string,
   descr: string,
   createdAt: string
@@ -10,7 +11,7 @@ export interface IFood {
 export interface IIllness {
   id?: string,
   title: string,
-  danger: string,
+  danger: number,
   descr: string
 }
 

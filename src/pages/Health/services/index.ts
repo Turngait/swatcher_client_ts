@@ -3,7 +3,7 @@ import { API_KEY } from 'config/keys';
 
 import {IIllnessStat} from 'types/common';
 
-export async function addNewIllnessService(title: string, descr: string, danger: string, token: string | null): Promise<{status: number, id: string}> {
+export async function addNewIllnessService(title: string, descr: string, danger: number, token: string | null): Promise<{status: number, id: string}> {
   return await fetch(API_URL + '/health/addillness', {
     method: "POST",
     headers: {
@@ -87,7 +87,7 @@ export async function getStatForPeriod(period: string, token: string): Promise<{
   .then(res => res.json());
 }
 
-export async function editIllnessService(title: string, descr: string, id: string, token: string): Promise<{status: number}> {
+export async function editIllnessService(title: string, descr: string, danger: number, id: string, token: string): Promise<{status: number}> {
   return await fetch(API_URL + '/health/editillness', {
     method: "PUT",
     headers: {
@@ -99,6 +99,7 @@ export async function editIllnessService(title: string, descr: string, id: strin
       token,
       title,
       descr,
+      danger,
       id
     }),
   })
