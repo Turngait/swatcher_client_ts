@@ -3,6 +3,7 @@ export interface IFood {
   title: string,
   callories: number,
   harmfulness?: number,
+  units?: string,
   groupId: string,
   descr: string,
   createdAt: string

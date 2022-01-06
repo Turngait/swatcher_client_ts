@@ -2,23 +2,14 @@
 
 .healthStatDay {
   margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(67, 67, 67, 0.25);
+  padding-bottom: 1rem;
   &__header {
-    background-color: $white;
-    padding: 0.6rem 1.2rem;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    border: 1px solid rgba(67, 67, 67, 0.25);
     font-weight: 700;
+    margin-bottom: 1rem;
   }
 
   &__info {
-    margin-top: 0.7rem;
-    background-color: $white;
-    padding: 0.6rem 1.2rem;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    border: 1px solid rgba(67, 67, 67, 0.25);
-
     &__healths {
       &__item {
         display: flex;

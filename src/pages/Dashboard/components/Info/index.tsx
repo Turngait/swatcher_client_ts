@@ -13,7 +13,7 @@ const Info: React.FC = () => {
         stats.length ?
           stats.map((stat: any) => <Day stat={stat} key={stat.id} />)
         :
-        <p>Нет данных. Начните добавлять данные в состветсвующих разделах</p>
+        <p className='dashboardInfo__noData'>Нет данных. Начните добавлять данные в состветсвующих разделах</p>
       }
     </div>
   )

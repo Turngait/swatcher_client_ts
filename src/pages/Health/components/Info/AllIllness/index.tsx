@@ -30,10 +30,9 @@ const AllIllness: React.FC<{
     <div className="allHealth">
       <div className="allHealth__header">Все болезни</div>
       <div className="allHealth__infoBox">
-        <Button size={BtnSize.largeBtn} title="Новое недомогание" onClick={() => setIsAddIllnessOpen(true)}/>
         <div className="allHealth__infoBox__health">
           {
-            illnesses.map((item: IIllness) => {
+            illnesses.length ? illnesses.map((item: IIllness) => {
               return (
                 <div key={item.id} className="allHealth__infoBox__health__item__box">
                   <div className={`allHealth__infoBox__health__item ${item.descr ? 'decriptionOpen' : ''}`}>
@@ -57,8 +56,10 @@ const AllIllness: React.FC<{
                 </div>
               );
             })
+            : <p>Здесь пока пусто. <br/><br/>Что бы добавить недомогание - нажмите кнопку ниже "Новое недомогание".</p>
           }
         </div>
+        <Button size={BtnSize.largeBtn} title="Новое недомогание" onClick={() => setIsAddIllnessOpen(true)}/>
       </div>
     </div>
   )

@@ -26,7 +26,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
               <div className="day__info__food__item" key={food.id}>
                 <p>{food.title}</p>
                 <p>{food.description}</p>
-                <p>{food.amount}</p>
+                <p>{food.amount} {food.units}</p>
               </div>
             )
           })

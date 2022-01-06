@@ -19,19 +19,19 @@ const AllFoods: React.FC<{
     <div className="allFoods">
       <div className="allFoods__header">Вся моя еда</div>
       <div className="allFoods__infoBox">
-        <Button size={BtnSize.largeBtn} title="Добавить еду" onClick={() => setIsAddFoodOpen(true)}/>
         <div className="allFoods__infoBox__foods">
           {
             Array.isArray(foods) && foods.length > 0 
             ?
             foods.map((food: IFood) => {
               return (
-                <Food onEditFood={onEditFood} onDeleteFood={onDeleteFood} key={food.id} food={food}/>
+                <Food onEditFood={onEditFood} onDeleteFood={onDeleteFood} key={food.id} food={food} />
               );
             })
             : <p>Вы пока не добавили себе ни одного продукта</p>
           }
         </div>
+        <Button size={BtnSize.largeBtn} title="Добавить еду" onClick={() => setIsAddFoodOpen(true)}/>
       </div>
     </div>
   )

@@ -15,28 +15,35 @@ const Stats: React.FC<{
   const illnesses = useSelector((state: any) => state.health.illnesses);
   return (
     <div className="healthStats">
+      <div>
+        <h2 className="foodStats__heading">Статистика по дням</h2>
+        {
+          illnesses.length === 0 ? <p>У вас не добавлено ни одного недомагания</p> : null
+        }
+        {
+          stats.length && stats[0].health.length ?
+          stats.map((stat: any) => {
+            if (stat.health.length > 0) {
+              return (
+                <Day deleteIllnessForDay={deleteIllnessForDay} stat={stat} key={stat.id} />
+              )
+            } else {
+              return null;
+            }
+          })
+          : <p>Здесь пока пусто.</p>
+        }
+      </div>
       <div className="healthStats__btnBox">
         {
           illnesses.length 
             ? 
             <Button size={BtnSize.largeBtn} title="Добавить" onClick={() => setIsAddIllnessForDayOpen(true)}/> 
             : 
-            <p>У вас не добавлено ни одного недомагания</p>
+            null
         }
         
       </div>
-
-      {
-        stats.map((stat: any) => {
-          if (stat.health.length > 0) {
-            return (
-              <Day deleteIllnessForDay={deleteIllnessForDay} stat={stat} key={stat.id} />
-            )
-          } else {
-            return null;
-          }
-        })
-      }
     </div>
   )
 }

@@ -13,7 +13,7 @@
 .modal {
   background-color: $white;
   padding: 2rem;
-  width: 50rem;
+  width: 30rem;
   margin: auto;
   margin-top: 7rem;
   box-sizing: border-box;
@@ -23,13 +23,21 @@
   &__header {
     text-align: center;
     font-size: 1.4rem;
+    margin-bottom: 1rem;
   }
 
   &__closeBtn {
     float: right;
-    filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 0.562));
-    width: 1.3rem;
+    width: 1.1rem;
     cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
   }
 }
 
