@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Button from 'components/controls/Button';
@@ -14,6 +14,26 @@ const Stats: React.FC<{
   }> = ({ setIsAddFoodForDayOpen, onDeleteFoodForDay }) => {
   const stats: IStat[] = useSelector((state: any) => state.user.stat);
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
+
+  const [showStat, setShowStat] = useState(false);
+
+  useEffect(() => {
+    if (stats.length) {
+      for(let stat of stats) {
+        if (stat.foods.length) {
+          setShowStat(true);
+          return;
+        }
+      }
+      setShowStat(false);
+      return;
+    } else {
+      setShowStat(false);
+      return;
+    }
+  }, [stats]);
+
+
   return (
     <div className="foodStats">
       <div>
@@ -21,7 +41,7 @@ const Stats: React.FC<{
       {
         foods.length === 0
         ? <p>У вас не добавлено еще ни одной еды</p> 
-        : stats.length && stats[0].foods.length ?
+        : showStat ?
             stats.map((stat: IStat) => {
               if(stat.foods.length > 0) {
                 return <Day onDeleteFoodForDay={onDeleteFoodForDay} stat={stat} key={stat.id} />

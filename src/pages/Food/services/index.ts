@@ -2,7 +2,14 @@ import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
 import { IFood, IFoodStat, IStat } from 'types/common';
 
-export async function addNewFoodService(title: string, callories: number, units: string, harmfulness: number, descr: string, token: string | null): Promise<{status: number, id: string}> {
+export async function addNewFoodService(
+    title: string,
+    callories: number,
+    units: string,
+    harmfulness: number,
+    descr: string,
+    token: string | null
+  ): Promise<{status: number, id: string, errors: any}> {
   return await fetch(API_URL + '/food/addfood', {
     method: "POST",
     headers: {
@@ -86,7 +93,7 @@ export async function deleteFoodForDayService(id: string, date: string, token: s
   .then(res => res.json());
 }
 
-export async function addFoodForDay(food: IFoodStat, date: string, token: string): Promise<{status: number, statsForday: IStat}> {
+export async function addFoodForDay(food: IFoodStat, date: string, token: string): Promise<{status: number, statsForday: IStat, errors: any}> {
   return await fetch(API_URL + '/stats/addfoodforday', {
     method: "POST",
     headers: {
@@ -95,7 +102,7 @@ export async function addFoodForDay(food: IFoodStat, date: string, token: string
     },
     mode: "cors",
     body: JSON.stringify({
-      food,
+      ...food,
       date,
       token
     }),

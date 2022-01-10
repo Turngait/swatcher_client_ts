@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BtnSize } from 'types/components';
@@ -8,11 +8,30 @@ import Button from 'components/controls/Button';
 import './index.scss';
 
 const Stats: React.FC<{
-    setIsAddIllnessForDayOpen: (isOpne: boolean) => void,
+    setIsAddIllnessForDayOpen: (isOpen: boolean) => void,
     deleteIllnessForDay: (id: string, date: string) => void
   }> = ({setIsAddIllnessForDayOpen, deleteIllnessForDay}) => {
   const stats = useSelector((state: any) => state.user.stat);
   const illnesses = useSelector((state: any) => state.health.illnesses);
+
+  const [showStat, setShowStat] = useState(false);
+
+  useEffect(() => {
+    if (stats.length) {
+      for(let stat of stats) {
+        if (stat.health.length) {
+          setShowStat(true);
+          return;
+        }
+      }
+      setShowStat(false);
+      return;
+    } else {
+      setShowStat(false);
+      return;
+    }
+  }, [stats]);
+
   return (
     <div className="healthStats">
       <div>
@@ -21,7 +40,7 @@ const Stats: React.FC<{
           illnesses.length === 0 ? <p>У вас не добавлено ни одного недомагания</p> : null
         }
         {
-          stats.length && stats[0].health.length ?
+          showStat ?
           stats.map((stat: any) => {
             if (stat.health.length > 0) {
               return (

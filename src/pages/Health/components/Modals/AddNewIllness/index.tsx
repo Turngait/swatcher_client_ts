@@ -17,7 +17,6 @@ const AddNewIllnessModal: React.FC<{
   const [danger, setDanger] = useState(1);
   const [msg, setMsg] = useState<string | null>(null);
 
-
   return (
     <PopUp title="Добавить недомогание" closeModal={() => onClose(false)}>
       {

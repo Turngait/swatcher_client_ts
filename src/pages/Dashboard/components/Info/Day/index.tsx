@@ -46,7 +46,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
                   <p className="day__info__health__item__title">{item.title}</p>
                   <p>{item.power}</p>
                   <p>с {item.begin}</p>
-                  <p className="day__info__health__item__duration">{item.duration} часов</p>
+                  <p className="day__info__health__item__duration">{item.duration} ч.</p>
                 </div>
               )
             })

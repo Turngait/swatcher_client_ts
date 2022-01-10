@@ -52,7 +52,8 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   }
   const addNewIllness = async (title: string, descr: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
-    const { status, id } = await addNewIllnessService(title, descr, danger, token);
+    const { status, id, errors } = await addNewIllnessService(title, descr, danger, token);
+
     if (status === 200) {
       setIsAddIllnessOpen(false);
 
@@ -65,6 +66,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
 
       const newIllnesses = [...illnesses, ill];
       dispatch(setAllHealth(newIllnesses));
+    } else if(errors && errors.length) {
+      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
     } else {
       setMsg('Что то пошло не так. Попробуйте позже');
       setTimeout(() => setMsg(null), 3000)
@@ -80,13 +84,16 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       description: descr,
       begin: time
     };
-    const {status} = await addIllnessForDayService(illness, date, token);
+    const {status, errors} = await addIllnessForDayService(illness, date, token);
     if (status === 200) {
       setIsAddIllnessForDayOpen(false);
       const {stat} = await getStatForPeriod(period, token || '');
       if(stat) {
         dispatch(setStat(stat));
       }
+    } else if(errors && errors.length) {
+      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
     } else {
       setMsg('Что то пошло не так. Попробуйте позже');
       setTimeout(() => setMsg(null), 3000)

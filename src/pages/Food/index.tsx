@@ -56,9 +56,16 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   }, []);
 
   // TODO Добавить обработку ошибок и вывод сообщений
-  const addNewFood = async (title: string, callories: number, units:string, harmfulness: number, descr: string): Promise<void> => {
+  const addNewFood = async (
+      title: string,
+      callories: number,
+      units:string,
+      harmfulness: number,
+      descr: string,
+      setMsg: (msg: string | null) => void
+    ): Promise<void> => {
     setLoading(true);
-    const { status, id } = await addNewFoodService(title, callories, units, harmfulness, descr, token);
+    const { status, id, errors } = await addNewFoodService(title, callories, units, harmfulness, descr, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
       const food: IFood = {
@@ -73,6 +80,12 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       };
 
       dispatch(setAllFoods([...foods, food]));
+    } else if(errors && errors.length) {
+      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
+    } else {
+      setMsg('Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
   }
@@ -130,7 +143,14 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  const addFoodForDayHandler = async (foodId: string, amount: number, date: string, time: string, description: string): Promise<void> => {
+  const addFoodForDayHandler = async (
+      foodId: string,
+      amount: number,
+      date: string,
+      time: string,
+      description: string,
+      setMsg: (msg: string | null) => void
+    ): Promise<void> => {
     setLoading(true);
     const food:IFoodStat = {
       food_id: foodId,
@@ -138,7 +158,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       time,
       description
     };
-    const { status } = await addFoodForDay(food, date, token || '');
+    const { status, errors } = await addFoodForDay(food, date, token || '');
     if (status === 200) {
       // dispatch(setStat(stats));
       setIsAddFoodForDayOpen(false);
@@ -146,6 +166,12 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       if(stat) {
         dispatch(setStat(stat));
       }
+    } else if(errors && errors.length) {
+      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
+    } else {
+      setMsg('Что то пошло не так. Попробуйте позже');
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
   }

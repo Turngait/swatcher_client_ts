@@ -23,9 +23,15 @@
         }
 
         &__title {
-          width: 18rem;
+          width: 16rem;
         }
       }
     }
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 1000px) {
+  .foodStatDay__info__foods__item__title {
+    width: 8rem;
   }
 }

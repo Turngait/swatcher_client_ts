@@ -7,7 +7,7 @@ import Button from 'components/controls/Button';
 import './index.scss';
 
 const AddNewFoodModal: React.FC<{
-    addNewFood: (title: string, callories: number, units:string, harmfulness: number, descr: string) => void,
+    addNewFood: (title: string, callories: number, units:string, harmfulness: number, descr: string, setMsg: (msg: string | null) => void) => void,
     closeModal: (isOpen: boolean) => void
   }> = ({ addNewFood, closeModal }) => {
   const [title, setTitle] = useState('');
@@ -15,9 +15,13 @@ const AddNewFoodModal: React.FC<{
   const [descr, setDescr] = useState('');
   const [harmfulness, setHarmfulness] = useState(1);
   const [units, setUnits] = useState('');
+  const [msg, setMsg] = useState<string | null>(null);
 
   return (
     <PopUp title="Добавить еду" closeModal={() => closeModal(false)}>
+      {
+        msg ? <p className="addNewIllness__msg">{msg}</p> : null
+      }
       <div className="addNewFood__form">
         <Textinput placeholder="Название..." onChange={(event) => setTitle(event.target.value)}/>
         <Textinput type="number" placeholder="Каллории..." onChange={(event) => setCallories(+event.target.value)}/>
@@ -38,7 +42,7 @@ const AddNewFoodModal: React.FC<{
           onChange={(event) => setDescr(event.target.value)}
         >
         </textarea>
-        <Button title="Добавить" onClick={() => addNewFood(title, callories, units, harmfulness, descr)} />
+        <Button title="Добавить" onClick={() => addNewFood(title, callories, units, harmfulness, descr, setMsg)} />
       </div>
     </PopUp>
   )

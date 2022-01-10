@@ -53,7 +53,7 @@ const AddIllnessForDayModal: React.FC<{
             <option value={5}>5</option>
           </select>
         </label>
-        <Textinput maxValue={24} value={duration} type="number" placeholder="Продолжительность в мин (примерно)..." onChange={(event) => setDuration(event.target.value)}/>
+        <Textinput maxValue={24} value={duration} type="number" placeholder="Продолжительность в часах (примерно)..." onChange={(event) => setDuration(event.target.value)}/>
         <label>
           <p>Введите время начала (примерное):</p>
           <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>

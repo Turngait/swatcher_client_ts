@@ -10,16 +10,20 @@ import './index.scss';
 const AddFoodForDayModal: React.FC<{
     foods: IFood[] | [], 
     closeModal: (isOpen: boolean) => void,
-    addFoodForDay: (foodId: string, amount: number, date:string,  time: string, description: string) => Promise<void>
+    addFoodForDay: (foodId: string, amount: number, date:string,  time: string, description: string, setMsg: (msg: string | null) => void) => Promise<void>
   }> = ({ addFoodForDay, closeModal, foods }) => {
   const [selectedFood, setSelectedFood] = useState(foods[0].id || '');
   const [amount, setAmount] = useState(1);
   const [descr, setDescr] = useState('');
   const [time, setTime] = useState('09:00');
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
+  const [msg, setMsg] = useState<string | null>(null);
 
   return (
     <PopUp title="Добавить еду на день" closeModal={() => closeModal(false)}>
+      {
+        msg ? <p className="addNewIllness__msg">{msg}</p> : null
+      }
       <div className="addFoodForDay__form">
         {/* TODO перенести все инпуты и селект в отдельный компонент */}
         <label>
@@ -50,7 +54,7 @@ const AddFoodForDayModal: React.FC<{
           onChange={(event) => setDescr(event.target.value)}
         >
         </textarea>
-        <Button title="Добавить" onClick={() => addFoodForDay(selectedFood, amount, date, time, descr)} />
+        <Button title="Добавить" onClick={() => addFoodForDay(selectedFood, amount, date, time, descr, setMsg)} />
       </div>
     </PopUp>
   )
