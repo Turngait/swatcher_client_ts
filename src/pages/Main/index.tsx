@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import type { RouteComponentProps } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import SignIn from './components/SignIn';
 import SignUp from './components/SingUp';
@@ -11,6 +12,8 @@ import {signInService, signUpService} from './services';
 import './index.scss';
 
 const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
+  const { t } = useTranslation();
+
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -65,19 +68,18 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
       }
       <div className="mainBox__leftBox">
         <p className="mainBox__leftBox__text">
-          Добро пожаловать в приложение SelfWatcher.
+          {t('index.welcome')}
           <br/>
           <br/>
-          Данное приложение позволит Вам вести учет потребляемой Вами еды и Вашего физического состояния. Все функции абсолютно бесплатны. Что бы
-          начать пользоваться необходимо просто пройти регистрацию.
+          {t('index.about1')}
           <br/>
           <br/>
-          Но, помните - данное приложение не является заменой медицинского заключения специалиста. Оно всего лишь позволяет вести статистику Вашей жизнедеятельнсоти.
+          {t('index.about2')}
         </p>
         <div className="mainBox__leftBox__info">
-          <p><a href="policy.html" target="_blank" className="mainBox__leftBox__info__link">Политика обработки персональных данных</a></p>
-          <p><a className="mainBox__leftBox__info__link" href="mailto:info@ilya-r.ru">Напишите нам</a></p>
-          <p>2021</p>
+          <p><a href="policy.html" target="_blank" className="mainBox__leftBox__info__link">{t('index.policy')}</a></p>
+          <p><a className="mainBox__leftBox__info__link" href="mailto:info@ilya-r.ru">{t('index.contactUs')}</a></p>
+          <p>2022</p>
         </div>
       </div>
       <div className="mainBox__rightBox">
@@ -95,17 +97,17 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
             (
               <>
                 <SignUp registartion={registartion}/>
-                <p className="mainBox__rightBox__descr">Уже есть аккаунт?</p>
-                <button onClick={() => setIsSignUpOpen(false)} className="mainBox__rightBox__switchBtn">Войдите!</button>
+                <p className="mainBox__rightBox__descr">{t('index.haveAccaunt')}</p>
+                <button onClick={() => setIsSignUpOpen(false)} className="mainBox__rightBox__switchBtn">{t('index.signin')}</button>
               </>
             )
             :
             (
               <>
                 <SignIn login={login}/>
-                <button onClick={() => setRestoreOpen(true)} className="mainBox__rightBox__switchBtn">Восстановить пароль</button>
-                <p className="mainBox__rightBox__descr">Нет еще аккаунта?</p>
-                <button onClick={() => setIsSignUpOpen(true)} className="mainBox__rightBox__switchBtn">Регестрация!</button>
+                <button onClick={() => setRestoreOpen(true)} className="mainBox__rightBox__switchBtn">{t('index.restorePass')}</button>
+                <p className="mainBox__rightBox__descr">{t('index.noAccaunt')}</p>
+                <button onClick={() => setIsSignUpOpen(true)} className="mainBox__rightBox__switchBtn">{t('index.signUp')}</button>
               </>
             ) 
         }

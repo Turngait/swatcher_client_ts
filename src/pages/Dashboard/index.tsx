@@ -2,19 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import LeftMenu from '../../components/common/LeftMenu';
 import Header from '../../components/common/Header';
 import Info from './components/Info';
 import FirstSetUp from './components/FirstSetUp';
 import Loader from 'components/common/Loader';
-import {IUserData} from 'types/common';
+import { IUserData } from 'types/common';
 
-import {saveFirstSetupData, getInitData} from './services';
+import { saveFirstSetupData, getInitData } from './services';
 import { setUserData, setPeriod } from 'store/User/user.actions';
 import './index.scss';
 
 const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const userData: IUserData = useSelector((state: any) => state.user.userData);
   const period: string = useSelector((state: any) => state.user.period);
@@ -75,7 +78,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
         {
           isFirstSetUpOpen ? <FirstSetUp saveData={saveFirstSetUp}/> : null
         }
-        <Header changePeriod={changePeriod} title="Статистика"/>
+        <Header changePeriod={changePeriod} title={t('menu.stats')}/>
         <Info />
       </div>
     </div>

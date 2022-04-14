@@ -1,11 +1,14 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import ExitIco from '../../../assets/icons/exit-ico.png';
 
 import './index.scss';
 
 const LeftMenu: React.FC<{exit?: () => void}> = ({exit}) => {
+  const { t } = useTranslation();
+
   return (
     <div className="leftMenu">
         <h1 className="leftMenu__header">
@@ -13,10 +16,10 @@ const LeftMenu: React.FC<{exit?: () => void}> = ({exit}) => {
           <p className="leftMenu__mini">Beta</p>
         </h1>
         <nav className="leftMenu__nav">
-          <NavLink to="/dashboard" className="leftMenu__nav__item">Статистика</NavLink>
-          <NavLink to="/food" className="leftMenu__nav__item">Еда</NavLink>
-          <NavLink to="/health" className="leftMenu__nav__item">Здоровье</NavLink>
-          <NavLink to="/profile" className="leftMenu__nav__item">Профиль</NavLink>
+          <NavLink to="/dashboard" className="leftMenu__nav__item">{t('menu.stats')}</NavLink>
+          <NavLink to="/food" className="leftMenu__nav__item">{t('menu.food')}</NavLink>
+          <NavLink to="/health" className="leftMenu__nav__item">{t('menu.health')}</NavLink>
+          <NavLink to="/profile" className="leftMenu__nav__item">{t('menu.profile')}</NavLink>
         </nav>
         <div>
           <img className="leftMenu__exitBtn" src={ExitIco} alt="ExitBtn" onClick={exit}/>
