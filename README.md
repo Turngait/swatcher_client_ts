@@ -1,6 +1,10 @@
 # SelfWatcher client
 
 Client part of SelWatcher Project
+Full project description on Notion:
+```
+https://ilya-r.notion.site/SelfWatcher-Description-9559ccdec2d74069ad52b130282125cb
+```
 
 Figma:
 ```
