@@ -20,6 +20,7 @@ const FirstSetUp:React.FC<{saveData: (sex: string, age: number, weight: number, 
           <select className="firstSU__form__select" onChange={(event) => setSex(event.target.value)}>
             <option value="man">Мужской</option>
             <option value="woman">Женский</option>
+            <option value="other">Женский</option>
           </select>
         </label>
         <Textinput type="number" placeholder="Ваш возраст..." onChange={(event) => setAge(+event.target.value)}/>

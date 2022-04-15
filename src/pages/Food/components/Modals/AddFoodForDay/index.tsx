@@ -25,7 +25,7 @@ const AddFoodForDayModal: React.FC<{
         msg ? <p className="addNewIllness__msg">{msg}</p> : null
       }
       <div className="addFoodForDay__form">
-        {/* TODO перенести все инпуты и селект в отдельный компонент */}
+        {/* TODO move all selects to component */}
         <label>
           <p>Введите день:</p>
           <input value={date} className="addFoodForDay__form__time" type="date" onChange={(event) => setDate(event.target.value)}/>

@@ -8,6 +8,19 @@ const resources = {
         "name": "Name",
         "email": "E-mail",
         "send": "Send",
+        "save": "Save",
+        "add": "Add",
+        "edit": "Edit",
+        "title": "Title",
+        "description": "Description",
+        "minimum": "Minimum",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "highest": "Highest"
+      },
+      "msgs": {
+        "err1": "Something goes wrong. Please try again later"
       },
       "index": {
         "signin": "SignIn",
@@ -37,7 +50,36 @@ const resources = {
         "profile": "Profile"
       },
       "stats": {
-        "noData": "Empty now. Please add some elements in in relevant sections"
+        "noData": "Empty now. Please add some elements in in relevant sections",
+        "emptyHere": "Empty here",
+        //First setup modal
+        "fillData": "Add your data please",
+        "fsSetSex": "Your sex",
+        "fsMan": "Male",
+        "fsWoman": "Female",
+        "fsOther": "Other",
+        "fsYourWeight": "Your weight",
+        "fsYourHeight": "Your hight",
+        "fsYourAge": "Your age"
+      },
+      "foods": {
+        "food": "Food",
+        "allMyFood": "All my food",
+        "allMyFoodEmpty": "You have not added any food yet",
+        "addFood": "Add Food",
+        "kkl": "kkl",
+        "ststByDays": "Statistics by days",
+        "ststByDaysNoFood": "Statistics is empty. you can add food for day by clicking 'Add' button at the bottom",
+        //Modals
+        "mAddFood": "Add food",
+        "mCalories": "Calories",
+        "mUnits": "Units (kg, litres, etc)",
+        "mHarmulness": "Harmfulness",
+        "mAddFoodForDay": "Add food for day",
+        "mChooseDay": "Choose a day",
+        "mChooseFood": "Choose food",
+        "mChooseTime": "Choose time",
+        "mAdditionalInfo": "Additional info (optional)"
       }
     }
   },
