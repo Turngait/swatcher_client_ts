@@ -60,7 +60,8 @@ const resources = {
         "fsOther": "Other",
         "fsYourWeight": "Your weight",
         "fsYourHeight": "Your hight",
-        "fsYourAge": "Your age"
+        "fsYourAge": "Your age",
+        "statByDays": "Statistics by days",
       },
       "foods": {
         "food": "Food",
@@ -68,8 +69,7 @@ const resources = {
         "allMyFoodEmpty": "You have not added any food yet",
         "addFood": "Add Food",
         "kkl": "kkl",
-        "ststByDays": "Statistics by days",
-        "ststByDaysNoFood": "Statistics is empty. you can add food for day by clicking 'Add' button at the bottom",
+        "statByDaysNoFood": "Statistics is empty. you can add food for day by clicking 'Add' button at the bottom",
         //Modals
         "mAddFood": "Add food",
         "mCalories": "Calories",
@@ -80,6 +80,38 @@ const resources = {
         "mChooseFood": "Choose food",
         "mChooseTime": "Choose time",
         "mAdditionalInfo": "Additional info (optional)"
+      },
+      "health": {
+        "health": "Health",
+        "noIllnessByDay": "You has not added any illness yet",
+        "allIllness": "All illness",
+        "newIllness": "New illness",
+        "allMyIllnessEmpty": "You have not added any illness yet",
+        "emptyIllnessByDay": "Statistics is empty. you can add illness for day by clicking 'Add' button at the bottom",
+        //Modals
+        "mNewIllnessForDay": "New illness for day",
+        "mChooseDay": "Choose a day",
+        "mChooseIllness": "Choose Illness",
+        "mChoosePower": "Choose power",
+        "mDurationInHours": "Duration in hours",
+        "mChooseTime": "Choose start time",
+        "mAdditionalInfo": "Additional info (optional)",
+        "mAddIllness": "Add illness",
+        "mChooseDanger": "Choose danger"
+      },
+      "profile": {
+        "profile": "Profile",
+        "nameIsChanged": "Name is changed",
+        "passIsChanged": "Password is changed",
+        "dataIsChanged": "Data is changed",
+        "changeName": "Change name",
+        "yourName": "Your name",
+        "changePass": "Change password",
+        "yourOldPass": "Your old password",
+        "yourNewPass": "Your new password",
+        "yourWeight": "Your weight",
+        "yourHeight": "Your height",
+        "yourAge": "Your age"
       }
     }
   },
