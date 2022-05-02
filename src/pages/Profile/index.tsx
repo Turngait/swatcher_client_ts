@@ -1,5 +1,5 @@
 import React, {useState, useEffect}  from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
 
 import LeftMenu from 'components/common/LeftMenu';
