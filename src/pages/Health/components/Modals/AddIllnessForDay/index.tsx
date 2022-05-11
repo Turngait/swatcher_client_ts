@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
@@ -13,6 +14,8 @@ const AddIllnessForDayModal: React.FC<{
     closeModal: (isOpen: boolean) => void,
     addIllnesForDay: (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void) => void
   }> = ({illnesses, closeModal, addIllnesForDay}) => {
+    const { t } = useTranslation();
+
     const [selectedIll, setSelectedIll] = useState(illnesses[0].id || '');
     const [power, setPower] = useState(1);
     const [duration, setDuration] = useState('1');
@@ -22,17 +25,17 @@ const AddIllnessForDayModal: React.FC<{
     const [msg, setMsg] = useState<string | null>(null);
     
   return (
-    <PopUp title="Добавить недомогание на день" closeModal={() => closeModal(false)}>
+    <PopUp title={t('health.mNewIllnessForDay')} closeModal={() => closeModal(false)}>
       {
         msg ? <p className="addNewIllnessForDay__msg">{msg}</p> : null
       }
       <div className="addFoodForDay__form">
         <label>
-          <p>Введите день:</p>
+          <p>{t('health.mChooseDay')}</p>
           <input value={date} className="addFoodForDay__form__time" type="date" onChange={(event) => setDate(event.target.value)}/>
         </label>
         <label>
-          <p>Выбирите недомагание:</p>
+          <p>{t('health.mChooseIllness')}</p>
           <select className="addFoodForDay__form__time" onChange={(event) => setSelectedIll(event.target.value)}>
             {
               illnesses.map((item: IIllness) => {
@@ -44,7 +47,7 @@ const AddIllnessForDayModal: React.FC<{
           </select>
         </label>
         <label>
-          <p>Выбирите силу:</p>
+          <p>{t('health.mChoosePower')}</p>
           <select className="addFoodForDay__form__time" onChange={(event) => setPower(+event.target.value)}>
             <option value={1}>1</option>
             <option value={2}>2</option>
@@ -53,18 +56,18 @@ const AddIllnessForDayModal: React.FC<{
             <option value={5}>5</option>
           </select>
         </label>
-        <Textinput maxValue={24} value={duration} type="number" placeholder="Продолжительность в часах (примерно)..." onChange={(event) => setDuration(event.target.value)}/>
+        <Textinput maxValue={24} value={duration} type="number" placeholder={`${t('health.mDurationInHours')}...`} onChange={(event) => setDuration(event.target.value)}/>
         <label>
-          <p>Введите время начала (примерное):</p>
+          <p>{t('health.mChooseTime')}</p>
           <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
         </label>
         <textarea
           className="addFoodForDay__form__textarea"
-          placeholder="Дополнительная информация (по желанию)..."
+          placeholder={`${t('health.mAdditionalInfo')}...`}
           onChange={(event) => setDescr(event.target.value)}
         >
         </textarea>
-        <Button title="Добавить" onClick={() => addIllnesForDay(selectedIll, power, duration, descr, time, date, setMsg)} />
+        <Button title={t('common.add')} onClick={() => addIllnesForDay(selectedIll, power, duration, descr, time, date, setMsg)} />
       </div>
     </PopUp>
   )

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import LeftMenu from '../../components/common/LeftMenu';
 import Header from '../../components/common/Header';
@@ -27,6 +28,7 @@ import './index.scss';
 
 //TODO сделать уведомления в случае ошибки сервера по разным функциям. Поправить везде функционал по добавлению
 const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [isAddIllnessOpen, setIsAddIllnessOpen] = useState(false);
@@ -67,10 +69,10 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       const newIllnesses = [...illnesses, ill];
       dispatch(setAllHealth(newIllnesses));
     } else if(errors && errors.length) {
-      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setMsg(errors[0].msg || t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     } else {
-      setMsg('Что то пошло не так. Попробуйте позже');
+      setMsg(t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
@@ -92,10 +94,10 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         dispatch(setStat(stat));
       }
     } else if(errors && errors.length) {
-      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setMsg(errors[0].msg || t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     } else {
-      setMsg('Что то пошло не так. Попробуйте позже');
+      setMsg(t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
@@ -144,7 +146,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     setIsEditIllnessOpen(false);
   }
 
-  //TODO добавить обработку ошибок и вывод ошибок и добавить реактивности
+  //TODO add error processing
   const deleteIllnessForDay = async (id: string, date: string): Promise<void> => {
     setLoading(true);
     const {status} = await deleteIllnessForDayService(id, date, token || '');
@@ -179,7 +181,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       }
       <LeftMenu exit={exit}/>
       <div className="foodPage__info">
-        <Header changePeriod={changePeriod} title="Здоровье"/>
+        <Header changePeriod={changePeriod} title={t('health.health')}/>
         <Info
           deleteIllnessForDay={deleteIllnessForDay}
           deleteIllness={deleteIllness}

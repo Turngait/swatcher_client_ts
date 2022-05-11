@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
@@ -12,6 +13,8 @@ const AddFoodForDayModal: React.FC<{
     closeModal: (isOpen: boolean) => void,
     addFoodForDay: (foodId: string, amount: number, date:string,  time: string, description: string, setMsg: (msg: string | null) => void) => Promise<void>
   }> = ({ addFoodForDay, closeModal, foods }) => {
+  const { t } = useTranslation();
+
   const [selectedFood, setSelectedFood] = useState(foods[0].id || '');
   const [amount, setAmount] = useState(1);
   const [descr, setDescr] = useState('');
@@ -20,18 +23,18 @@ const AddFoodForDayModal: React.FC<{
   const [msg, setMsg] = useState<string | null>(null);
 
   return (
-    <PopUp title="Добавить еду на день" closeModal={() => closeModal(false)}>
+    <PopUp title={t('foods.mAddFoodForDay')} closeModal={() => closeModal(false)}>
       {
         msg ? <p className="addNewIllness__msg">{msg}</p> : null
       }
       <div className="addFoodForDay__form">
         {/* TODO move all selects to component */}
         <label>
-          <p>Введите день:</p>
+          <p>{t('foods.mChooseDay')}</p>
           <input value={date} className="addFoodForDay__form__time" type="date" onChange={(event) => setDate(event.target.value)}/>
         </label>
         <label>
-          <p>Выбирите еду:</p>
+          <p>{t('foods.mChooseFood')}</p>
           <select className="addFoodForDay__form__time" onChange={(event) => setSelectedFood(event.target.value)}>
             {
               foods.map((food) => {
@@ -43,18 +46,18 @@ const AddFoodForDayModal: React.FC<{
           </select>
         </label>
 
-        <Textinput value={amount} type="number" placeholder="Колличество..." onChange={(event) => setAmount(+event.target.value)}/>
+        <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
         <label>
-          <p>Введите время приема пищи:</p>
+          <p>{t('foods.mChooseTime')}</p>
           <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
         </label>
         <textarea
           className="addFoodForDay__form__textarea"
-          placeholder="Дополнительная информация (по желанию)..."
+          placeholder={`${t('foods.mAdditionalInfo')}...`}
           onChange={(event) => setDescr(event.target.value)}
         >
         </textarea>
-        <Button title="Добавить" onClick={() => addFoodForDay(selectedFood, amount, date, time, descr, setMsg)} />
+        <Button title={t('common.add')} onClick={() => addFoodForDay(selectedFood, amount, date, time, descr, setMsg)} />
       </div>
     </PopUp>
   )

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
@@ -15,12 +16,14 @@ const EditIllnessModal: React.FC<{
   closeModal: (isOpen: boolean) => void,
   saveChangesOnIllness: (title: string, descr: string, danger: number, id: string) => void
 }> = ({ illness, closeModal, saveChangesOnIllness }) => {
+  const { t } = useTranslation();
+
   const [title, setTitle] = useState(illness.title);
   const [descr, setDescr] = useState(illness.descr);
   const [danger, setDanger] = useState(+illness.danger);
 
   const showDangerName = (danger: number) => {
-    if (!danger) return 'Неопределено';
+    if (!danger) return t('common.empty');
     if (danger === 1) return illsDangerEnum.none;
     if (danger === 2) return illsDangerEnum.small;
     if (danger === 3) return illsDangerEnum.medium;
@@ -29,13 +32,13 @@ const EditIllnessModal: React.FC<{
   }
 
   return (
-    <PopUp title={`Редактировать ${illness.title}`} closeModal={() => closeModal(false)}>
+    <PopUp title={`${t('common.edit')} ${illness.title}`} closeModal={() => closeModal(false)}>
       <div className="addNewFood__form">
-        <Textinput value={title} maxlength={20} placeholder="Название..." onChange={(event) => setTitle(event.target.value)}/>
+        <Textinput value={title} maxlength={20} placeholder={`${t('common.title')}...`} onChange={(event) => setTitle(event.target.value)}/>
         <label>
-          <p>Выбирите опасность:</p>
+          <p>{t('health.mChooseDanger')}</p>
           <select className="addFoodForDay__form__time" onChange={(event: any) => setDanger(event.target.value)}>
-            <option value={danger}>Установлена: {showDangerName(danger)}</option>
+            <option value={danger}>Set: {showDangerName(danger)}</option>
             <option value={1}>{illsDangerEnum.none}</option>
             <option value={2}>{illsDangerEnum.small}</option>
             <option value={3}>{illsDangerEnum.medium}</option>
@@ -45,12 +48,12 @@ const EditIllnessModal: React.FC<{
         </label>
         <textarea
           className="addNewIllness__form__textarea"
-          placeholder="Описание..."
+          placeholder={`${t('common.description')}...`}
           onChange={(event) => setDescr(event.target.value)}
           value={descr}
         >
         </textarea>
-         <Button title="Добавить" onClick={() => saveChangesOnIllness(title, descr, danger, illness.id || '')} />
+         <Button title={t('common.add')} onClick={() => saveChangesOnIllness(title, descr, danger, illness.id || '')} />
 
       </div>
     </PopUp>

@@ -17,7 +17,8 @@ const resources = {
         "low": "Low",
         "medium": "Medium",
         "high": "High",
-        "highest": "Highest"
+        "highest": "Highest",
+        "empty": "Empty"
       },
       "msgs": {
         "err1": "Something goes wrong. Please try again later"
@@ -79,6 +80,7 @@ const resources = {
         "mChooseDay": "Choose a day",
         "mChooseFood": "Choose food",
         "mChooseTime": "Choose time",
+        "mAmount": "Amount",
         "mAdditionalInfo": "Additional info (optional)"
       },
       "health": {
@@ -109,6 +111,7 @@ const resources = {
         "changePass": "Change password",
         "yourOldPass": "Your old password",
         "yourNewPass": "Your new password",
+        "yourData": "Your data",
         "yourWeight": "Your weight",
         "yourHeight": "Your height",
         "yourAge": "Your age"

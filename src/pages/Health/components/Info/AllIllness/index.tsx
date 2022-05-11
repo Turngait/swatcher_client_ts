@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Button from 'components/controls/Button';
 import {BtnSize} from 'types/components';
@@ -15,10 +16,11 @@ const AllIllness: React.FC<{
     deleteIllness: (id: string) => void,
     openEditIllness: (id: string) => void
   }> = ({setIsAddIllnessOpen, deleteIllness, openEditIllness}) => {
+  const { t } = useTranslation();
   const illnesses: IIllness[] = useSelector((state: any) => state.health.illnesses);
 
   const showDangerName = (danger: number) => {
-    if (!danger) return 'Неопределено';
+    if (!danger) return t('common.empty');
     if (danger === 1) return illsDangerEnum.none;
     if (danger === 2) return illsDangerEnum.small;
     if (danger === 3) return illsDangerEnum.medium;
@@ -28,7 +30,7 @@ const AllIllness: React.FC<{
 
   return (
     <div className="allHealth">
-      <div className="allHealth__header">Все болезни</div>
+      <div className="allHealth__header">{t('health.allIllness')}</div>
       <div className="allHealth__infoBox">
         <div className="allHealth__infoBox__health">
           {
@@ -56,10 +58,10 @@ const AllIllness: React.FC<{
                 </div>
               );
             })
-            : <p>Здесь пока пусто. <br/><br/>Что бы добавить недомогание - нажмите кнопку ниже "Новое недомогание".</p>
+            : <p>{t('health.emptyIllnessByDay')}</p>
           }
         </div>
-        <Button size={BtnSize.largeBtn} title="Новое недомогание" onClick={() => setIsAddIllnessOpen(true)}/>
+        <Button size={BtnSize.largeBtn} title={t('health.newIllness')} onClick={() => setIsAddIllnessOpen(true)}/>
       </div>
     </div>
   )
