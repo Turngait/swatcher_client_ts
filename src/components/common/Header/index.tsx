@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-// import DatePicker from 'react-datepicker';
-// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import './index.scss';
 
 const Header:React.FC<{title: string, changePeriod?: (period: string) => void}> = ({title, changePeriod}) => {
@@ -13,7 +13,14 @@ const Header:React.FC<{title: string, changePeriod?: (period: string) => void}> 
       <h2 className="headBox__pageName">{title}</h2>
       <div>
         {
-          changePeriod ? <input className="headBox__dataPicker" type="month" value={period} onChange={(event) => changePeriod(event.target.value)}/> : null
+          changePeriod ? 
+            <DatePicker
+              className='headBox__dataPicker'
+              selected={new Date(period)}
+              onChange={(date: Date) => changePeriod(date.toISOString().slice(0, 7))}
+              dateFormat="MM/yyyy"
+              showMonthYearPicker
+            /> : null
         }
       </div>
     </div>
