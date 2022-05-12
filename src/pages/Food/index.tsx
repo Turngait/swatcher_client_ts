@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import LeftMenu from '../../components/common/LeftMenu';
 import Header from '../../components/common/Header';
@@ -29,6 +30,8 @@ import './index.scss';
 
 const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
   const period: string = useSelector((state: any) => state.user.period);
   const stats: IStat[] = useSelector((state: any) => state.user.stat);
@@ -81,10 +84,10 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
 
       dispatch(setAllFoods([...foods, food]));
     } else if(errors && errors.length) {
-      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setMsg(errors[0].msg || t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     } else {
-      setMsg('Что то пошло не так. Попробуйте позже');
+      setMsg(t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
@@ -167,10 +170,10 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         dispatch(setStat(stat));
       }
     } else if(errors && errors.length) {
-      setMsg(errors[0].msg || 'Что то пошло не так. Попробуйте позже');
+      setMsg(errors[0].msg || t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     } else {
-      setMsg('Что то пошло не так. Попробуйте позже');
+      setMsg(t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
@@ -199,7 +202,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
       <LeftMenu exit={exit}/>
       <div className="foodPage__info">
-        <Header changePeriod={changePeriod} title="Еда"/>
+        <Header changePeriod={changePeriod} title={t('foods.food')}/>
         <Info
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}

@@ -27,7 +27,7 @@ const Day: React.FC<{
                 <div className="foodStatDay__info__foods__item" key={food.id}>
                   <p className="foodStatDay__info__foods__item__title">{food.title}</p>
                   <p>{food.description}</p>
-                  <p>{food.amount} шт.</p>
+                  <p>{food.amount}</p>
                   <p>{food.time}</p>
                   <img onClick={() => onDeleteFoodForDay(food.id, stat.date)} className="healthStatDay__info__healths__item__delIco" src={DelIco} alt="delete health"/>
                 </div>

@@ -1,27 +1,31 @@
 # SelfWatcher client
 
-Клиентская часть для приложения SelWatcher
+Client part of SelWatcher Project
+Full project description on Notion:
+```
+https://ilya-r.notion.site/SelfWatcher-Description-9559ccdec2d74069ad52b130282125cb
+```
 
-Макеты приложения зедсь:
+Figma:
 ```
 https://www.figma.com/file/yDcJx5ySr2y0z16LECbsEI/SelfWatcher?node-id=0%3A1
 ```
 
-Код апи можно найти здесь:
+API's repositories here:
 ```
 https://github.com/Turngait/swatcher_api_ts
 ```
-Данное приложение является опенсорс проектом и каждый желающий может использовать код данного приложения по своему усмотрению.
+This is open source project. And anyone can use this code however he\she want. :)
 
-## Требования
-В Вашей системе должны быть установлены следующие пакеты:
+## Requirements
+You will need this utils:
 ```
 git
 nodejs
 npm
 ```
 
-## Установка проекта локальная
+## Local setup
 ```
 git clone https://github.com/Turngait/swatcher_client_ts.git client
 cd client
@@ -29,21 +33,21 @@ npm install
 cd src/config
 cp key.example.ts key.ts
 ```
-Далее, следует вставить строку API KEY .
+Next, you need to add API KEY into key.ts file.
 
-## Запуск проекта локально
+## Start localy
 ```
 npm start
 ```
 
-## Что бы собрать проект для продакшена
+## Buld for production
 ```
 npm build
 ```
 
-Данный фаил со временем будет дополнятся.
+This file will be updated over time.
 
-### Разработано мной
+### Developed by
 ```
-http://ilya-r.ru/
+http://ilya-r.com/
 ```

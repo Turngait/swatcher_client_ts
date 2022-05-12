@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PopUp from 'components/common/PopUp';
 import DelIco from 'assets/icons/delete-ico.png';
@@ -12,6 +13,8 @@ import './index.scss';
 
 //TODO выводить сообщения исходя из статуса ответа
 const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRestore}) => {
+  const { t } = useTranslation();
+
   const [secondStep, setSecondStep] = useState(false);
   const [isComplite, setIsComplite] = useState(false);
   const [email, setEmail] = useState('');
@@ -36,25 +39,25 @@ const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRe
   return (
     <PopUp>
       <img onClick={() => closeRestore(false)} className="restorePass__closeBtn" src={DelIco} alt="close modal"/>
-      <h2 className="restorePass__header">Восстановить пароль</h2>
+      <h2 className="restorePass__header">{t('index.restorePass')}</h2>
       {
-        isComplite ? <p className="restorePass__complite">Пароль успешно изменен!</p> : null
+        isComplite ? <p className="restorePass__complite">{t('index.restorePassSuccess')}</p> : null
       }
       {
         secondStep 
           ? 
         (
           <div className="restorePass__box">
-            <p>Вам на e-mail был отправлен код. Введите его в поле ниже</p>
-            <Textinput onChange={(event) => setCode(event.target.value)} placeholder='Введите код из e-mail' type='email'/>
-            <Textinput onChange={(event) => setPass(event.target.value)} placeholder='Введите Ваш новый пароль' type='email'/>
-            <Button onClick={setNewPass} title='Отправить'/>
+            <p>{t('index.rstoreMsg')}</p>
+            <Textinput onChange={(event) => setCode(event.target.value)} placeholder={t('index.enterSecretCode')} type='email'/>
+            <Textinput onChange={(event) => setPass(event.target.value)} placeholder={t('index.enterNewPass')} type='email'/>
+            <Button onClick={setNewPass} title={t('common.send')} />
           </div>
         ) 
         : (
           <div className="restorePass__box">
-            <Textinput onChange={(event) => setEmail(event.target.value)} placeholder='Введите Ваш e-mail' type='email'/>
-            <Button onClick={startRestore} title='Отправить'/>
+            <Textinput onChange={(event) => setEmail(event.target.value)} placeholder={t('index.enterEmail')} type='email'/>
+            <Button onClick={startRestore} title={t('common.send')} />
           </div>
         )
       }

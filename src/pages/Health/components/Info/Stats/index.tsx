@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { BtnSize } from 'types/components';
 import Day from './Day';
@@ -11,6 +12,7 @@ const Stats: React.FC<{
     setIsAddIllnessForDayOpen: (isOpen: boolean) => void,
     deleteIllnessForDay: (id: string, date: string) => void
   }> = ({setIsAddIllnessForDayOpen, deleteIllnessForDay}) => {
+  const { t } = useTranslation();
   const stats = useSelector((state: any) => state.user.stat);
   const illnesses = useSelector((state: any) => state.health.illnesses);
 
@@ -35,9 +37,9 @@ const Stats: React.FC<{
   return (
     <div className="healthStats">
       <div>
-        <h2 className="foodStats__heading">Статистика по дням</h2>
+        <h2 className="foodStats__heading">{t('stats.statByDays')}</h2>
         {
-          illnesses.length === 0 ? <p>У вас не добавлено ни одного недомагания</p> : null
+          illnesses.length === 0 ? <p>{t('health.allMyIllnessEmpty')}</p> : null
         }
         {
           showStat ?
@@ -50,14 +52,14 @@ const Stats: React.FC<{
               return null;
             }
           })
-          : <p>Здесь пока пусто.</p>
+          : <p>{t('health.allMyIllnessEmpty')}</p>
         }
       </div>
       <div className="healthStats__btnBox">
         {
           illnesses.length 
             ? 
-            <Button size={BtnSize.largeBtn} title="Добавить" onClick={() => setIsAddIllnessForDayOpen(true)}/> 
+            <Button size={BtnSize.largeBtn} title={t('common.add')} onClick={() => setIsAddIllnessForDayOpen(true)}/> 
             : 
             null
         }

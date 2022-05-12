@@ -1,6 +1,7 @@
 import React, {useState, useEffect}  from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import LeftMenu from 'components/common/LeftMenu';
 import Header from '../../components/common/Header';
@@ -13,6 +14,8 @@ import { IUserData, IUserPersonalData } from 'types/common';
 import './index.scss';
 
 const Profile:React.FC<RouteComponentProps> = ({ history }) => {
+  const { t } = useTranslation();
+
   const [token, setToken] = useState<string | null>(null);
   const userData: IUserData | null = useSelector((state: any) => state.user.userData);
 
@@ -36,9 +39,9 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
       if(status === 200 && userData) {
         userData.name = name;
         setUserInfoData(userData);
-        setMsg('Имя успешно изменено');
+        setMsg(t('profile.nameIsChanged'));
       } else {
-        setMsg('Что то пошло не так, попробуйте позже');
+        setMsg(t('msgs.err1'));
       }
     }
     setTimeout(() => setMsg(null), 4000);
@@ -46,9 +49,9 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
   const changeUserPass = async (oldPass: string, pass: string, setMsg: (msg: string | null) =>void): Promise<void> => {
     const { status } = await changeUserPassService(oldPass, pass, token || '');
     if(status === 200) {
-      setMsg('Пароль успешно изменен');
+      setMsg(t('profile.passIsChanged'));
     } else {
-      setMsg('Что то пошло не так, попробуйте позже');
+      setMsg(t('msgs.err1'));
     }
     setTimeout(() => setMsg(null), 4000);
   }
@@ -59,9 +62,9 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
       setMsg(errors[0].msg);
     } else {
       if(status === 200) {
-        setMsg('Данные успешно изменены');
+        setMsg(t('profile.dataIsChanged'));
       } else {
-        setMsg('Что то пошло не так, попробуйте позже');
+        setMsg(t('msgs.err1'));
       }
     }
     setTimeout(() => setMsg(null), 4000);
@@ -71,7 +74,7 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
     <div className="profilePage">
       <LeftMenu exit={exit}/>
       <div className="profilePage__info">
-        <Header title="Profile"/>
+        <Header title={t('profile.profile')}/>
         <Settings
           userData={userData ? userData.data : null}
           userName={userData ? userData.name : ''}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Button from 'components/controls/Button';
 import {BtnSize} from 'types/components';
@@ -12,6 +13,8 @@ const Stats: React.FC<{
     setIsAddFoodForDayOpen: (isOpen: boolean) => void,
     onDeleteFoodForDay: (id: string, date: string) => void,
   }> = ({ setIsAddFoodForDayOpen, onDeleteFoodForDay }) => {
+  const { t } = useTranslation();
+
   const stats: IStat[] = useSelector((state: any) => state.user.stat);
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
 
@@ -37,10 +40,10 @@ const Stats: React.FC<{
   return (
     <div className="foodStats">
       <div>
-      <h2 className="foodStats__heading">Статистика по дням</h2>
+      <h2 className="foodStats__heading">{t('stats.statByDays')}</h2>
       {
         foods.length === 0
-        ? <p>У вас не добавлено еще ни одной еды</p> 
+        ? <p>{t('foods.allMyFoodEmpty')}</p>
         : showStat ?
             stats.map((stat: IStat) => {
               if(stat.foods.length > 0) {
@@ -51,14 +54,14 @@ const Stats: React.FC<{
                 }
               }
             )
-          : <p>У вас не добавлено еще ни одной еды в статистику. Что бы начать вести статистику нажмите кнопки ниже "Добавить".</p>
+          : <p>{t('foods.statByDaysNoFood')}</p>
       }
       </div>
       <div className="foodStats__controlBox">
         {
           foods.length 
           ?
-          <Button onClick={() => setIsAddFoodForDayOpen(true)} size={BtnSize.largeBtn} title="Добавить"/>
+          <Button onClick={() => setIsAddFoodForDayOpen(true)} size={BtnSize.largeBtn} title={t('common.add')}/>
           :
           null
         }

@@ -7,6 +7,7 @@ import {store} from './store/index'
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './i18n';
 
 const app = (
   <React.StrictMode>

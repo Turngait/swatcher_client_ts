@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import './index.scss';
 
 const Day: React.FC<{stat: any}> = ({stat}) => {
+  const { t } = useTranslation();
+
   function showDate (initDate: string): string {
     const d = new Date(initDate);
     let ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
@@ -32,7 +35,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
           })
           :
           <div className="day__info__food__item">
-            <p>Тут пока пусто</p>
+            <p>{t('stats.emptyHere')}</p>
           </div>
         }
 
@@ -45,15 +48,15 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
                 <div className="day__info__health__item" key={item.id}>
                   <p className="day__info__health__item__title">{item.title}</p>
                   <p>{item.power}</p>
-                  <p>с {item.begin}</p>
-                  <p className="day__info__health__item__duration">{item.duration} ч.</p>
+                  <p>start {item.begin}</p>
+                  <p className="day__info__health__item__duration">{item.duration} h.</p>
                 </div>
               )
             })
             :
             (
               <div className="day__info__health__item">
-                <p>Тут пока пусто</p>
+                <p>{t('stats.emptyHere')}</p>
             </div>
             )
           }

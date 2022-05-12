@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Button from 'components/controls/Button';
 import {BtnSize} from 'types/components';
@@ -13,11 +14,13 @@ const AllFoods: React.FC<{
     onEditFood: (id: string) => void,
     onDeleteFood: (id: string) => Promise<void>
   }> = ({ setIsAddFoodOpen, onEditFood, onDeleteFood }) => {
+  const { t } = useTranslation();
+
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
 
   return (
     <div className="allFoods">
-      <div className="allFoods__header">Вся моя еда</div>
+      <div className="allFoods__header">{t('foods.allMyFood')}</div>
       <div className="allFoods__infoBox">
         <div className="allFoods__infoBox__foods">
           {
@@ -28,10 +31,10 @@ const AllFoods: React.FC<{
                 <Food onEditFood={onEditFood} onDeleteFood={onDeleteFood} key={food.id} food={food} />
               );
             })
-            : <p>Вы пока не добавили себе ни одного продукта</p>
+            : <p>{t('foods.allMyFoodEmpty')}</p>
           }
         </div>
-        <Button size={BtnSize.largeBtn} title="Добавить еду" onClick={() => setIsAddFoodOpen(true)}/>
+        <Button size={BtnSize.largeBtn} title={t('foods.addFood')} onClick={() => setIsAddFoodOpen(true)}/>
       </div>
     </div>
   )
