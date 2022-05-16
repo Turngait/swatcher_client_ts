@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import DatePicker from 'react-datepicker';
 
 import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 import {IFood} from 'types/common';
 
+import "react-datepicker/dist/react-datepicker.css";
 import './index.scss';
 
 const AddFoodForDayModal: React.FC<{
@@ -18,7 +20,7 @@ const AddFoodForDayModal: React.FC<{
   const [selectedFood, setSelectedFood] = useState(foods[0].id || '');
   const [amount, setAmount] = useState(1);
   const [descr, setDescr] = useState('');
-  const [time, setTime] = useState('09:00');
+  const [time, setTime] = useState(new Date().toLocaleTimeString().slice(0, 5));
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
   const [msg, setMsg] = useState<string | null>(null);
 
@@ -49,7 +51,16 @@ const AddFoodForDayModal: React.FC<{
         <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
         <label>
           <p>{t('foods.mChooseTime')}</p>
-          <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
+          <DatePicker
+            value={time}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="h:mm aa"
+            className="addFoodForDay__form__time"
+            onChange={(date: Date) => setTime(date.toLocaleTimeString().slice(0, 5))}
+          />
         </label>
         <textarea
           className="addFoodForDay__form__textarea"

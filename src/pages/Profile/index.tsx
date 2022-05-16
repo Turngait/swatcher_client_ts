@@ -72,9 +72,9 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <div className="profilePage">
-      <LeftMenu exit={exit}/>
+      <LeftMenu />
       <div className="profilePage__info">
-        <Header title={t('profile.profile')}/>
+        <Header exit={exit} title={t('profile.profile')}/>
         <Settings
           userData={userData ? userData.data : null}
           userName={userData ? userData.name : ''}

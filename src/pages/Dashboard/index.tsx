@@ -73,12 +73,12 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
       {
         loading ? <Loader /> : null
       }
-      <LeftMenu exit={exit}/>
+      <LeftMenu />
       <div className="dashboard__info">
         {
           isFirstSetUpOpen ? <FirstSetUp saveData={saveFirstSetUp}/> : null
         }
-        <Header changePeriod={changePeriod} title={t('menu.stats')}/>
+        <Header exit={exit} changePeriod={changePeriod} title={t('menu.stats')}/>
         <Info />
       </div>
     </div>

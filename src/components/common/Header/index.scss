@@ -1,11 +1,18 @@
 .headBox {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 2rem;
 
   &__pageName {
     font-size: 2rem;
+  }
+
+  &__controllsBox {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   &__dataPicker {
@@ -13,9 +20,21 @@
     border: 1px solid #6d6d6d62;
     border-radius: 5px;
     font-size: 1rem;
+    align-self:center;
 
     &:focus {
       outline: none;
+    }
+  }
+
+  &__icon {
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }

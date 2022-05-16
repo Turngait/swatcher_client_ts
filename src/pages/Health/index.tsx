@@ -179,9 +179,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       {
         isAddIllnessForDayOpen ? <AddIllnessForDayModal illnesses={illnesses} addIllnesForDay={addIllnesForDay} closeModal={setIsAddIllnessForDayOpen} /> : null
       }
-      <LeftMenu exit={exit}/>
+      <LeftMenu />
       <div className="foodPage__info">
-        <Header changePeriod={changePeriod} title={t('health.health')}/>
+        <Header exit={exit} changePeriod={changePeriod} title={t('health.health')}/>
         <Info
           deleteIllnessForDay={deleteIllnessForDay}
           deleteIllness={deleteIllness}

@@ -10,9 +10,9 @@ const Day: React.FC<{
   }> = ({ stat, onDeleteFoodForDay }) => {
   function showDate (initDate: string): string {
     const d = new Date(initDate);
-    let ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('ru', { month: 'long' }).format(d);
-    let da = new Intl.DateTimeFormat('ru', { day: '2-digit' }).format(d);
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     return `${da} ${mo} ${ye}`;
   }
 

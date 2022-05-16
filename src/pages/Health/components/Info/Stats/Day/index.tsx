@@ -10,9 +10,9 @@ const Day:React.FC<{
   }> = ({ stat, deleteIllnessForDay}) => {
     function showDate (initDate: string): string {
       const d = new Date(initDate);
-      let ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
-      let mo = new Intl.DateTimeFormat('ru', { month: 'long' }).format(d);
-      let da = new Intl.DateTimeFormat('ru', { day: '2-digit' }).format(d);
+      let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+      let mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
+      let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
       return `${da} ${mo} ${ye}`;
     }
   return (
@@ -26,8 +26,8 @@ const Day:React.FC<{
                 <div key={item.id} className="healthStatDay__info__healths__item">
                   <p className="healthStatDay__info__healths__item__title">{item.title}</p>
                   <p>{item.description}</p>
-                  <p>с {item.begin}</p>
-                  <p className="healthStatDay__info__healths__item__duration">{item.duration} ч.</p>
+                  <p>from {item.begin}</p>
+                  <p className="healthStatDay__info__healths__item__duration">{item.duration} h.</p>
                   <p>{item.power}</p>
                   <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="healthStatDay__info__healths__item__delIco" src={DelIco} alt="delete health"/>
                 </div>
