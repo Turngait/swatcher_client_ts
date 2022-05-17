@@ -51,11 +51,11 @@ const AddIllnessForDayModal: React.FC<{
         <label>
           <p>{t('health.mChoosePower')}</p>
           <select className="addFoodForDay__form__time" onChange={(event) => setPower(+event.target.value)}>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
+            <option value={1}>{t('common.minimum')}</option>
+            <option value={2}>{t('common.low')}</option>
+            <option value={3}>{t('common.medium')}</option>
+            <option value={4}>{t('common.high')}</option>
+            <option value={5}>{t('common.highest')}</option>
           </select>
         </label>
         <Textinput maxValue={24} value={duration} type="number" placeholder={`${t('health.mDurationInHours')}...`} onChange={(event) => setDuration(event.target.value)}/>

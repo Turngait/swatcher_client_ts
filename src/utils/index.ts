@@ -26,3 +26,17 @@ export function getPeriod(date: string | null = null): string {
 
   return dateForPeriod.slice(0, 7);
 }
+
+export const logOut = (history: any) => {
+  localStorage.removeItem('token');
+  history.push('/');
+}
+
+export function showPower(power: number): string {
+  if(power===1) return 'Minimum'; 
+  if(power===2) return 'Low'; 
+  if(power===3) return 'Medium'; 
+  if(power===4) return 'High'; 
+  if(power===5) return 'Highest'; 
+  return 'Unkown';
+}

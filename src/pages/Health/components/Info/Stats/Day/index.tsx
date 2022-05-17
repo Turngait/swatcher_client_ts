@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DelIco from 'assets/icons/close_ico.png';
+import { showPower } from 'utils';
 
 import './index.scss';
 
@@ -15,6 +16,7 @@ const Day:React.FC<{
       let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
       return `${da} ${mo} ${ye}`;
     }
+
   return (
     <div className="healthStatDay">
       <div className="healthStatDay__header">{showDate(stat.date)}</div>
@@ -28,7 +30,7 @@ const Day:React.FC<{
                   <p>{item.description}</p>
                   <p>from {item.begin}</p>
                   <p className="healthStatDay__info__healths__item__duration">{item.duration} h.</p>
-                  <p>{item.power}</p>
+                  <p>Power: {showPower(item.power)}</p>
                   <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="healthStatDay__info__healths__item__delIco" src={DelIco} alt="delete health"/>
                 </div>
               )

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { showPower } from 'utils';
+
 import './index.scss';
 
 const Day: React.FC<{stat: any}> = ({stat}) => {
@@ -47,7 +49,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
               return (
                 <div className="day__info__health__item" key={item.id}>
                   <p className="day__info__health__item__title">{item.title}</p>
-                  <p>{item.power}</p>
+                  <p>Power: {showPower(item.power)}</p>
                   <p>start {item.begin}</p>
                   <p className="day__info__health__item__duration">{item.duration} h.</p>
                 </div>

@@ -11,6 +11,7 @@ import AddNewFoodModal from './components/Modals/AddNewFood';
 import AddFoodForDayModal from './components/Modals/AddFoodForDay';
 import EditFoodModal from './components/Modals/EditFood';
 import Loader from 'components/common/Loader';
+import MobileMenu from 'components/common/MobileMenu';
 
 import { 
   addNewFoodService,
@@ -42,6 +43,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [editableFood, setEditableFood] = useState<IFood | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const init = async (token: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
@@ -200,9 +202,10 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
+      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null}
       <LeftMenu />
       <div className="foodPage__info">
-        <Header exit={exit} changePeriod={changePeriod} title={t('foods.food')}/>
+        <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('foods.food')}/>
         <Info
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}

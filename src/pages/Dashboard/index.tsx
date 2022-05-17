@@ -5,6 +5,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 import LeftMenu from '../../components/common/LeftMenu';
+import MobileMenu from '../../components/common/MobileMenu';
 import Header from '../../components/common/Header';
 import Info from './components/Info';
 import FirstSetUp from './components/FirstSetUp';
@@ -25,6 +26,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const [token, setToken] = useState('');
   const [isFirstSetUpOpen, setIsFirstSetUpOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   async function init(token: string, period: string) {
     setLoading(true);
@@ -73,12 +75,15 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
       {
         loading ? <Loader /> : null
       }
+      {
+        isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null
+      }
       <LeftMenu />
       <div className="dashboard__info">
         {
           isFirstSetUpOpen ? <FirstSetUp saveData={saveFirstSetUp}/> : null
         }
-        <Header exit={exit} changePeriod={changePeriod} title={t('menu.stats')}/>
+        <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('menu.stats')}/>
         <Info />
       </div>
     </div>

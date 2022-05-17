@@ -37,10 +37,27 @@
       opacity: 0.8;
     }
   }
+
+  &__mobileBox {
+    display: none;
+  }
 }
 
-@media all and (min-width: 0) and (max-width: 460px) {
+@media all and (min-width: 0) and (max-width: 800px) {
   .headBox {
     flex-direction: column;
+  }
+  .headBox__desktop {
+    display: none;
+  }
+  .headBox__mobileBox {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .headBox__controllsBox {
+    width: 100%;
   }
 }

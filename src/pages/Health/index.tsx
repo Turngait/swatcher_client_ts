@@ -10,6 +10,7 @@ import AddNewIllnessModal from './components/Modals/AddNewIllness';
 import AddIllnessForDayModal from './components/Modals/AddIllnessForDay';
 import EditIllnessModal from './components/Modals/EditIllnessModal';
 import Loader from 'components/common/Loader';
+import MobileMenu from 'components/common/MobileMenu';
 
 import {
   addNewIllnessService,
@@ -38,6 +39,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [editableIllness, setEditableIllness] = useState<IIllness | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
   const stats = useSelector((state: any) => state.user.stat);
@@ -179,9 +181,10 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       {
         isAddIllnessForDayOpen ? <AddIllnessForDayModal illnesses={illnesses} addIllnesForDay={addIllnesForDay} closeModal={setIsAddIllnessForDayOpen} /> : null
       }
+      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null}
       <LeftMenu />
       <div className="foodPage__info">
-        <Header exit={exit} changePeriod={changePeriod} title={t('health.health')}/>
+        <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('health.health')}/>
         <Info
           deleteIllnessForDay={deleteIllnessForDay}
           deleteIllness={deleteIllness}
