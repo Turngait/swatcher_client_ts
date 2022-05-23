@@ -10,8 +10,6 @@ import { restoreUserPass } from '../../services';
 
 import './index.scss';
 
-
-//TODO выводить сообщения исходя из статуса ответа
 const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRestore}) => {
   const { t } = useTranslation();
 
@@ -20,11 +18,17 @@ const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRe
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [pass, setPass] = useState('');
+  const [msg, setMsg] = useState<string | null>(null);
 
   const startRestore = async () => {
-    const { status } = await restoreUserPass(email, pass, code, true);
+    setMsg(null);
+    const { status, errors } = await restoreUserPass(email, pass, code, true);
     if(status === 200) {
       setSecondStep(true);
+    } else if(status === 403) {
+      setMsg("Email is not exist");
+    } else if (errors && errors[0]) {
+        setMsg(errors[0].msg);
     }
   }
 
@@ -49,6 +53,7 @@ const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRe
         (
           <div className="restorePass__box">
             <p>{t('index.rstoreMsg')}</p>
+            {msg ? <p>{msg}</p> : null}
             <Textinput onChange={(event) => setCode(event.target.value)} placeholder={t('index.enterSecretCode')} type='email'/>
             <Textinput onChange={(event) => setPass(event.target.value)} placeholder={t('index.enterNewPass')} type='email'/>
             <Button onClick={setNewPass} title={t('common.send')} />
@@ -56,6 +61,7 @@ const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRe
         ) 
         : (
           <div className="restorePass__box">
+            {msg ? <p className="restorePass__box__Msg">{msg}</p> : null}
             <Textinput onChange={(event) => setEmail(event.target.value)} placeholder={t('index.enterEmail')} type='email'/>
             <Button onClick={startRestore} title={t('common.send')} />
           </div>

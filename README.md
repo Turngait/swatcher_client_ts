@@ -51,3 +51,13 @@ This file will be updated over time.
 ```
 http://ilya-r.com/
 ```
+
+
+<hr/>
+
+# Releases
+
+## Alpha
+### May 23 2022 - v. 0.6.1 
+
+Add errors messages to restore pass screen.
