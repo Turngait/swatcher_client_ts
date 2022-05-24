@@ -58,6 +58,7 @@ http://ilya-r.com/
 # Releases
 
 ## Alpha
-### May 23 2022 - v. 0.6.1 
-
+### May 24 2022 - v. 0.6.2
+Fix some small issues
+### May 23 2022 - v. 0.6.1
 Add errors messages to restore pass screen.

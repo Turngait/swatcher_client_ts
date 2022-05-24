@@ -63,20 +63,20 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   // TODO Добавить обработку ошибок и вывод сообщений
   const addNewFood = async (
       title: string,
-      callories: number,
+      calories: number,
       units:string,
       harmfulness: number,
       descr: string,
       setMsg: (msg: string | null) => void
     ): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewFoodService(title, callories, units, harmfulness, descr, token);
+    const { status, id, errors } = await addNewFoodService(title, calories, units, harmfulness, descr, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
       const food: IFood = {
         id,
         title,
-        callories,
+        calories: calories,
         harmfulness,
         units,
         groupId: '',
