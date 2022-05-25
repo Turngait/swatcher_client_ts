@@ -15,7 +15,7 @@ const Food: React.FC<{
     <div className="item__box">
       <div className={`item ${food.descr ? 'decriptionOpen' : ''}`}>
         <p className="item__title">{food.title}</p>
-        <p className="item__colories">{food.calories} kkl</p>
+        <p className="item__colories">{food.callories} kkl</p>
         <div className="item__contolls">
           <img onClick={() => onEditFood(food.id)} className="item__contolls__ico" src={EditIco} alt="edit food"/>
           <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>

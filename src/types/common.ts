@@ -2,6 +2,7 @@ export interface IFood {
   id: string,
   title: string,
   calories: number,
+  callories?: number,
   harmfulness?: number,
   units?: string,
   groupId: string,
