@@ -2,10 +2,19 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+
+  &__myIllnessMobileBtn {
+    display: none;
+  }
 }
 
 @media all and (min-width: 0) and (max-width: 650px) {
   .healthInfo {
     flex-direction: column;
+    justify-content: space-between;
+    height: 70%;
+  }
+  .healthInfo__myIllnessMobileBtn {
+    display: block;
   }
 }

@@ -58,9 +58,14 @@ http://ilya-r.com/
 # Releases
 
 ## Alpha
+### May 31 2022 - v. 0.6.4
+Fix mobile version on Health page
+
 ### May 24 2022 - v. 0.6.3
 Fix mobile version on Food page
+
 ### May 24 2022 - v. 0.6.2
 Fix some small issues
+
 ### May 23 2022 - v. 0.6.1
 Add errors messages to restore pass screen.

@@ -32,7 +32,7 @@ const Info: React.FC<{
       }
       <Stats onDeleteFoodForDay={onDeleteFoodForDay} setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}/>
       <AllFoods onDeleteFood={onDeleteFood} setIsAddFoodOpen={setIsAddFoodOpen} onEditFood={onEditFood}/>
-      <Button className='foodInfo__myFoodMobileBtn' size={BtnSize.largeBtn} title='All my food' onClick={() => setIsAllMyFoodOpen(true)}/>
+      <Button className="foodInfo__myFoodMobileBtn" size={BtnSize.largeBtn} title='All my food' onClick={() => setIsAllMyFoodOpen(true)}/>
     </div>
   )
 }
