@@ -44,3 +44,17 @@
     }
   }
 }
+
+@media all and (min-width: 0) and (max-width: 540px) {
+  .healthStatDay__info__healths__item {
+    font-size: 0.9rem;
+  }
+  .healthStatDay__info__healths__item__title {
+    width: 10rem;
+  }
+  .healthStatDay__info__healths__item__duration {
+    width: 6rem;
+    text-align: right;
+    padding-right: 0.6rem;
+  }
+}

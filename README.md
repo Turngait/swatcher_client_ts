@@ -58,6 +58,9 @@ http://ilya-r.com/
 # Releases
 
 ## Alpha
+### May 31 2022 - v. 0.6.5
+Fix layout issues
+
 ### May 31 2022 - v. 0.6.4
 Fix mobile version on Health page
 

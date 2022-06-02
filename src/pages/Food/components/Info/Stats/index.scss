@@ -18,3 +18,9 @@
   }
 
 }
+
+@media all and (min-width: 0) and (max-width: 540px) {
+  .foodStats {
+    overflow-y: auto;
+  }
+}

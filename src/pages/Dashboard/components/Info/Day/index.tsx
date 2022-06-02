@@ -50,7 +50,7 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
                 <div className="day__info__health__item" key={item.id}>
                   <p className="day__info__health__item__title">{item.title}</p>
                   <p>Power: {showPower(item.power)}</p>
-                  <p>start {item.begin}</p>
+                  <p>From: {item.begin}</p>
                   <p className="day__info__health__item__duration">{item.duration} h.</p>
                 </div>
               )

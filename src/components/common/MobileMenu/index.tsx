@@ -7,9 +7,10 @@ import CloseIco from 'assets/icons/close_ico2.png';
 import "./index.scss";
 
 interface Props {
-  closeMenu: (isOpen: boolean) => void
+  closeMenu: (isOpen: boolean) => void,
+  logOut: () => void
 }
-const MobileMenu:React.FC<Props> = ({ closeMenu }) => {
+const MobileMenu:React.FC<Props> = ({ closeMenu, logOut }) => {
   const { t } = useTranslation();
 
   return (
@@ -20,7 +21,7 @@ const MobileMenu:React.FC<Props> = ({ closeMenu }) => {
         <NavLink to="/food" className="MenuContainer__nav__item">{t('menu.food')}</NavLink>
         <NavLink to="/health" className="MenuContainer__nav__item">{t('menu.health')}</NavLink>
         <NavLink to="/profile" className="MenuContainer__nav__item">{t('menu.profile')}</NavLink>
-        <NavLink to="/profile" className="MenuContainer__nav__item">{t('menu.logout')}</NavLink>
+        <button onClick={logOut} className="MenuContainer__nav__item">{t('menu.logout')}</button>
       </nav>
     </div>
   )

@@ -76,7 +76,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
         loading ? <Loader /> : null
       }
       {
-        isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null
+        isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null
       }
       <LeftMenu />
       <div className="dashboard__info">

@@ -11,3 +11,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+
+@media all and (min-width: 0) and (max-width: 540px) {
+  .healthStats {
+    overflow-y: auto;
+  }
+}

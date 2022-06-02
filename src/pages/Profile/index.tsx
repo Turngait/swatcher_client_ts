@@ -74,7 +74,7 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <div className="profilePage">
-      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null}
+      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />
       <div className="profilePage__info">
         <Header openMenu={setIsMenuOpen} exit={exit} title={t('profile.profile')}/>

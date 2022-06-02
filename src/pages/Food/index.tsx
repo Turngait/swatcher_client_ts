@@ -202,7 +202,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isAddFoodForDayOpen ? <AddFoodForDayModal addFoodForDay={addFoodForDayHandler} foods={foods} closeModal={setIsAddFoodForDayOpen}/> : null}
-      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null}
+      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit} /> : null}
       <LeftMenu />
       <div className="foodPage__info">
         <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('foods.food')}/>

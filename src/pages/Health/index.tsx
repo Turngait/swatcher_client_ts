@@ -54,6 +54,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     localStorage.removeItem('token');
     history.push('/');
   }
+
   const addNewIllness = async (title: string, descr: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
     const { status, id, errors } = await addNewIllnessService(title, descr, danger, token);
@@ -181,9 +182,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       {
         isAddIllnessForDayOpen ? <AddIllnessForDayModal illnesses={illnesses} addIllnesForDay={addIllnesForDay} closeModal={setIsAddIllnessForDayOpen} /> : null
       }
-      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen}/> : null}
+      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />
-      <div className="foodPage__info">
+      <div className="healthPage__info">
         <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('health.health')}/>
         <Info
           deleteIllnessForDay={deleteIllnessForDay}

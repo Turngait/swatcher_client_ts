@@ -46,3 +46,11 @@
     width: 90%;
   }
 }
+
+@media all and (min-width: 0) and (max-width: 540px) {
+  .modal {
+    margin-top: 1rem;
+    height: 90%;
+    overflow-y: auto;
+  }
+}

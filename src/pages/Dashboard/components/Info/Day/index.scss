@@ -44,6 +44,7 @@
         }
         &__duration {
           width: 4rem;
+          text-align: right;
         }
       }
     }
@@ -74,5 +75,22 @@
   .day__info__health__item__title,
   .day__info__food__item__title {
     width: 10rem;
+  }
+}
+
+@media all and (min-width: 0) and (max-width: 540px) {
+  .day__info {
+    gap: 0.6rem;
+  }
+  .day__info__food,
+  .day__info__health,
+  .day__header {
+    font-size: 0.9rem;
+    padding: 12px 16px;
+  }
+
+  .day__info__health__item__title,
+  .day__info__food__item__title {
+    width: 6rem;
   }
 }
