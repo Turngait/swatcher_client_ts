@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 
-import Stats from './Stats';
 import AllFoods from './AllFoods';
-import Button from 'components/controls/Button';
-import { BtnSize } from 'types/components';
 import AllMyFoodMobile from '../Modals/AllMyFoodMobile';
+import PlsButton from 'components/controls/PlsButton';
 
 import './index.scss';
 
 
 const Info: React.FC<{
     setIsAddFoodOpen: (isOpne: boolean) => void,
-    setIsAddFoodForDayOpen: (isOpen: boolean) => void,
     onEditFood: (id: string) => void,
     onDeleteFood: (id: string) => Promise<void>,
-    onDeleteFoodForDay: (id: string, date: string) => void,
-  }> = ({ setIsAddFoodOpen, setIsAddFoodForDayOpen, onEditFood, onDeleteFood, onDeleteFoodForDay }) => {
+  }> = ({ setIsAddFoodOpen, onEditFood, onDeleteFood }) => {
     const [isAllMyFoodOpen, setIsAllMyFoodOpen] = useState(false);
 
   return(
@@ -30,9 +26,8 @@ const Info: React.FC<{
             /> 
           : null
       }
-      <Stats onDeleteFoodForDay={onDeleteFoodForDay} setIsAddFoodForDayOpen={setIsAddFoodForDayOpen}/>
-      <AllFoods onDeleteFood={onDeleteFood} setIsAddFoodOpen={setIsAddFoodOpen} onEditFood={onEditFood}/>
-      <Button className="foodInfo__myFoodMobileBtn" size={BtnSize.largeBtn} title='All my food' onClick={() => setIsAllMyFoodOpen(true)}/>
+      <AllFoods onDeleteFood={onDeleteFood} onEditFood={onEditFood}/>
+      <PlsButton onClick={() => setIsAddFoodOpen(true)} />
     </div>
   )
 }

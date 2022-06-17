@@ -4,6 +4,7 @@ import EditIco from 'assets/icons/edit-ico.png';
 import DelIco from 'assets/icons/delete-ico.png';
 
 import { IFood } from 'types/common';
+import { showHarmfulness } from 'utils';
 import './index.scss';
 
 const Food: React.FC<{
@@ -13,23 +14,31 @@ const Food: React.FC<{
 }> = ({ food, onDeleteFood, onEditFood }) => {
   return (
     <div className="item__box">
-      <div className={`item ${food.descr ? 'decriptionOpen' : ''}`}>
-        <p className="item__title">{food.title}</p>
-        <p className="item__colories">{food.callories} kkl</p>
-        <div className="item__contolls">
-          <img onClick={() => onEditFood(food.id)} className="item__contolls__ico" src={EditIco} alt="edit food"/>
-          <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
+      <div className={"item"}>
+        <div className={"item__headingBox"}>
+          <p className="item__title">{food.title}</p>
+          <div className="item__contolls">
+            <img onClick={() => onEditFood(food.id)} className="item__contolls__ico" src={EditIco} alt="edit food"/>
+            <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
+          </div>
         </div>
-      </div>
-      {
+
+        <div>{food.callories}kkl</div>
+        <div>Harmfulness: {showHarmfulness(food.harmfulness || 0)}</div>
+        {
         food.descr ?
         (
-          <div className="allHealth__infoBox__health__item__decription">
-            {food.descr}
-          </div>
+          <>
+            <hr className="item__decription__line"/>
+            <div className="item__decription">
+              {food.descr}
+            </div>
+          </>
         )
         : null
       }
+      </div>
+
     </div>
   )
 }
