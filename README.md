@@ -58,6 +58,9 @@ http://ilya-r.com/
 # Releases
 
 ## Alpha
+### June 21 2022 - v. 0.6.7
+Change layout of Health page
+
 ### June 17 2022 - v. 0.6.6
 Change layout of Food page
 

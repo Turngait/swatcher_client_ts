@@ -64,9 +64,9 @@ export interface IStat {
 }
 
 export enum illsDangerEnum {
-  none = 'Незначительная',
-  small = 'Небольшая',
-  medium = 'Средняя',
-  high = 'Высокая',
-  mortal = 'Смертелньая'
+  none = 'Little',
+  small = 'Small',
+  medium = 'Middle',
+  high = 'High',
+  mortal = 'Average'
 }
