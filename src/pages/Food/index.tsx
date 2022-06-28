@@ -31,8 +31,6 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();
 
   const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
-  // const period: string = useSelector((state: any) => state.user.period);
-  // const stats: IStat[] = useSelector((state: any) => state.user.stat);
 
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
   const [isEditFoodOpen, setIsEditFoodOpen] = useState(false);
@@ -128,53 +126,6 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  // const deleteFoodForDayHandler = async (id: string, date: string): Promise<void> => {
-  //   setLoading(true);
-  //   const { status } = await deleteFoodForDayService(id, date, token || '');
-  //   if (status === 200) {
-  //     for (const stat of stats) {
-  //       if (stat.date === date) {
-  //         stat.foods = stat.foods.filter((food: any) => food.id !== id);
-  //       }
-  //     }
-  //     console.log('deleteFoodForDayHandler', stats);
-  //     dispatch(setStat(stats));
-  //   }
-  //   setLoading(false);
-  // }
-
-  // const addFoodForDayHandler = async (
-  //     foodId: string,
-  //     amount: number,
-  //     date: string,
-  //     time: string,
-  //     description: string,
-  //     setMsg: (msg: string | null) => void
-  //   ): Promise<void> => {
-  //   setLoading(true);
-  //   const food:IFoodStat = {
-  //     food_id: foodId,
-  //     amount,
-  //     time,
-  //     description
-  //   };
-  //   const { status, errors } = await addFoodForDay(food, date, token || '');
-  //   if (status === 200) {
-  //     // dispatch(setStat(stats));
-  //     setIsAddFoodForDayOpen(false);
-  //     const {stat} = await getStatForPeriod(period, token || '');
-  //     if(stat) {
-  //       dispatch(setStat(stat));
-  //     }
-  //   } else if(errors && errors.length) {
-  //     setMsg(errors[0].msg || t('msgs.err1'));
-  //     setTimeout(() => setMsg(null), 3000)
-  //   } else {
-  //     setMsg(t('msgs.err1'));
-  //     setTimeout(() => setMsg(null), 3000)
-  //   }
-  //   setLoading(false);
-  // }
   async function changePeriod(period: string): Promise<void> {
     setLoading(true);
     const {stat} = await getStatForPeriod(period, token || '');

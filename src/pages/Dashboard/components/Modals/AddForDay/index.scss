@@ -36,6 +36,20 @@
   }
 }
 
+.addNewIllnessForDay {
+  &__header {
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  &__msg {
+    color: $red;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+}
+
 @media all and (min-width: 0) and (max-width: 500px) {
   .addFoodForDay__form__time {
     width: 100%;

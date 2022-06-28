@@ -60,7 +60,7 @@ export interface IStat {
   id?: string,
   date: string,
   foods: IFoodStat[] | [],
-  health: [IIllnessStat] | []
+  health: [IIllnessStat] | IIllnessStat[] | []
 }
 
 export enum illsDangerEnum {

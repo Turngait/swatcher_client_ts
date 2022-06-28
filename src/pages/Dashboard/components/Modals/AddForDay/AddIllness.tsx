@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
 
-import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 
@@ -11,11 +10,10 @@ import {IIllness} from 'types/common';
 import "react-datepicker/dist/react-datepicker.css";
 import './index.scss';
 
-const AddIllnessForDayModal: React.FC<{
+const AddIllness: React.FC<{
     illnesses: IIllness[],
-    closeModal: (isOpen: boolean) => void,
     addIllnesForDay: (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void) => void
-  }> = ({illnesses, closeModal, addIllnesForDay}) => {
+  }> = ({illnesses, addIllnesForDay}) => {
     const { t } = useTranslation();
 
     const [selectedIll, setSelectedIll] = useState(illnesses[0].id || '');
@@ -27,7 +25,7 @@ const AddIllnessForDayModal: React.FC<{
     const [msg, setMsg] = useState<string | null>(null);
     
   return (
-    <PopUp title={t('health.mNewIllnessForDay')} closeModal={() => closeModal(false)}>
+    <>
       {
         msg ? <p className="addNewIllnessForDay__msg">{msg}</p> : null
       }
@@ -80,8 +78,8 @@ const AddIllnessForDayModal: React.FC<{
         </textarea>
         <Button title={t('common.add')} onClick={() => addIllnesForDay(selectedIll, power, duration, descr, time, date, setMsg)} />
       </div>
-    </PopUp>
+    </>
   )
 }
 
-export default AddIllnessForDayModal;
+export default AddIllness;

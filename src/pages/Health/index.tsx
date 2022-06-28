@@ -74,31 +74,6 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     }
     setLoading(false);
   }
-  // const addIllnesForDay = async (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void): Promise<void> => {
-  //   setLoading(true);
-  //   const illness = {
-  //     health_id: illnesId,
-  //     power,
-  //     duration,
-  //     description: descr,
-  //     begin: time
-  //   };
-  //   const {status, errors} = await addIllnessForDayService(illness, date, token);
-  //   if (status === 200) {
-  //     setIsAddIllnessForDayOpen(false);
-  //     const {stat} = await getStatForPeriod(period, token || '');
-  //     if(stat) {
-  //       dispatch(setStat(stat));
-  //     }
-  //   } else if(errors && errors.length) {
-  //     setMsg(errors[0].msg || t('msgs.err1'));
-  //     setTimeout(() => setMsg(null), 3000)
-  //   } else {
-  //     setMsg(t('msgs.err1'));
-  //     setTimeout(() => setMsg(null), 3000)
-  //   }
-  //   setLoading(false);
-  // }
 
   async function changePeriod(period: string): Promise<void> {
     setLoading(true);
@@ -142,23 +117,6 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     }
     setIsEditIllnessOpen(false);
   }
-
-  //TODO add error processing
-  // const deleteIllnessForDay = async (id: string, date: string): Promise<void> => {
-  //   setLoading(true);
-  //   const {status} = await deleteIllnessForDayService(id, date, token || '');
-  //   console.log(id)
-  //   console.log(status)
-  //   if (status === 200) {
-  //     for (const stat of stats) {
-  //       if (stat.date === date) {
-  //         stat.health = stat.health.filter((item: any) => item.id !== id);
-  //       }
-  //     }
-  //     dispatch(setStat(stats));
-  //   }
-  //   setLoading(false);
-  // }
 
   return (
     <div className="healthPage">

@@ -23,7 +23,7 @@
     &__food,
     &__health {
       flex-grow: 1;
-      // border: 1px solid rgba(67, 67, 67, 0.25);
+      border: 1px solid rgba(67, 67, 67, 0.25);
       background-color: $white;
       padding: 15px 20px;
       box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
@@ -32,19 +32,43 @@
       width: 600px;
 
       &__item {
-        display: flex;
-        justify-content: space-between;
         margin-bottom: 1rem;
+        border-bottom: 1px solid #fff;
+        padding-bottom: 0.8rem;
         &:last-child {
           margin-bottom: 0;
+          border-bottom: none;
+        }
+
+        &__mainBox {
+          display: flex;
+          justify-content: space-between;
         }
 
         &__title {
-          width: 18rem;
+          width: 10rem;
+          font-weight: 700;
+          font-size: 1rem;
         }
         &__duration {
           width: 4rem;
           text-align: right;
+        }
+        &__contolls {
+          display: flex;
+          justify-content: space-between;
+          gap: 0.8rem;
+      
+          &__ico {
+            width: 1.4rem;
+            height: 1.4rem;
+            cursor: pointer;
+            transition-duration: 0.4s;
+      
+            &:hover {
+              opacity: 0.8;
+            }
+          }
         }
       }
     }
