@@ -28,26 +28,25 @@ const AllIllness: React.FC<{
   return (
     <div className="allHealth">
       <div className="allHealth__infoBox">
-        <div className="allHealth__infoBox__health">
           {
             illnesses.length ? illnesses.map((item: IIllness) => {
               return (
-                <div key={item.id} className="allHealth__infoBox__health__item__box">
-                  <div className={`allHealth__infoBox__health__item`}>
-                    <div className={`allHealth__infoBox__health__item__headerBox`}>
-                      <p className="allHealth__infoBox__health__item__title">{item.title}</p>
-                      <div className="allHealth__infoBox__health__item__contolls">
-                        <img onClick={() => openEditIllness(item.id || '')} className="allHealth__infoBox__health__item__contolls__ico" src={EditIco} alt="edit food"/>
-                        <img onClick={() => deleteIllness(item.id || '')} className="allHealth__infoBox__health__item__contolls__ico" src={DelIco} alt="delete food"/>
+                <div key={item.id} className="allHealth__infoBox__item__box">
+                  <div className={`allHealth__infoBox__item`}>
+                    <div className={`allHealth__infoBox__item__headerBox`}>
+                      <p className="allHealth__infoBox__item__title">{item.title}</p>
+                      <div className="allHealth__infoBox__item__contolls">
+                        <img onClick={() => openEditIllness(item.id || '')} className="allHealth__infoBox__item__contolls__ico" src={EditIco} alt="edit food"/>
+                        <img onClick={() => deleteIllness(item.id || '')} className="allHealth__infoBox__item__contolls__ico" src={DelIco} alt="delete food"/>
                       </div>
                     </div>
-                      <p className="allHealth__infoBox__health__item__colories">Power: {showDangerName(+item.danger)}</p>
+                      <p className="allHealth__infoBox__item__colories">Power: {showDangerName(+item.danger)}</p>
                   {
                     item.descr ?
                     (
                       <>
-                        <hr className="allHealth__infoBox__health__item__decription__line" />
-                        <div className="allHealth__infoBox__health__item__decription">
+                        <hr className="allHealth__infoBox__item__decription__line" />
+                        <div className="allHealth__infoBox__item__decription">
                           {item.descr}
                         </div>
                       </>
@@ -61,7 +60,6 @@ const AllIllness: React.FC<{
             })
             : <p>{t('health.emptyIllnessByDay')}</p>
           }
-        </div>
       </div>
     </div>
   )

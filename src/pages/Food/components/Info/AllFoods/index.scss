@@ -8,14 +8,12 @@
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     border: 1px solid rgba(67, 67, 67, 0.25);
-    height: 80vh;
+    height: 70vh;
 
-    &__foods {
-      display: flex;
-      justify-content: flex-start;
-      gap: 1rem;
-      flex-wrap: wrap;
-      overflow-y: auto;
-    }
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    overflow-y: auto;
   }
 }

@@ -49,11 +49,10 @@
   }
 }
 
-@media all and (min-width: 0) and (max-width: 540px) {
-  .item__box {
-    margin-bottom: 0.8rem;
-    &:last-child {
-      margin-bottom: 0;
-    }
+@media all and (min-width: 0) and (max-width: 470px) {
+  .item {
+    width: 200px;
+    min-height: 160px;
+    overflow-y: auto;
   }
 }

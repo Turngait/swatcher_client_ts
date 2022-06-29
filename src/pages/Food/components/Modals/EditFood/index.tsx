@@ -43,7 +43,7 @@ const EditFoodModal: React.FC<{
   }
 
   return (
-    <PopUp title={t('common.edit')+food.title} closeModal={() => closeModal(false)}>
+    <PopUp title={t('common.edit') + " " + food.title} closeModal={() => closeModal(false)}>
       <div className="addNewFood__form">
         <Textinput value={title} placeholder={`${t('common.title')}...`} onChange={(event) => setTitle(event.target.value)}/>
         <Textinput value={calories} type="number" placeholder={`${t('foods.mCalories')}...`} onChange={(event) => setCallories(+event.target.value)}/>

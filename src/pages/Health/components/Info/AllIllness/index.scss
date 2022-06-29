@@ -11,65 +11,63 @@
     height: 80vh;
     overflow-y: auto;
 
-    &__health {
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      gap: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
 
-      &__item {
-        background-color: $red-light;
-        padding: 0.8rem 1.2rem;
-        width: 290px;
-        min-height: 221px;
-        border-radius: 5px;
-        color: $white;
-        font-size: 0.8rem;
-
+    &__item {
+      background-color: $red-light;
+      padding: 0.8rem 1.2rem;
+      width: 290px;
+      min-height: 221px;
+      border-radius: 5px;
+      color: $white;
+      font-size: 0.8rem;
 
 
-        &__headerBox {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 1rem;
-        }
 
-        &__box {
-          margin-bottom: 1rem;
-        }
+      &__headerBox {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
 
-        &__title {
-          flex-grow: 1;
-          font-weight: 700;
-          font-size: 1rem;
-        }
+      &__box {
+        margin-bottom: 1rem;
+      }
 
-        &__colories {
-          width: 10rem;
-        }
+      &__title {
+        flex-grow: 1;
+        font-weight: 700;
+        font-size: 1rem;
+      }
 
-        &__contolls {
-          display: flex;
-          justify-content: space-between;
-          gap: 0.8rem;
+      &__colories {
+        width: 10rem;
+      }
 
-          &__ico {
-            width: 1.4rem;
-            height: 1.4rem;
-            cursor: pointer;
-            transition-duration: 0.4s;
+      &__contolls {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
 
-            &:hover {
-              opacity: 0.8;
-            }
+        &__ico {
+          width: 1.4rem;
+          height: 1.4rem;
+          cursor: pointer;
+          transition-duration: 0.4s;
+
+          &:hover {
+            opacity: 0.8;
           }
         }
+      }
 
-        &__decription {
-          &__line {
-            width: 100%;
-            border: 1px solid #FFFFFF;
-          }
+      &__decription {
+        &__line {
+          width: 100%;
+          border: 1px solid #FFFFFF;
         }
       }
     }
@@ -78,4 +76,12 @@
 
 .decriptionOpen {
   border-radius: 10px 10px 0px 0px;
+}
+
+@media all and (min-width: 0) and (max-width: 470px) {
+  .allHealth__infoBox__health__item {
+    width: 200px;
+    min-height: 160px;
+    overflow-y: auto;
+  }
 }

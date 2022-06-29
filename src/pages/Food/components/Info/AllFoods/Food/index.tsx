@@ -13,7 +13,6 @@ const Food: React.FC<{
   onEditFood: (id: string) => void
 }> = ({ food, onDeleteFood, onEditFood }) => {
   return (
-    <div className="item__box">
       <div className={"item"}>
         <div className={"item__headingBox"}>
           <p className="item__title">{food.title}</p>
@@ -39,7 +38,6 @@ const Food: React.FC<{
       }
       </div>
 
-    </div>
   )
 }
 

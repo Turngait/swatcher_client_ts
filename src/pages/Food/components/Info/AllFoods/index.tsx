@@ -18,7 +18,6 @@ const AllFoods: React.FC<{
   return (
     <div className="allFoods">
       <div className="allFoods__infoBox">
-        <div className="allFoods__infoBox__foods">
           {
             Array.isArray(foods) && foods.length > 0 
             ?
@@ -29,7 +28,6 @@ const AllFoods: React.FC<{
             })
             : <p>{t('foods.allMyFoodEmpty')}</p>
           }
-        </div>
       </div>
     </div>
   )
