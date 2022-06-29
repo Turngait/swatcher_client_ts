@@ -48,7 +48,8 @@ const resources = {
         "stats": "Statistics",
         "food": "Food",
         "health": "Health",
-        "profile": "Profile"
+        "profile": "Profile",
+        "logout": "Log out"
       },
       "stats": {
         "noData": "Empty now. Please add some elements in in relevant sections",

@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import DatePicker from 'react-datepicker';
 
-import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 import {IFood} from 'types/common';
 
+import "react-datepicker/dist/react-datepicker.css";
 import './index.scss';
 
-const AddFoodForDayModal: React.FC<{
+const AddForDayModal: React.FC<{
     foods: IFood[] | [], 
-    closeModal: (isOpen: boolean) => void,
     addFoodForDay: (foodId: string, amount: number, date:string,  time: string, description: string, setMsg: (msg: string | null) => void) => Promise<void>
-  }> = ({ addFoodForDay, closeModal, foods }) => {
+  }> = ({ addFoodForDay, foods }) => {
   const { t } = useTranslation();
 
-  const [selectedFood, setSelectedFood] = useState(foods[0].id || '');
+  const [selectedFood, setSelectedFood] = useState(foods[0] ? foods[0].id : '');
   const [amount, setAmount] = useState(1);
   const [descr, setDescr] = useState('');
-  const [time, setTime] = useState('09:00');
+  const [time, setTime] = useState(new Date().toLocaleTimeString().slice(0, 5));
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
   const [msg, setMsg] = useState<string | null>(null);
 
   return (
-    <PopUp title={t('foods.mAddFoodForDay')} closeModal={() => closeModal(false)}>
+    <>
       {
         msg ? <p className="addNewIllness__msg">{msg}</p> : null
       }
@@ -33,23 +33,38 @@ const AddFoodForDayModal: React.FC<{
           <p>{t('foods.mChooseDay')}</p>
           <input value={date} className="addFoodForDay__form__time" type="date" onChange={(event) => setDate(event.target.value)}/>
         </label>
-        <label>
-          <p>{t('foods.mChooseFood')}</p>
-          <select className="addFoodForDay__form__time" onChange={(event) => setSelectedFood(event.target.value)}>
-            {
-              foods.map((food) => {
-                return (
-                  <option value={food.id} key={food.id}>{food.title}</option>
-                )
-              })
-            }
-          </select>
-        </label>
+        {
+            foods.length ? 
+              <label>
+              <p>{t('foods.mChooseFood')}</p>
+    
+              <select className="addFoodForDay__form__time" onChange={(event) => setSelectedFood(event.target.value)}>
+                {
+                  foods.map((food) => {
+                    return (
+                      <option value={food.id} key={food.id}>{food.title}</option>
+                    )
+                  })
+                }
+              </select>
+            </label>
+            : null
+        }
+
 
         <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
         <label>
           <p>{t('foods.mChooseTime')}</p>
-          <input value={time} className="addFoodForDay__form__time" type="time" onChange={(event) => setTime(event.target.value)}/>
+          <DatePicker
+            value={time}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="h:mm aa"
+            className="addFoodForDay__form__time"
+            onChange={(date: Date) => setTime(date.toLocaleTimeString().slice(0, 5))}
+          />
         </label>
         <textarea
           className="addFoodForDay__form__textarea"
@@ -59,8 +74,8 @@ const AddFoodForDayModal: React.FC<{
         </textarea>
         <Button title={t('common.add')} onClick={() => addFoodForDay(selectedFood, amount, date, time, descr, setMsg)} />
       </div>
-    </PopUp>
+    </>
   )
 }
 
-export default AddFoodForDayModal;
+export default AddForDayModal;

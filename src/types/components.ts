@@ -19,3 +19,8 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   maxlength?: number,
   maxValue?: number,
 }
+
+export interface IPlsButton {
+  onClick: () => void;
+  className?: string;
+}

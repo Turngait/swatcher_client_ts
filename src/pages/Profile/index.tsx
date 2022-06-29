@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import LeftMenu from 'components/common/LeftMenu';
 import Header from '../../components/common/Header';
 import Settings from './components/Settings';
+import MobileMenu from 'components/common/MobileMenu';
 
 import { changeUserNameService, changeUserPassService, changeUserPersonalData } from './services';
 import { setUserInfoData } from 'store/User/user.actions';
@@ -17,6 +18,7 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();
 
   const [token, setToken] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const userData: IUserData | null = useSelector((state: any) => state.user.userData);
 
   useEffect(() => {
@@ -72,9 +74,10 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <div className="profilePage">
-      <LeftMenu exit={exit}/>
+      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
+      <LeftMenu />
       <div className="profilePage__info">
-        <Header title={t('profile.profile')}/>
+        <Header openMenu={setIsMenuOpen} exit={exit} title={t('profile.profile')}/>
         <Settings
           userData={userData ? userData.data : null}
           userName={userData ? userData.name : ''}

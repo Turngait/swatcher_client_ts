@@ -1,9 +1,18 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+// import EditIco from 'assets/icons/edit-ico.png';
+import DelIco from 'assets/icons/delete-ico.png';
+
+import { showPower } from 'utils';
+
 import './index.scss';
 
-const Day: React.FC<{stat: any}> = ({stat}) => {
+const Day: React.FC<{
+    stat: any;
+    deleteIllnessForDay: (id: string, date: string) => Promise<void>;
+    deleteFoodForDayHandler: (id: string, date: string) => Promise<void>;
+  }> = ({stat, deleteIllnessForDay, deleteFoodForDayHandler}) => {
   const { t } = useTranslation();
 
   function showDate (initDate: string): string {
@@ -27,9 +36,15 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
           stat.foods.map((food: any) => {
             return (
               <div className="day__info__food__item" key={food.id}>
-                <p>{food.title}</p>
+                <div className="day__info__food__item__mainBox">
+                  <p className="day__info__food__item__title">{food.title}</p>
+                  <p>Amount: {food.amount} {food.units}</p>
+                  <div className="day__info__food__item__contolls">
+                    {/* <img onClick={() => console.log(food.id)} className="day__info__food__item__contolls__ico" src={EditIco} alt="edit food"/> */}
+                    <img onClick={() => deleteFoodForDayHandler(food.id, stat.date)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
+                  </div>
+                </div>
                 <p>{food.description}</p>
-                <p>{food.amount} {food.units}</p>
               </div>
             )
           })
@@ -46,10 +61,16 @@ const Day: React.FC<{stat: any}> = ({stat}) => {
             stat.health.map((item: any) => {
               return (
                 <div className="day__info__health__item" key={item.id}>
-                  <p className="day__info__health__item__title">{item.title}</p>
-                  <p>{item.power}</p>
-                  <p>start {item.begin}</p>
-                  <p className="day__info__health__item__duration">{item.duration} h.</p>
+                  <div className="day__info__health__item__mainBox">
+                    <p className="day__info__health__item__title">{item.title}</p>
+                    <p>From: {item.begin}</p>
+                    <p className="day__info__health__item__duration">{item.duration} h.</p>
+                    <div className="day__info__food__item__contolls">
+                      {/* <img onClick={() => console.log(item.id)} className="day__info__food__item__contolls__ico" src={EditIco} alt="edit food"/> */}
+                      <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="item__contolls__ico" src={DelIco} alt="delete illness"/>
+                    </div>
+                  </div>
+                  <p>Power: {showPower(item.power)}</p>
                 </div>
               )
             })
