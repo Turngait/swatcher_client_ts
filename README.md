@@ -58,6 +58,18 @@ http://ilya-r.com/
 # Releases
 
 ## Alpha
+### June 28 2022 - v. 0.7.0
+Fix mobile version. New markup ended.
+
+### June 28 2022 - v. 0.6.7
+Change layout of Dashboard page, add AddForDay modal
+
+### June 21 2022 - v. 0.6.7
+Change layout of Health page
+
+### June 17 2022 - v. 0.6.6
+Change layout of Food page
+
 ### May 31 2022 - v. 0.6.5
 Fix layout issues
 

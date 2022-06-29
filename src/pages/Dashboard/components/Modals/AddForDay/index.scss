@@ -36,6 +36,47 @@
   }
 }
 
+.addNewIllnessForDay {
+  &__header {
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  &__msg {
+    color: $red;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+}
+
+.addForDay {
+  &__radioBox {
+    display: flex;
+    gap: 1rem;
+
+    &__item {
+      border-bottom: 1px solid $black;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      transition-duration: 0.4s;
+
+      &:hover {
+        color: $green;
+        border-color: $green;
+      }
+
+      &__active {
+        color: $dark-green;
+        border-color: $dark-green;
+      }
+      &__inp {
+        display: none;
+      }
+    }
+  }
+}
+
 @media all and (min-width: 0) and (max-width: 500px) {
   .addFoodForDay__form__time {
     width: 100%;

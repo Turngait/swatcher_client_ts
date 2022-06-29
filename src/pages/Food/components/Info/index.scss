@@ -1,7 +1,7 @@
 .foodInfo {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  // display: flex;
+  // justify-content: space-between;
+  // gap: 1rem;
 
   &__myFoodMobileBtn {
     display: none;
@@ -11,8 +11,8 @@
 
 @media all and (min-width: 0) and (max-width: 650px) {
   .foodInfo {
-    flex-direction: column;
-    justify-content: space-between;
+    // flex-direction: column;
+    // justify-content: space-between;
     height: 80%;
   }
 

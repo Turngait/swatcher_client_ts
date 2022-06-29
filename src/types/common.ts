@@ -60,13 +60,13 @@ export interface IStat {
   id?: string,
   date: string,
   foods: IFoodStat[] | [],
-  health: [IIllnessStat] | []
+  health: [IIllnessStat] | IIllnessStat[] | []
 }
 
 export enum illsDangerEnum {
-  none = 'Незначительная',
-  small = 'Небольшая',
-  medium = 'Средняя',
-  high = 'Высокая',
-  mortal = 'Смертелньая'
+  none = 'Little',
+  small = 'Small',
+  medium = 'Middle',
+  high = 'High',
+  mortal = 'Average'
 }
