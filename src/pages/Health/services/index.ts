@@ -3,34 +3,34 @@ import { API_KEY } from 'config/keys';
 
 // TODO типизировать errors
 export async function addNewIllnessService(title: string, descr: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
-  return await fetch(API_URL + '/health/addillness', {
+  return await fetch(API_URL + '/symptoms', {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token ? token : ''
     },
     mode: "cors",
     body: JSON.stringify({
       title,
       descr,
       danger,
-      token
     }),
   })
   .then(res => res.json());
 }
 
 export async function deleteIllnessService(id: string, token: string): Promise<{status: number}> {
-  return await fetch(API_URL + '/health/deleteillness', {
+  return await fetch(API_URL + '/symptoms', {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      id,
-      token
+      symptomId: id,
     }),
   })
   .then(res => res.json());
@@ -42,10 +42,10 @@ export async function getStatForPeriod(period: string, token: string): Promise<{
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      token,
       period
     }),
   })
@@ -53,19 +53,19 @@ export async function getStatForPeriod(period: string, token: string): Promise<{
 }
 
 export async function editIllnessService(title: string, descr: string, danger: number, id: string, token: string): Promise<{status: number}> {
-  return await fetch(API_URL + '/health/editillness', {
-    method: "PUT",
+  return await fetch(API_URL + '/symptoms', {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      token,
       title,
       descr,
       danger,
-      id
+      _id: id
     }),
   })
   .then(res => res.json());

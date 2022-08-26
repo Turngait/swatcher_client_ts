@@ -41,7 +41,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
 
   const init = async (token: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
-      const { foods } = await getAllFoodsDataService(token);
+      const foods = await getAllFoodsDataService(token);
       if (foods) dispatch(setAllFoods(foods));
     }
   }

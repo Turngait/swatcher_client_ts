@@ -1,7 +1,7 @@
 import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
 
-export async function signUpService (name: string, email: string, pass: string): Promise<{status: number, token: string, errors?: [{msg: string, param: string}]}> {
+export async function signUpService (name: string, email: string, pass: string): Promise<{userData: {token: string}, status: number, error?: string}> {
   return await fetch(API_URL + '/users/signup', {
     method: "POST",
     headers: {
@@ -12,7 +12,7 @@ export async function signUpService (name: string, email: string, pass: string):
     body: JSON.stringify({
       name,
       email,
-      pass
+      password: pass
     }),
   })
   .then(res => res.json());
@@ -28,7 +28,7 @@ export async function signInService (email: string, pass: string): Promise<{stat
     mode: "cors",
     body: JSON.stringify({
       email,
-      pass
+      password: pass
     }),
   })
   .then(res => res.json());

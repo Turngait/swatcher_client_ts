@@ -45,14 +45,14 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
   const registartion = async (name: string, email: string, pass: string): Promise<void> => {
     setLoading(true);
     const data = await signUpService(name, email, pass);
-    if(data.errors) {
+    if(data.error) {
       setLoading(false);
-      setMsg(data.errors[0].msg);
+      setMsg(data.error);
       setTimeout(() => setMsg(null), 3000);
       return;
     } else {
-      if (data.status === 200 && data.token) {
-        localStorage.setItem("token", data.token);
+      if (data.status === 200 && data.userData.token) {
+        localStorage.setItem("token", data.userData.token);
         history.push('/dashboard');
       }
     }

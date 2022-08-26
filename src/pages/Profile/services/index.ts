@@ -5,15 +5,15 @@ import { IUserPersonalData } from 'types/common';
 
 export async function changeUserNameService(name: string, token: string): Promise<{status: number, errors: [{msg: string, param: string}]}> {
   return await fetch(API_URL + '/users/changename', {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      name,
-      token
+      name
     }),
   })
   .then(res => res.json());
@@ -21,16 +21,16 @@ export async function changeUserNameService(name: string, token: string): Promis
 
 export async function changeUserPassService(oldPass: string, pass: string, token: string): Promise<{status: number, errors: [{msg: string, param: string}]}> {
   return await fetch(API_URL + '/users/changepass', {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
       oldPass,
-      pass,
-      token
+      newPass: pass
     }),
   })
   .then(res => res.json());
@@ -38,15 +38,15 @@ export async function changeUserPassService(oldPass: string, pass: string, token
 
 export async function changeUserPersonalData(data: IUserPersonalData, token: string): Promise<{status: number, errors: [{msg: string, param: string}]}> {
   return await fetch(API_URL + '/users/changepersdata', {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      data,
-      token
+      data
     }),
   })
   .then(res => res.json());

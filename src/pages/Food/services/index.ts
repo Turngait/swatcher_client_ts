@@ -4,73 +4,71 @@ import { IFood } from 'types/common';
 
 export async function addNewFoodService(
     title: string,
-    callories: number,
+    calories: number,
     units: string,
     harmfulness: number,
     descr: string,
     token: string | null
   ): Promise<{status: number, id: string, errors: any}> {
-  return await fetch(API_URL + '/food/addfood', {
+  return await fetch(API_URL + '/food', {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token ? token : ''
     },
     mode: "cors",
     body: JSON.stringify({
       title,
-      callories,
+      calories,
       units,
       harmfulness,
-      descr,
-      token
+      descr
     }),
   })
   .then(res => res.json());
 }
 
-export async function getAllFoodsDataService(token: string): Promise<{foods: [IFood] | []}> {
-  return await fetch(API_URL + '/food/alldata', {
-    method: "POST",
+export async function getAllFoodsDataService(token: string): Promise<[IFood] | []> {
+  return await fetch(API_URL + '/food', {
+    method: "GET",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
-    body: JSON.stringify({
-      token
-    }),
   })
   .then(res => res.json());
 }
 
 export async function editFood(food: IFood, token: string): Promise<{status: number}> {
-  return await fetch(API_URL + '/food/edit', {
-    method: "PUT",
+  return await fetch(API_URL + '/food', {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      token,
-      food
+      ...food
     }),
   })
   .then(res => res.json());
 }
 
-export async function deleteFood(id: string, token: string): Promise<{status: number}> {
-  return await fetch(API_URL + '/food/delfood', {
+export async function deleteFood(foodId: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/food', {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      id,
-      token
+      foodId
     }),
   })
   .then(res => res.json());
@@ -82,10 +80,10 @@ export async function getStatForPeriod(period: string, token: string): Promise<{
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "API-KEY": API_KEY,
+      "TOKEN": token
     },
     mode: "cors",
     body: JSON.stringify({
-      token,
       period
     }),
   })

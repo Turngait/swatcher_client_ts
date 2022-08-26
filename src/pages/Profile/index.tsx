@@ -38,7 +38,7 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
     if (errors) {
       setMsg(errors[0].msg);
     } else {
-      if(status === 200 && userData) {
+      if(status === 202 && userData) {
         userData.name = name;
         setUserInfoData(userData);
         setMsg(t('profile.nameIsChanged'));
@@ -50,7 +50,7 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
   }
   const changeUserPass = async (oldPass: string, pass: string, setMsg: (msg: string | null) =>void): Promise<void> => {
     const { status } = await changeUserPassService(oldPass, pass, token || '');
-    if(status === 200) {
+    if(status === 202) {
       setMsg(t('profile.passIsChanged'));
     } else {
       setMsg(t('msgs.err1'));
@@ -63,7 +63,7 @@ const Profile:React.FC<RouteComponentProps> = ({ history }) => {
     if (errors) {
       setMsg(errors[0].msg);
     } else {
-      if(status === 200) {
+      if(status === 202) {
         setMsg(t('profile.dataIsChanged'));
       } else {
         setMsg(t('msgs.err1'));

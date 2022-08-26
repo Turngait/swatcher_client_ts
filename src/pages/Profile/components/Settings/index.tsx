@@ -36,7 +36,7 @@ const Settings: React.FC<{
           }
           <div className="settings__item__form">
             <Textinput value={userNameInp} onChange={(event) => setUserNameInp(event.target.value)} placeholder={`${t('profile.yourName')}...`}/>
-            <Button onClick={() => changeUserName(userNameInp, setMsg)} title={t('commone.save')}/>
+            <Button onClick={() => changeUserName(userNameInp, setMsg)} title={t('common.save')}/>
           </div>
         </div>
         <div className="settings__item">
@@ -47,7 +47,7 @@ const Settings: React.FC<{
           <div className="settings__item__form">
             <Textinput type="password" onChange={(event) => setOldPass(event.target.value)} placeholder={`${t('profile.yourOldPass')}...`}/>
             <Textinput type="password" onChange={(event) => setPass(event.target.value)} placeholder={`${t('profile.yourNewPass')}...`}/>
-            <Button onClick={() => changeUserPass(oldPass, pass, setMsgPass)} title={t('commone.save')}/>
+            <Button onClick={() => changeUserPass(oldPass, pass, setMsgPass)} title={t('common.save')}/>
           </div>
         </div>
         <div className="settings__item">
@@ -59,7 +59,7 @@ const Settings: React.FC<{
             <Textinput value={age} type="number" onChange={(event) => setAge(+event.target.value)} placeholder={`${t('profile.yourAge')}...`}/>
             <Textinput value={height} type="number" onChange={(event) => setHeight(+event.target.value)} placeholder={`${t('profile.yourHeight')}...`}/>
             <Textinput value={weight} type="number" onChange={(event) => setWeight(+event.target.value)} placeholder={`${t('profile.yourWeight')}...`}/>
-            <Button onClick={() => changeUserData({age, height, weight}, setMsgData)} title={t('commone.save')}/>
+            <Button onClick={() => changeUserData({age, height, weight}, setMsgData)} title={t('common.save')}/>
           </div>
         </div>
     </div>

@@ -74,6 +74,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
 
   const saveFirstSetUp = async (sex: string, age: number, weight: number, height: number) => {
     const { status } = await saveFirstSetupData(sex, age, weight, height, token);
+    console.log(status);
     // TODO add show errors function
     if (status === 200) setIsFirstSetUpOpen(false);
   }
