@@ -160,7 +160,6 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
           stat.foods = stat.foods.filter((food: any) => food.id !== id);
         }
       }
-      console.log('deleteFoodForDayHandler', stats);
       dispatch(setStat(stats));
     }
     setLoading(false);

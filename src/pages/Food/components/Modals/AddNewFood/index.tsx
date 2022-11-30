@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
+import Select from 'components/controls/Select';
 
 import './index.scss';
 
@@ -31,13 +32,17 @@ const AddNewFoodModal: React.FC<{
         <Textinput placeholder={`${t('foods.mUnits')}...`} onChange={(event) => setUnits(event.target.value)}/>
         <label>
           <p>{t('foods.mHarmulness')}</p>
-          <select defaultValue={1} className="addFoodForDay__form__time" onChange={(event) => setHarmfulness(+event.target.value)}>
-            <option value={1}>{t('common.minimum')}</option>
-            <option value={2}>{t('common.low')}</option>
-            <option value={3}>{t('common.medium')}</option>
-            <option value={4}>{t('common.high')}</option>
-            <option value={5}>{t('common.highest')}</option>
-          </select>
+          <Select 
+            items={[
+              {value: 1, title: t('common.minimum')},
+              {value: 2, title: t('common.low')},
+              {value: 3, title: t('common.medium')},
+              {value: 4, title: t('common.high')},
+              {value: 5, title: t('common.highest')}
+            ]}
+            defaultValue={1}
+            onChange={(event) => setHarmfulness(+event.target.value)}
+          /> 
         </label>
         <textarea
           className="addNewFood__form__textarea"

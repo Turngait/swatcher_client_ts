@@ -1,0 +1,12 @@
+@import '../../../../styles/colors.scss';
+
+.contacts {
+  &__text {
+    font-size: 1.1rem;
+
+    &__link {
+      font-size: 1.1rem;
+      color: $black;
+    }
+  }
+}

@@ -29,12 +29,12 @@ const AddForDayModal: React.FC<{
       }
       <div className="addFoodForDay__form">
         {/* TODO move all selects to component */}
-        <label>
-          <p>{t('foods.mChooseDay')}</p>
-          <input value={date} className="addFoodForDay__form__time" type="date" onChange={(event) => setDate(event.target.value)}/>
-        </label>
         {
-            foods.length ? 
+            foods.length ? <>
+              <label>
+                <p>{t('foods.mChooseDay')}</p>
+                <input value={date} className="addFoodForDay__form__time" type="date" onChange={(event) => setDate(event.target.value)}/>
+              </label>
               <label>
               <p>{t('foods.mChooseFood')}</p>
     
@@ -48,31 +48,32 @@ const AddForDayModal: React.FC<{
                 }
               </select>
             </label>
-            : null
+            
+
+
+          <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
+          <label>
+            <p>{t('foods.mChooseTime')}</p>
+            <DatePicker
+              value={time}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="h:mm aa"
+              className="addFoodForDay__form__time"
+              onChange={(date: Date) => setTime(date.toLocaleTimeString().slice(0, 5))}
+            />
+          </label>
+          <textarea
+            className="addFoodForDay__form__textarea"
+            placeholder={`${t('foods.mAdditionalInfo')}...`}
+            onChange={(event) => setDescr(event.target.value)}
+          >
+          </textarea>
+          <Button title={t('common.add')} onClick={() => addFoodForDay(selectedFood, amount, date, time, descr, setMsg)} />
+        </> : null
         }
-
-
-        <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
-        <label>
-          <p>{t('foods.mChooseTime')}</p>
-          <DatePicker
-            value={time}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="h:mm aa"
-            className="addFoodForDay__form__time"
-            onChange={(date: Date) => setTime(date.toLocaleTimeString().slice(0, 5))}
-          />
-        </label>
-        <textarea
-          className="addFoodForDay__form__textarea"
-          placeholder={`${t('foods.mAdditionalInfo')}...`}
-          onChange={(event) => setDescr(event.target.value)}
-        >
-        </textarea>
-        <Button title={t('common.add')} onClick={() => addFoodForDay(selectedFood, amount, date, time, descr, setMsg)} />
       </div>
     </>
   )

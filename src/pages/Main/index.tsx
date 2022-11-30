@@ -6,6 +6,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SingUp';
 import Loader from 'components/common/Loader';
 import RestorePass from './components/Restore';
+import Contacts from './components/Contacts';
 
 import {signInService, signUpService} from './services';
 
@@ -18,6 +19,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [msg, setMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
+  const [isContactsOpen, setIsContactsOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -66,6 +68,9 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
       {
         restoreOpen ? <RestorePass closeRestore={setRestoreOpen}/> : null
       }
+      {
+        isContactsOpen ? <Contacts onClose={() => setIsContactsOpen(false)}/> : null
+      }
       <div className="mainBox__leftBox">
         <p className="mainBox__leftBox__text">
           {t('index.welcome')}
@@ -78,7 +83,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
         </p>
         <div className="mainBox__leftBox__info">
           <p><a href="policy.html" target="_blank" className="mainBox__leftBox__info__link">{t('index.policy')}</a></p>
-          <p><a className="mainBox__leftBox__info__link" href="mailto:info@ilya-r.ru">{t('index.contactUs')}</a></p>
+          <p><button onClick={() => setIsContactsOpen(true)} className="mainBox__leftBox__info__link">{t('index.contactUs')}</button></p>
           <p>2022</p>
         </div>
       </div>

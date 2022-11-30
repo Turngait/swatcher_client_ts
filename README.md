@@ -56,6 +56,9 @@ http://ilya-r.com/
 <hr/>
 
 # Releases
+## Beta
+### November 30 2022 - v 0.9.8
+Fix some bugs, add new components
 
 ## Alpha
 ### June 28 2022 - v. 0.7.0

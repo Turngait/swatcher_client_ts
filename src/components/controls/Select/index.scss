@@ -1,0 +1,16 @@
+@import '../../../styles/colors.scss';
+
+.slct {
+  width: 100%;
+  padding: 0.4rem 1rem;
+  border: 1px solid #6D6D6D;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: $white;
+  box-sizing: border-box;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
