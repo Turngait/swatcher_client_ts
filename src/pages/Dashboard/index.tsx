@@ -43,7 +43,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
       localStorage.removeItem('token');
       history.push('/');
     } else {
-      if (user && Array.isArray(stat) && foods && health) dispatch(setUserData(user, stat, foods, health));
+      if (user && Array.isArray(stat) && foods && health) dispatch(setUserData(user, stat, foods.publicFoods, health));
       dispatch(setPeriod(period));
       setToken(token);
     }

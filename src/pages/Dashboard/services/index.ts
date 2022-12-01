@@ -21,7 +21,7 @@ export async function saveFirstSetupData(sex: string, age: number, weight: numbe
   .then(res => res.json());
 }
 
-export async function getInitData(token: string, period: string): Promise<{user: IUserData | null, status: number, stat: [any] | [] | null, foods: IFood[] | [], health: IIllness[] | null}> {
+export async function getInitData(token: string, period: string): Promise<{user: IUserData | null, status: number, stat: [any] | [] | null, foods: {publicFoods: IFood[] | [], ingredients: any[]}, health: IIllness[] | null}> {
   return await fetch(API_URL + '/stats/getdata', {
     method: "POST",
     headers: {

@@ -8,6 +8,8 @@ export async function addNewFoodService(
     units: string,
     harmfulness: number,
     descr: string,
+    isIngredient: boolean,
+    ingredients: string[],
     token: string | null
   ): Promise<{status: number, id: string, errors: any}> {
   return await fetch(API_URL + '/food', {
@@ -23,13 +25,15 @@ export async function addNewFoodService(
       calories,
       units,
       harmfulness,
-      descr
+      descr,
+      isIngredient,
+      ingredients
     }),
   })
   .then(res => res.json());
 }
 
-export async function getAllFoodsDataService(token: string): Promise<[IFood] | []> {
+export async function getAllFoodsDataService(token: string): Promise<{publicFoods: IFood[] | [], ingredients: any[]}> {
   return await fetch(API_URL + '/food', {
     method: "GET",
     headers: {

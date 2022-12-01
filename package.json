@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -17,6 +17,7 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-select": "^5.7.0",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "sass": "^1.51.0",

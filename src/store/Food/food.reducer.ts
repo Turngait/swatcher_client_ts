@@ -1,5 +1,6 @@
 const initialState = {
-  foods: []
+  foods: [],
+  ingredients: []
 };
 
 export default function foodReducer(state = initialState, action: any) {
@@ -9,7 +10,12 @@ export default function foodReducer(state = initialState, action: any) {
         ...state,
         foods: action.payload
       }
-      default:
-        return state;
+    case 'SET_INGREDIENTS':
+      return {
+        ...state,
+        ingredients: action.payload
+      }
+    default:
+      return state;
   }
 };

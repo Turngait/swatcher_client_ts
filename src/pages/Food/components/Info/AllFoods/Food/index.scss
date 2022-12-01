@@ -47,6 +47,15 @@
       border: 1px solid #FFFFFF;
     }
   }
+
+  &__ingredients {
+    font-weight: 700;
+    font-size: 0.8rem;
+
+    &__list {
+      padding-left: 1rem;
+    }
+  }
 }
 
 @media all and (min-width: 0) and (max-width: 470px) {

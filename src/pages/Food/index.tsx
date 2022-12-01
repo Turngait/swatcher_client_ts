@@ -20,7 +20,7 @@ import {
   editFood
 } from './services';
 
-import { setAllFoods } from 'store/Food/food.action';
+import { setAllFoods, setAllIngredients } from 'store/Food/food.action';
 import { setPeriod, setStat } from 'store/User/user.actions';
 import { IFood } from 'types/common';
 
@@ -38,11 +38,16 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [ingredients, setIngredients] = useState<any>([]);
 
   const init = async (token: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
       const foods = await getAllFoodsDataService(token);
-      if (foods) dispatch(setAllFoods(foods));
+      if (foods) {
+        dispatch(setAllFoods(foods.publicFoods));
+        setIngredients(foods.ingredients);
+        dispatch(setAllIngredients(foods.ingredients));
+      }
     }
   }
 
@@ -61,10 +66,12 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       units:string,
       harmfulness: number,
       descr: string,
+      isIngredient: boolean,
+      ingredients: string[],
       setMsg: (msg: string | null) => void
     ): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewFoodService(title, calories, units, harmfulness, descr, token);
+    const { status, id, errors } = await addNewFoodService(title, calories, units, harmfulness, descr, isIngredient, ingredients, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
       const food: IFood = {
@@ -75,6 +82,8 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         units,
         groupId: '',
         descr,
+        isIngredient,
+        ingredients,
         createdAt: new Date().toISOString().slice(0,10)
       };
 
@@ -145,7 +154,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         isEditFoodOpen && editableFood ? <EditFoodModal food={editableFood} editFoodHandler={editFoodHandler} closeModal={setIsEditFoodOpen}/> : null
       }
       {
-        isAddFoodOpen ? <AddNewFoodModal addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
+        isAddFoodOpen ? <AddNewFoodModal ingredients={ingredients} addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit} /> : null}
       <LeftMenu />

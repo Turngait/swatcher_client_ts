@@ -7,6 +7,8 @@ export interface IFood {
   units?: string,
   groupId: string,
   descr: string,
+  isIngredient?: boolean,
+  ingredients?: any[],
   createdAt: string
 }
 

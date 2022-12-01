@@ -26,6 +26,20 @@ const Food: React.FC<{
           <div>{food.calories} kkl</div>
           <div>Harmfulness: {showHarmfulness(food.harmfulness || 0)}</div>
           {
+            food.ingredients?.length ? (
+              <>
+                <p className='item__ingredients'>Ingredients:</p>
+                <ul className='item__ingredients__list'>
+                  {
+                    food.ingredients.map((item, idx) => (
+                      <li key={idx}>{idx+1} {item.title}</li>
+                    ))
+                  }
+                </ul>
+              </>
+            ) : null
+          }
+          {
           food.descr ?
           (
             <>

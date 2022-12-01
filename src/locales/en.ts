@@ -78,7 +78,8 @@ export const en = {
       "mChooseFood": "Choose food",
       "mChooseTime": "Choose time",
       "mAmount": "Amount",
-      "mAdditionalInfo": "Additional info (optional)"
+      "mAdditionalInfo": "Additional info (optional)",
+      "isIngredient": "Can it be an ingredient"
     },
     "health": {
       "health": "Health",
