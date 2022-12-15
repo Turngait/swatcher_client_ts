@@ -57,6 +57,11 @@
       opacity: 0.8;
     }
   }
+
+  &__langBox {
+    width: 40%;
+    padding-left: 2rem;
+  }
 }
 
 @media all and (min-width: 0) and (max-width: 900px) {
