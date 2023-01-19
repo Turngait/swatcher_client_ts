@@ -49,9 +49,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     history.push('/');
   }
 
-  const addNewIllness = async (title: string, descr: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
+  const addNewIllness = async (title: string, descr: string, groupId: string, placeId: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewIllnessService(title, descr, danger, token);
+    const { status, id, errors } = await addNewIllnessService(title, descr, groupId, placeId, danger, token);
 
     if (status === 200) {
       setIsAddIllnessOpen(false);
@@ -59,6 +59,8 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       const ill: IIllness = {
         id,
         title,
+        groupId,
+        placeId,
         danger,
         descr
       };

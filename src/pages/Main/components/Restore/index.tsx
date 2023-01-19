@@ -10,7 +10,7 @@ import { restoreUserPass } from '../../services';
 
 import './index.scss';
 
-const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRestore}) => {
+const RestorePass: React.FC<{closeRestore: (isOpen: false) => void}> = ({closeRestore}) => {
   const { t } = useTranslation();
 
   const [secondStep, setSecondStep] = useState(false);
@@ -20,7 +20,7 @@ const RestorePass: React.FC<{closeRestore: (isOpne: false) => void}> = ({closeRe
   const [pass, setPass] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
 
-  const startRestore = async () => {
+  const startRestore = async (): Promise<void> => {
     setMsg(null);
     const { status, errors } = await restoreUserPass(email, pass, code, true);
     if(status === 200) {

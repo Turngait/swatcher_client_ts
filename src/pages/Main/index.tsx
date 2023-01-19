@@ -44,7 +44,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
     }
   }
 
-  const registartion = async (name: string, email: string, pass: string): Promise<void> => {
+  const registration = async (name: string, email: string, pass: string): Promise<void | undefined> => {
     setLoading(true);
     const data = await signUpService(name, email, pass);
     if(data.error) {
@@ -101,7 +101,7 @@ const MainPage: React.FC<RouteComponentProps> = ({ history }) => {
           isSignUpOpen ? 
             (
               <>
-                <SignUp registartion={registartion}/>
+                <SignUp registration={registration}/>
                 <p className="mainBox__rightBox__descr">{t('index.haveAccaunt')}</p>
                 <button onClick={() => setIsSignUpOpen(false)} className="mainBox__rightBox__switchBtn">{t('index.signin')}</button>
               </>

@@ -2,7 +2,7 @@ import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
 
 // TODO типизировать errors
-export async function addNewIllnessService(title: string, descr: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
+export async function addNewIllnessService(title: string, descr: string, groupId: string, placeId: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
   return await fetch(API_URL + '/symptoms', {
     method: "POST",
     headers: {
@@ -13,6 +13,8 @@ export async function addNewIllnessService(title: string, descr: string, danger:
     mode: "cors",
     body: JSON.stringify({
       title,
+      groupId,
+      placeId,
       descr,
       danger,
     }),

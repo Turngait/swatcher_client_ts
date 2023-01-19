@@ -23,7 +23,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
-  const foods: [IFood] | [] = useSelector((state: any) => state.food.foods);
+  const foods: IFood[] | [] = useSelector((state: any) => state.food.foods);
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
   const userData: IUserData = useSelector((state: any) => state.user.userData);
   const period: string = useSelector((state: any) => state.user.period);
@@ -35,9 +35,10 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAddForDayOpen, setIsAddForDayOpen] = useState(false);
 
-  async function init(token: string, period: string) {
+  async function init(token: string, period: string): Promise<void> {
     setLoading(true);
     const { user, status, stat, foods, health } = await getInitData(token, period);
+    console.log(health);
 
     if(status === 403) {
       localStorage.removeItem('token');
@@ -72,7 +73,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
     }
   }, []);
 
-  const saveFirstSetUp = async (sex: string, age: number, weight: number, height: number) => {
+  const saveFirstSetUp = async (sex: string, age: number, weight: number, height: number): Promise<void> => {
     const { status } = await saveFirstSetupData(sex, age, weight, height, token);
     console.log(status);
     // TODO add show errors function
@@ -110,7 +111,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
     }
     setLoading(false);
   }
-  const addIllnesForDay = async (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void): Promise<void> => {
+  const addIllnessForDay = async (illnesId: string, power: number, duration: string, descr: string, time: string, date: string, setMsg:(msg: string | null) => void): Promise<void> => {
     setLoading(true);
     const illness = {
       health_id: illnesId,
@@ -179,7 +180,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
         <AddForDayModal
           closeModal={() => setIsAddForDayOpen(false)}
           addFoodForDay={addFoodForDayHandler}
-          addIllnesForDay={addIllnesForDay}
+          addIllnesForDay={addIllnessForDay}
           foods={foods}
           illnesses={illnesses}
         />

@@ -6,14 +6,14 @@ import Button from '../../../../components/controls/Button';
 
 import './index.scss';
 
-const SignUp: React.FC<{registartion: (name: string, email: string, pass: string) => Promise<void>}> = ({ registartion }) => {
+const SignUp: React.FC<{registration: (name: string, email: string, pass: string) => Promise<void>}> = ({ registration }) => {
   const { t } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
-  const signUpService = async () => {
-    await registartion(name, email, pass);
+  const signUpService = async (): Promise<void> => {
+    await registration(name, email, pass);
   }
 
   return (
