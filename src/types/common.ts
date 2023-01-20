@@ -21,6 +21,12 @@ export interface IIllness {
   descr: string
 }
 
+export interface IIllnessGroups {
+  id?: string,
+  title: string,
+  descr: string
+}
+
 export interface IUserPersonalData {
   sex?: string,
   age: number,

@@ -15,12 +15,13 @@ import {
   addNewIllnessService,
   deleteIllnessService,
   getStatForPeriod,
-  editIllnessService
+  editIllnessService,
+  getAllSymptomsDataService
 } from './services';
-import {setAllHealth} from 'store/Health/health.actions';
+import { setAllHealth, setAllGroups } from 'store/Health/health.actions';
 import { setStat, setPeriod } from 'store/User/user.actions';
 
-import {IIllness} from 'types/common';
+import {IIllness, IIllnessGroups} from 'types/common';
 
 import './index.scss';
 
@@ -38,16 +39,29 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
+  const groups: IIllnessGroups[] | [] = useSelector((state: any) => state.health.groups);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(token) setToken(token);
-   }, []);
-
-   const exit = () => {
+  const exit = () => {
     localStorage.removeItem('token');
     history.push('/');
   }
+
+  const init = async (token: string): Promise<void> => {
+    if (Array.isArray(illnesses) && illnesses.length === 0) {
+      const data = await getAllSymptomsDataService(token);
+      if(data.illnesses) dispatch(setAllHealth(data.illnesses));
+      if(data.groups) dispatch(setAllGroups(data.groups));
+    }
+  }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      setToken(token);
+      init(token);
+    }
+    else history.push('/');
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
   const addNewIllness = async (title: string, descr: string, groupId: string, placeId: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
@@ -131,7 +145,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         : null
       }
       {
-        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness}/> : null
+        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} groups={groups}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />

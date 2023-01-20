@@ -1,5 +1,6 @@
 const initState = {
-  illnesses: []
+  illnesses: [],
+  groups: [],
 }
 
 export default function healthReducer(state = initState, action: any) {
@@ -8,6 +9,11 @@ export default function healthReducer(state = initState, action: any) {
       return {
         ...state,
         illnesses: action.payload
+      };
+    case 'SET_GROUPS':
+      return{
+        ...state,
+        groups: action.payload
       };
     default:
       return state;
