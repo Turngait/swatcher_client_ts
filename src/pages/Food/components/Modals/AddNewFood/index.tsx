@@ -10,14 +10,14 @@ import Select from 'components/controls/Select';
 import './index.scss';
 
 const AddNewFoodModal: React.FC<{
-    addNewFood: (title: string, callories: number, units:string, harmfulness: number, descr: string, isIngredient: boolean, ingredients: any, setMsg: (msg: string | null) => void) => void,
+    addNewFood: (title: string, units: string, harmfulness: number, descr: string, isIngredient: boolean, ingredients: any, setMsg: (msg: string | null) => void) => void,
     closeModal: (isOpen: boolean) => void,
-    ingredients: any
-  }> = ({ addNewFood, closeModal, ingredients }) => {
+    ingredients: any,
+    foodsGroups: any[],
+  }> = ({ addNewFood, closeModal, ingredients, foodsGroups }) => {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
-  const [callories, setCallories] = useState(0);
   const [descr, setDescr] = useState('');
   const [harmfulness, setHarmfulness] = useState(1);
   const [units, setUnits] = useState('');
@@ -32,7 +32,6 @@ const AddNewFoodModal: React.FC<{
       }
       <div className="addNewFood__form">
         <Textinput placeholder={`${t('common.title')}...`} onChange={(event) => setTitle(event.target.value)}/>
-        <Textinput type="number" placeholder={`${t('foods.mCalories')}...`} onChange={(event) => setCallories(+event.target.value)}/>
         <Textinput placeholder={`${t('foods.mUnits')}...`} onChange={(event) => setUnits(event.target.value)}/>
         <label>
           <p>{t('foods.mHarmulness')}</p>
@@ -48,14 +47,22 @@ const AddNewFoodModal: React.FC<{
             onChange={(event) => setHarmfulness(+event.target.value)}
           />
         </label>
+        {/* <label>
+          <p>{t('foods.foodsGroups')}</p>
+          <Select 
+            items={foodsGroups.map(group => ({ value: group._id, title: group.title }))}
+            defaultValue={1}
+            onChange={(event) => setHarmfulness(+event.target.value)}
+          />
+        </label> */}
         <label>
           <input className='addNewFood__form__checkbox' type="checkbox" onChange={(event) => setIsIngredient(event.target.checked) } />
           {t('foods.isIngredient')}
         </label>
         {
-          isIngredient && ingredients.length ? null : (
+          isIngredient && !ingredients.length ? null : (
             <label>
-              Select ingredients
+              Select ingredients (optional)
               <ReactSelect
                 defaultValue={[]}
                 isMulti
@@ -77,7 +84,7 @@ const AddNewFoodModal: React.FC<{
         </textarea>
         <Button
           title={t('common.add')}
-          onClick={() => addNewFood(title, callories, units, harmfulness, descr, isIngredient, choosingIngredients.map((item: any) => {return item.value}), setMsg)} 
+          onClick={() => addNewFood(title, units, harmfulness, descr, isIngredient, choosingIngredients.map((item: any) => {return item.value}), setMsg)} 
         />
       </div>
     </PopUp>

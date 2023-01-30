@@ -38,10 +38,10 @@ const Day: React.FC<{
               <div className="day__info__food__item" key={food.id}>
                 <div className="day__info__food__item__mainBox">
                   <p className="day__info__food__item__title">{food.title}</p>
-                  <p>Amount: {food.amount} {food.units}</p>
                   <div className="day__info__food__item__contolls">
+                    <p>Amount: {food.amount} {food.units}</p>
                     {/* <img onClick={() => console.log(food.id)} className="day__info__food__item__contolls__ico" src={EditIco} alt="edit food"/> */}
-                    <img onClick={() => deleteFoodForDayHandler(food.id, stat.date)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
+                    <img onClick={() => deleteFoodForDayHandler(food.id, stat.date)} className="day__info__food__item__contolls__ico" src={DelIco} alt="delete food"/>
                   </div>
                 </div>
                 <p>{food.description}</p>
@@ -63,14 +63,14 @@ const Day: React.FC<{
                 <div className="day__info__health__item" key={item.id}>
                   <div className="day__info__health__item__mainBox">
                     <p className="day__info__health__item__title">{item.title}</p>
-                    <p>From: {item.begin}</p>
-                    <p className="day__info__health__item__duration">{item.duration} h.</p>
                     <div className="day__info__food__item__contolls">
+                      <p>From: {item.begin}</p>
+                      <p className="day__info__health__item__duration">{item.duration} h.</p>
                       {/* <img onClick={() => console.log(item.id)} className="day__info__food__item__contolls__ico" src={EditIco} alt="edit food"/> */}
-                      <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="item__contolls__ico" src={DelIco} alt="delete illness"/>
+                      <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="day__info__food__item__contolls__ico" src={DelIco} alt="delete illness"/>
                     </div>
                   </div>
-                  <p>Power: {showPower(item.power)}</p>
+                  <p>Intensive: {showPower(item.power)}</p>
                 </div>
               )
             })

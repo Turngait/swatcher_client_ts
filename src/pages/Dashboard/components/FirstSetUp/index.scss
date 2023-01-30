@@ -3,7 +3,7 @@
 .firstSU {
   &__header {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 2.4rem;
   }
 
   &__form {
@@ -19,7 +19,7 @@
       padding: 0.4rem 1rem;
       border: 1px solid #6D6D6D;
       border-radius: 5px;
-      font-size: 1.1rem;
+      font-size: 1.8rem;
       background: $white;
 
       &:focus {
@@ -27,7 +27,7 @@
       }
     }
     &__desc {
-      font-size: 1rem;
+      font-size: 1.4rem;
     }
   }
 }

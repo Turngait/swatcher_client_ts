@@ -20,13 +20,14 @@
     &__text {
       text-align: right;
       width: 50%;
-      font-size: 1.1rem;
+      font-size: 1.6rem;
     }
     &__info {
       display: flex;
       justify-content: flex-end;
       gap: 1rem;
       align-self: flex-end;
+      font-size: 1.4rem;
 
       &__link {
         color: $black;
@@ -34,13 +35,13 @@
         border: none;
         text-decoration: underline;
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 1.4rem;
       }
     }
   }
 
   &__rightBox {
-    flex-basis: 26rem;
+    flex-basis: 34rem;
     box-shadow: -2px 0px 2px rgba(0, 0, 0, 0.1);
     border-radius: 10px 0px 0px 10px;
     padding: 2rem 2rem;
@@ -56,7 +57,7 @@
         border: none;
         background: none;
         text-decoration: underline;
-        font-size: 1rem;
+        font-size: 1.4rem;
         color: $black;
         cursor: pointer;
       }
@@ -71,7 +72,7 @@
 
     &__mini {
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 1.2rem;
       margin-bottom: 3rem;
     }
 
@@ -89,7 +90,7 @@
     &__descr {
       margin-top: 1rem;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 1.2rem;
     }
 
     &__switchBtn {

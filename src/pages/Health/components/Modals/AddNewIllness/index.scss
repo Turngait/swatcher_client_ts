@@ -9,7 +9,7 @@
   &__msg {
     color: $red;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 700;
   }
 
@@ -20,13 +20,14 @@
     justify-content: flex-start;
     gap: 1rem;
     align-self: center;
+    font-size: 1.4rem;
 
     &__textarea {
       width: 100%;
-      padding: 0.4rem 1rem;
+      padding: 0.8rem 1.5rem;
       border: 1px solid #6D6D6D;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: 1.4rem;
       background: $white;
       box-sizing: border-box;
     }

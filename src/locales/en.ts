@@ -43,7 +43,7 @@ export const en = {
     "menu": {
       "stats": "Statistics",
       "food": "Food",
-      "health": "Health",
+      "health": "Symptoms",
       "profile": "Profile",
       "logout": "Log out"
     },
@@ -79,10 +79,11 @@ export const en = {
       "mChooseTime": "Choose time",
       "mAmount": "Amount",
       "mAdditionalInfo": "Additional info (optional)",
-      "isIngredient": "Can it be an ingredient"
+      "isIngredient": "Can it be an ingredient",
+      "foodsGroups": "Groups"
     },
     "health": {
-      "health": "Health",
+      "health": "Symptoms",
       "noIllnessByDay": "You has not added any illness yet",
       "allIllness": "All illness",
       "newIllness": "New illness",

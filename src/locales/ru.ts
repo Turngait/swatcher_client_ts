@@ -43,7 +43,7 @@ export const ru = {
     "menu": {
       "stats": "Статистика",
       "food": "Еда",
-      "health": "Здоровье",
+      "health": "Симптомы",
       "profile": "Профиль",
       "logout": "Выйти"
     },
@@ -79,10 +79,11 @@ export const ru = {
       "mChooseTime": "Выбрать время",
       "mAmount": "Количество",
       "mAdditionalInfo": "Дополнительно (не обязательно)",
-      "isIngredient": "Может ли это быть ингридиентом?"
+      "isIngredient": "Может ли это быть ингридиентом?",
+      "foodsGroups": "Группы"
     },
     "health": {
-      "health": "Здоровье",
+      "health": "Симптомы",
       "noIllnessByDay": "Вы еще не добавили ни один симптом",
       "allIllness": "Все симптомы",
       "newIllness": "Новый симптом",

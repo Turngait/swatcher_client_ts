@@ -20,7 +20,7 @@ import {
   editFood
 } from './services';
 
-import { setAllFoods, setAllIngredients } from 'store/Food/food.action';
+import { setAllFoods, setAllIngredients, setGroups } from 'store/Food/food.action';
 import { setPeriod, setStat } from 'store/User/user.actions';
 import { IFood } from 'types/common';
 
@@ -39,14 +39,20 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [ingredients, setIngredients] = useState<any>([]);
+  const [foodsGroups, setFoodsGroups] = useState<any>([]);
 
   const init = async (token: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
-      const foods = await getAllFoodsDataService(token);
-      if (foods) {
-        dispatch(setAllFoods(foods.publicFoods));
-        setIngredients(foods.ingredients);
-        dispatch(setAllIngredients(foods.ingredients));
+      const data = await getAllFoodsDataService(token);
+      console.log(foods);
+      if (data.foods) {
+        dispatch(setAllFoods(data.foods.publicFoods));
+        setIngredients(data.foods.ingredients);
+        dispatch(setAllIngredients(data.foods.ingredients));
+      }
+      if (data.groups) {
+        dispatch(setGroups(data.groups));
+        setFoodsGroups(data.groups);
       }
     }
   }
@@ -62,7 +68,6 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   // TODO Добавить обработку ошибок и вывод сообщений
   const addNewFood = async (
       title: string,
-      calories: number,
       units:string,
       harmfulness: number,
       descr: string,
@@ -71,13 +76,12 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       setMsg: (msg: string | null) => void
     ): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewFoodService(title, calories, units, harmfulness, descr, isIngredient, ingredients, token);
+    const { status, id, errors } = await addNewFoodService(title, units, harmfulness, descr, isIngredient, ingredients, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
       const food: IFood = {
         id,
         title,
-        calories: calories,
         harmfulness,
         units,
         groupId: '',
@@ -154,7 +158,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         isEditFoodOpen && editableFood ? <EditFoodModal food={editableFood} editFoodHandler={editFoodHandler} closeModal={setIsEditFoodOpen}/> : null
       }
       {
-        isAddFoodOpen ? <AddNewFoodModal ingredients={ingredients} addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
+        isAddFoodOpen ? <AddNewFoodModal foodsGroups={foodsGroups} ingredients={ingredients} addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit} /> : null}
       <LeftMenu />

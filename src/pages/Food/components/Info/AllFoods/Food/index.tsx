@@ -22,8 +22,6 @@ const Food: React.FC<{
               <img onClick={() => onDeleteFood(food.id)} className="item__contolls__ico" src={DelIco} alt="delete food"/>
             </div>
           </div>
-
-          <div>{food.calories} kkl</div>
           <div>Harmfulness: {showHarmfulness(food.harmfulness || 0)}</div>
           {
             food.ingredients?.length ? (

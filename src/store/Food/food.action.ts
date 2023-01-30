@@ -11,3 +11,9 @@ export function setAllIngredients(ingredients: any[]): (dispatch: any) => void {
     dispatch({type: 'SET_INGREDIENTS', payload: ingredients});
   }
 }
+
+export function setGroups(groups: any[]): (dispatch: any) => void {
+  return (dispatch: any) => {
+    dispatch({type: 'SET_GROUPS', payload: groups});
+  }
+}

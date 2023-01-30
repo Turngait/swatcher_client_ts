@@ -4,7 +4,6 @@ import { IFood } from 'types/common';
 
 export async function addNewFoodService(
     title: string,
-    calories: number,
     units: string,
     harmfulness: number,
     descr: string,
@@ -22,7 +21,6 @@ export async function addNewFoodService(
     mode: "cors",
     body: JSON.stringify({
       title,
-      calories,
       units,
       harmfulness,
       descr,
@@ -33,7 +31,7 @@ export async function addNewFoodService(
   .then(res => res.json());
 }
 
-export async function getAllFoodsDataService(token: string): Promise<{publicFoods: IFood[] | [], ingredients: any[]}> {
+export async function getAllFoodsDataService(token: string): Promise<{foods: {publicFoods: IFood[] | [], ingredients: any[]}, groups: any[]}> {
   return await fetch(API_URL + '/food', {
     method: "GET",
     headers: {

@@ -1,6 +1,7 @@
 const initialState = {
   foods: [],
-  ingredients: []
+  ingredients: [],
+  groups: []
 };
 
 export default function foodReducer(state = initialState, action: any) {
@@ -14,6 +15,11 @@ export default function foodReducer(state = initialState, action: any) {
       return {
         ...state,
         ingredients: action.payload
+      }
+    case 'SET_GROUPS':
+      return {
+        ...state,
+        groups: action.payload
       }
     default:
       return state;

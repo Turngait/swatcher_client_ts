@@ -5,12 +5,12 @@
   margin-bottom: 2rem;
 
   &__pageName {
-    font-size: 2rem;
+    font-size: 3.6rem;
   }
 
   &__controllsBox {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: flex-end;
     align-items: center;
   }
@@ -19,7 +19,7 @@
     padding: 0.4rem 0.8rem;
     border: 1px solid #6d6d6d62;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.6rem;
     align-self:center;
 
     &:focus {

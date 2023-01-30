@@ -11,6 +11,7 @@
     justify-content: space-between;
     border: 1px solid rgba(67, 67, 67, 0.25);
     font-weight: 700;
+    font-size: 1.6rem;
   }
 
   &__info {
@@ -23,21 +24,22 @@
     &__food,
     &__health {
       flex-grow: 1;
-      border: 1px solid rgba(67, 67, 67, 0.25);
-      background-color: $white;
-      padding: 15px 20px;
-      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
       box-sizing: border-box;
       width: 600px;
 
       &__item {
         margin-bottom: 1rem;
         border-bottom: 1px solid #fff;
-        padding-bottom: 0.8rem;
+        padding: 1rem 1.5rem;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: $dark-green;
+        color: #fff;
+        min-height: 6rem;
+        font-size: 1.4rem;
+
         &:last-child {
           margin-bottom: 0;
-          border-bottom: none;
         }
 
         &__mainBox {
@@ -48,7 +50,7 @@
         &__title {
           width: 10rem;
           font-weight: 700;
-          font-size: 1rem;
+          font-size: 1.6rem;
         }
         &__duration {
           width: 4rem;
@@ -57,11 +59,11 @@
         &__contolls {
           display: flex;
           justify-content: space-between;
-          gap: 0.8rem;
+          gap: 1.4rem;
       
           &__ico {
-            width: 1.4rem;
-            height: 1.4rem;
+            width: 2rem;
+            height: 2rem;
             cursor: pointer;
             transition-duration: 0.4s;
       
@@ -73,14 +75,10 @@
       }
     }
 
-    &__food {
-      background-color: $dark-green;
-      color: $white;
-    }
-
     &__health {
-      background-color: $red-light;
-      color: $white;
+      &__item {
+        background-color: $red-light;
+      }
     }
   }
 }
@@ -109,7 +107,7 @@
   .day__info__food,
   .day__info__health,
   .day__header {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     padding: 12px 16px;
   }
 

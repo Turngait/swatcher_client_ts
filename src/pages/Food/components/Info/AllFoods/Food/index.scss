@@ -5,9 +5,9 @@
   padding: 1.5rem;
   border-radius: 5px;
   color: $white;
-  width: 300px;
-  min-height: 220px;
-  font-size: 0.8rem;
+  width: 30rem;
+  min-height: 18rem;
+  font-size: 1.4rem;
 
   display: flex;
   flex-direction: column;
@@ -22,17 +22,17 @@
   &__title {
     flex-grow: 1;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 
   &__contolls {
     display: flex;
     justify-content: space-between;
-    gap: 0.8rem;
+    gap: 1.4rem;
 
     &__ico {
-      width: 1.4rem;
-      height: 1.4rem;
+      width: 2rem;
+      height: 2rem;
       cursor: pointer;
       transition-duration: 0.4s;
 
