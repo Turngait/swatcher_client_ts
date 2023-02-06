@@ -1,6 +1,6 @@
 import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
-import { IIllness } from 'types/common';
+import { IBodyPlaces, IIllness, IIllnessGroups } from 'types/common';
 
 // TODO типизировать errors
 export async function addNewIllnessService(title: string, descr: string, groupId: string, placeId: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
@@ -39,7 +39,7 @@ export async function deleteIllnessService(id: string, token: string): Promise<{
   .then(res => res.json());
 }
 
-export async function getAllSymptomsDataService(token: string): Promise<{ illnesses: IIllness[], groups: any[] }> {
+export async function getAllSymptomsDataService(token: string): Promise<{ illnesses: IIllness[], groups: IIllnessGroups[], bodyPlaces: IBodyPlaces[] }> {
   return await fetch(API_URL + '/symptoms', {
     method: "GET",
     headers: {

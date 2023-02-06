@@ -18,10 +18,10 @@ import {
   editIllnessService,
   getAllSymptomsDataService
 } from './services';
-import { setAllHealth, setAllGroups } from 'store/Health/health.actions';
+import { setAllHealth, setAllGroups, setAllBodyPlaces } from 'store/Health/health.actions';
 import { setStat, setPeriod } from 'store/User/user.actions';
 
-import {IIllness, IIllnessGroups} from 'types/common';
+import {IBodyPlaces, IIllness, IIllnessGroups} from 'types/common';
 
 import './index.scss';
 
@@ -40,6 +40,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
   const groups: IIllnessGroups[] | [] = useSelector((state: any) => state.health.groups);
+  const bodyPlaces: IBodyPlaces[] | [] = useSelector((state: any) => state.health.bodyPlaces);
 
   const exit = () => {
     localStorage.removeItem('token');
@@ -49,8 +50,10 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const init = async (token: string): Promise<void> => {
     if (Array.isArray(illnesses) && illnesses.length === 0) {
       const data = await getAllSymptomsDataService(token);
+      console.log(data);
       if(data.illnesses) dispatch(setAllHealth(data.illnesses));
       if(data.groups) dispatch(setAllGroups(data.groups));
+      if(data.bodyPlaces) dispatch(setAllBodyPlaces(data.bodyPlaces));
     }
   }
   useEffect(() => {
@@ -145,7 +148,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         : null
       }
       {
-        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} groups={groups}/> : null
+        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} groups={groups} bodyPlaces={bodyPlaces}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />

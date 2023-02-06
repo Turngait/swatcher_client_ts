@@ -22,9 +22,14 @@ export interface IIllness {
 }
 
 export interface IIllnessGroups {
-  id?: string,
+  _id?: string,
   title: string,
   descr: string
+}
+
+export interface IBodyPlaces {
+  _id?: string,
+  title: string
 }
 
 export interface IUserPersonalData {
