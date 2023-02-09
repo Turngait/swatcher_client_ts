@@ -23,8 +23,7 @@ export interface IIllness {
 
 export interface IIllnessGroups {
   _id?: string,
-  title: string,
-  descr: string
+  title: string
 }
 
 export interface IBodyPlaces {

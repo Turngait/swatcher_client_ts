@@ -16,7 +16,9 @@ import {
   deleteIllnessService,
   getStatForPeriod,
   editIllnessService,
-  getAllSymptomsDataService
+  getAllSymptomsDataService,
+  addGroupService,
+  addBodyPlaceService
 } from './services';
 import { setAllHealth, setAllGroups, setAllBodyPlaces } from 'store/Health/health.actions';
 import { setStat, setPeriod } from 'store/User/user.actions';
@@ -65,6 +67,20 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     else history.push('/');
    // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
+
+  const addNewGroup = async (title: string): Promise<{ id: string, status: number }> => {
+    setLoading(true);
+    const data = await addGroupService(title, token || '');
+    setLoading(false);
+    return data;
+  }
+
+  const addBodyPlace = async (title: string): Promise<{ id: string, status: number }> => {
+    setLoading(true);
+    const data = await addBodyPlaceService(title, token || '');
+    setLoading(false);
+    return data;
+  }
 
   const addNewIllness = async (title: string, descr: string, groupId: string, placeId: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
@@ -148,7 +164,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         : null
       }
       {
-        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} groups={groups} bodyPlaces={bodyPlaces}/> : null
+        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} addGroup={addNewGroup} addBodyPlace={addBodyPlace} groups={groups} bodyPlaces={bodyPlaces}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />

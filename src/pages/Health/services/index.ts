@@ -86,3 +86,37 @@ export async function editIllnessService(title: string, descr: string, danger: n
   })
   .then(res => res.json());
 }
+
+export async function addGroupService (title: string, token: string): Promise<{ id: string, status: number }> {
+  console.log(title);
+  return await fetch(API_URL + '/symptoms-group', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      title
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function addBodyPlaceService (title: string, token: string): Promise<{ id: string, status: number }> {
+  console.log(title);
+  return await fetch(API_URL + '/body-places', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      title
+    }),
+  })
+  .then(res => res.json());
+}
