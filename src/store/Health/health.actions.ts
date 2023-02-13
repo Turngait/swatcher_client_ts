@@ -1,9 +1,5 @@
 import { IIllness, IIllnessGroups, IBodyPlaces } from "types/common";
 
-export function getHealthData() {
-  return null;
-}
-
 export function setAllHealth(illnesses: IIllness[]): (dispatch: any) => void {
   return (dispatch: any) => {
     dispatch({type: 'SET_HEALTH', payload: illnesses});

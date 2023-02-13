@@ -1,4 +1,12 @@
-const initialState = {
+import { IFood } from "types/common";
+
+interface IFoodStore {
+  foods: [] | IFood[],
+  ingredients: any[],
+  groups: any[]
+}
+
+const initialState: IFoodStore = {
   foods: [],
   ingredients: [],
   groups: []

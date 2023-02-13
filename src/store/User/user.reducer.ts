@@ -1,6 +1,13 @@
+import { IStat, IUserData } from 'types/common';
 import { getPeriod } from '../../utils';
 
-const initialState = {
+interface IUserStore {
+  userData: null | IUserData,
+  stat: [] | IStat[],
+  period: string
+}
+
+const initialState: IUserStore = {
   userData: null,
   stat: [],
   period: getPeriod()

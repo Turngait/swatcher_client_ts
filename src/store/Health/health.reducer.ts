@@ -1,4 +1,12 @@
-const initState = {
+import { IBodyPlaces, IIllness, IIllnessGroups } from "types/common";
+
+interface IHealthStore {
+  illnesses: [] | IIllness[],
+  groups: [] | IIllnessGroups[],
+  bodyPlaces: [] | IBodyPlaces[],
+}
+
+const initState: IHealthStore = {
   illnesses: [],
   groups: [],
   bodyPlaces: [],

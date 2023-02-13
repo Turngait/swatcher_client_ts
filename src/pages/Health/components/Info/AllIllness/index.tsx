@@ -2,12 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {IIllness} from 'types/common';
+import {IBodyPlaces, IIllness, IIllnessGroups} from 'types/common';
 import EditIco from 'assets/icons/edit-ico.png';
 import DelIco from 'assets/icons/delete-ico.png';
 import { illsDangerEnum } from 'types/common';
 
 import './index.scss';
+import { getBodyPlaceTitle, getSymptomGroupTitle } from 'utils';
 
 const AllIllness: React.FC<{
     deleteIllness: (id: string) => void,
@@ -15,6 +16,8 @@ const AllIllness: React.FC<{
   }> = ({deleteIllness, openEditIllness}) => {
   const { t } = useTranslation();
   const illnesses: IIllness[] = useSelector((state: any) => state.health.illnesses);
+  const bodyPlaces: IBodyPlaces[] = useSelector((state: any) => state.health.bodyPlaces);
+  const groups: IIllnessGroups[] = useSelector((state: any) => state.health.groups);
 
   const showDangerName = (danger: number) => {
     if (!danger) return t('common.empty');
@@ -40,7 +43,9 @@ const AllIllness: React.FC<{
                         <img onClick={() => deleteIllness(item.id || '')} className="allHealth__infoBox__item__contolls__ico" src={DelIco} alt="delete food"/>
                       </div>
                     </div>
-                      <p className="allHealth__infoBox__item__colories">Power: {showDangerName(+item.danger)}</p>
+                      <p className="allHealth__infoBox__item__chars">Power: {showDangerName(+item.danger)}</p>
+                      <p className="allHealth__infoBox__item__chars">Place: {getBodyPlaceTitle(item.placeId, bodyPlaces)}</p>
+                      <p className="allHealth__infoBox__item__chars">Group: {getSymptomGroupTitle(item.groupId, groups)}</p>
                   {
                     item.descr ?
                     (

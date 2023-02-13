@@ -41,8 +41,13 @@
         font-size: 1.6rem;
       }
 
-      &__colories {
-        width: 10rem;
+      &__chars {
+        width: 20rem;
+        margin-bottom: 0.6rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
 
       &__contolls {

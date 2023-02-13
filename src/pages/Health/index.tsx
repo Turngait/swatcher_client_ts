@@ -138,15 +138,16 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     }
   }
 
-  const saveChangesOnIllness = async(title: string, descr: string, danger: number, id: string) => {
-    const { status } = await editIllnessService(title, descr, danger, id, token || '');
+  const saveChangesOnIllness = async(title: string, descr: string, danger: number, id: string, groupId: string, bodyPlaceId: string) => {
+    const { status } = await editIllnessService(title, descr, +danger, id, token || '', groupId, bodyPlaceId);
     if (status === 200) {
       for (const idx in illnesses) {
         if (illnesses[idx].id === id) {
           illnesses[idx].title = title;
           illnesses[idx].descr = descr;
           illnesses[idx].danger = danger;
-        } 
+          break;
+        }
       }
       dispatch(setAllHealth(illnesses));
     }
