@@ -45,8 +45,8 @@ const LeftMenu: React.FC = () => {
         </h1>
         <nav className="leftMenu__nav">
           <NavLink to="/dashboard" className="leftMenu__nav__item">{t('menu.stats')}</NavLink>
-          <NavLink to="/food" className="leftMenu__nav__item">{t('menu.food')}</NavLink>
           <NavLink to="/health" className="leftMenu__nav__item">{t('menu.health')}</NavLink>
+          <NavLink to="/food" className="leftMenu__nav__item">{t('menu.food')}</NavLink>
           {/* <NavLink to="/profile" className="leftMenu__nav__item">{t('menu.profile')}</NavLink> */}
         </nav>
         <div className="leftMenu__langBox">

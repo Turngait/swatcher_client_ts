@@ -47,7 +47,15 @@ const Food: React.FC<{
               </div>
             </>
           )
-          : null
+          :
+          (
+            <>
+              <hr className="item__decription__line"/>
+              <div className="item__decription">
+                There no description
+              </div>
+            </>
+          )
         }
         </div>
       </div>

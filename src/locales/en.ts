@@ -43,7 +43,7 @@ export const en = {
     "menu": {
       "stats": "Statistics",
       "food": "Food",
-      "health": "Symptoms",
+      "health": "Health",
       "profile": "Profile",
       "logout": "Log out"
     },
@@ -79,14 +79,14 @@ export const en = {
       "mChooseTime": "Choose time",
       "mAmount": "Amount",
       "mAdditionalInfo": "Additional info (optional)",
-      "isIngredient": "Can it be an ingredient",
+      "isIngredient": "Ingridient",
       "foodsGroups": "Groups"
     },
     "health": {
-      "health": "Symptoms",
+      "health": "Health",
       "noIllnessByDay": "You has not added any illness yet",
-      "allIllness": "All illness",
-      "newIllness": "New illness",
+      "allIllness": "All symptoms",
+      "newIllness": "New symptom",
       "allMyIllnessEmpty": "You have not added any illness yet",
       "emptyIllnessByDay": "Statistics is empty. you can add illness for day by clicking 'Add' button at the bottom",
       //Modals

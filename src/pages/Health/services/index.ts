@@ -3,7 +3,7 @@ import { API_KEY } from 'config/keys';
 import { IBodyPlaces, IIllness, IIllnessGroups } from 'types/common';
 
 // TODO типизировать errors
-export async function addNewIllnessService(title: string, descr: string, groupId: string, placeId: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
+export async function addNewIllnessService(title: string, descr: string, placeId: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
   return await fetch(API_URL + '/symptoms', {
     method: "POST",
     headers: {
@@ -14,7 +14,6 @@ export async function addNewIllnessService(title: string, descr: string, groupId
     mode: "cors",
     body: JSON.stringify({
       title,
-      groupId,
       placeId,
       descr,
       danger,
@@ -68,7 +67,7 @@ export async function getStatForPeriod(period: string, token: string): Promise<{
   .then(res => res.json());
 }
 
-export async function editIllnessService(title: string, descr: string, danger: number, id: string, token: string, groupId: string, placeId: string): Promise<{status: number}> {
+export async function editIllnessService(title: string, descr: string, danger: number, id: string, token: string, placeId: string): Promise<{status: number}> {
   return await fetch(API_URL + '/symptoms', {
     method: "PATCH",
     headers: {
@@ -82,7 +81,6 @@ export async function editIllnessService(title: string, descr: string, danger: n
       descr,
       danger,
       _id: id,
-      groupId,
       placeId
     }),
   })

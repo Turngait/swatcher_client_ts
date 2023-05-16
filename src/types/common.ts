@@ -15,7 +15,7 @@ export interface IFood {
 export interface IIllness {
   id?: string,
   title: string,
-  groupId: string,
+  groupId?: string,
   placeId: string,
   danger: number,
   descr: string

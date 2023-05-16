@@ -5,7 +5,6 @@ import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 
-import AddGroup from './AddGroup';
 import AddBodyPlace from './AddBodyPlaces';
 import CloseIco from 'assets/icons/close_ico2.png';
 
@@ -14,7 +13,7 @@ import { IBodyPlaces, IIllnessGroups, illsDangerEnum } from 'types/common';
 import './index.scss';
 
 const AddNewIllnessModal: React.FC<{
-  addNewIllness: (title: string,descr: string, groupId: string, placeId: string, danger: number, setMsg: (msg: string | null) => void) => void,
+  addNewIllness: (title: string,descr: string, placeId: string, danger: number, setMsg: (msg: string | null) => void) => void,
   addGroup: (title: string) => Promise<{ id: string, status: number }>
   addBodyPlace: (title: string) => Promise<{ id: string, status: number }>
   onClose: (isOpen: boolean) => void,
@@ -26,24 +25,10 @@ const AddNewIllnessModal: React.FC<{
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [danger, setDanger] = useState(1);
-  const [groupId, setGroupId] = useState(groups[0]._id || '');
   const [placeId, setPlaceId] = useState(bodyPlaces[0]._id || '');
-  const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
   const [isAddPlaceOpen, setIsAddPlaceOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
-  const [symptGroups, setSymptGroups] = useState(groups);
   const [places, setPlaces] = useState(bodyPlaces);
-
-  const addGroupHandle = async (groupTitle: string): Promise<any> => {
-    const data = await addGroup(groupTitle);
-    console.log(data);
-    if (data.status === 500) {
-      setMsg("Something goes wrong. Try later.");
-    } else {
-      setSymptGroups([...symptGroups, { _id: data.id, title: groupTitle }]);
-    }
-    setIsAddGroupOpen(false);
-  }
 
   const addBodyPlaceHandle = async (placeTitle: string): Promise<any> => {
     const data = await addBodyPlace(placeTitle);
@@ -69,27 +54,6 @@ const AddNewIllnessModal: React.FC<{
           onChange={(event) => setDescr(event.target.value)}
         >
         </textarea>
-        <label>
-          <p>Choose group</p>
-          <div className="addNewIllness__form__selectBox">
-            {/* Move all selects to component Select */}
-            <select className="addFoodForDay__form__time" onChange={(event: any) => setGroupId(event.target.value)}>
-              {
-                symptGroups.map(group => {
-                  return <option key={group._id || ''} value={group._id}>{group.title}</option>
-                })
-              }
-            </select>
-            <button onClick={() => setIsAddGroupOpen(!isAddGroupOpen)} className="addNewIllness__form__selectBox__plsBtn">
-              {
-                isAddGroupOpen ? <img className="addNewIllness__form__selectBox__plsBtn__clsIcon" src={CloseIco} alt="close"/> : <span>+</span>
-              }
-            </button>
-          </div>
-          {
-            isAddGroupOpen ? <AddGroup addNewGroup={addGroupHandle}/> : null
-          }
-        </label>
         <label>
           <p>Choose place in body</p>
           <div className="addNewIllness__form__selectBox">
@@ -120,7 +84,7 @@ const AddNewIllnessModal: React.FC<{
             <option value={5}>{illsDangerEnum.mortal}</option>
           </select>
         </label>
-        <Button title={t('common.add')} onClick={() => addNewIllness(title, descr, groupId, placeId, danger, setMsg)} />
+        <Button title={t('common.add')} onClick={() => addNewIllness(title, descr, placeId, danger, setMsg)} />
       </div>
     </PopUp>
   )

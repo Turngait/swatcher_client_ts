@@ -82,9 +82,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     return data;
   }
 
-  const addNewIllness = async (title: string, descr: string, groupId: string, placeId: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
+  const addNewIllness = async (title: string, descr: string, placeId: string, danger: number, setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewIllnessService(title, descr, groupId, placeId, danger, token);
+    const { status, id, errors } = await addNewIllnessService(title, descr, placeId, danger, token);
 
     if (status === 200) {
       setIsAddIllnessOpen(false);
@@ -92,7 +92,6 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       const ill: IIllness = {
         id,
         title,
-        groupId,
         placeId,
         danger,
         descr
@@ -138,8 +137,8 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     }
   }
 
-  const saveChangesOnIllness = async(title: string, descr: string, danger: number, id: string, groupId: string, bodyPlaceId: string) => {
-    const { status } = await editIllnessService(title, descr, +danger, id, token || '', groupId, bodyPlaceId);
+  const saveChangesOnIllness = async(title: string, descr: string, danger: number, id: string, bodyPlaceId: string) => {
+    const { status } = await editIllnessService(title, descr, +danger, id, token || '', bodyPlaceId);
     if (status === 200) {
       for (const idx in illnesses) {
         if (illnesses[idx].id === id) {

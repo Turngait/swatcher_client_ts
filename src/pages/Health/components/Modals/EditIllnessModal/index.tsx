@@ -14,7 +14,7 @@ import './index.scss';
 const EditIllnessModal: React.FC<{
   illness: IIllness,
   closeModal: (isOpen: boolean) => void,
-  saveChangesOnIllness: (title: string, descr: string, danger: number, id: string, groupId: string, bodyPlaceId: string) => void
+  saveChangesOnIllness: (title: string, descr: string, danger: number, id: string, bodyPlaceId: string) => void
 }> = ({ illness, closeModal, saveChangesOnIllness }) => {
   const { t } = useTranslation();
 
@@ -53,7 +53,7 @@ const EditIllnessModal: React.FC<{
           value={descr}
         >
         </textarea>
-         <Button title={t('common.add')} onClick={() => saveChangesOnIllness(title, descr, danger, illness.id || '', illness.groupId, illness.placeId)} />
+         <Button title={t('common.add')} onClick={() => saveChangesOnIllness(title, descr, danger, illness.id || '', illness.placeId)} />
 
       </div>
     </PopUp>

@@ -79,7 +79,7 @@ export const ru = {
       "mChooseTime": "Выбрать время",
       "mAmount": "Количество",
       "mAdditionalInfo": "Дополнительно (не обязательно)",
-      "isIngredient": "Может ли это быть ингридиентом?",
+      "isIngredient": "Ингридиент",
       "foodsGroups": "Группы"
     },
     "health": {
