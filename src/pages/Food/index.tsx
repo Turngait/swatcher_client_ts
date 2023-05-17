@@ -16,12 +16,10 @@ import {
   addNewFoodService,
   getAllFoodsDataService,
   deleteFood,
-  getStatForPeriod,
   editFood
 } from './services';
 
 import { setAllFoods, setAllIngredients, setGroups } from 'store/Food/food.action';
-import { setPeriod, setStat } from 'store/User/user.actions';
 import { IFood } from 'types/common';
 
 import './index.scss';
@@ -139,16 +137,6 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  async function changePeriod(period: string): Promise<void> {
-    setLoading(true);
-    const {stat} = await getStatForPeriod(period, token || '');
-    if(stat) {
-      dispatch(setStat(stat));
-      dispatch(setPeriod(period));
-    }
-    setLoading(false);
-  }
-
   return (
     <div className="foodPage">
       {
@@ -163,7 +151,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit} /> : null}
       <LeftMenu />
       <div className="foodPage__info">
-        <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('foods.food')}/>
+        <Header openMenu={setIsMenuOpen} exit={exit} title={t('foods.food')}/>
         <Info
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodOpen={setIsAddFoodOpen}

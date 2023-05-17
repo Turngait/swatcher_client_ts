@@ -8,7 +8,7 @@ import Button from 'components/controls/Button';
 import AddBodyPlace from './AddBodyPlaces';
 import CloseIco from 'assets/icons/close_ico2.png';
 
-import { IBodyPlaces, IIllnessGroups, illsDangerEnum } from 'types/common';
+import { IBodyPlaces, illsDangerEnum } from 'types/common';
 
 import './index.scss';
 
@@ -17,9 +17,8 @@ const AddNewIllnessModal: React.FC<{
   addGroup: (title: string) => Promise<{ id: string, status: number }>
   addBodyPlace: (title: string) => Promise<{ id: string, status: number }>
   onClose: (isOpen: boolean) => void,
-  groups: IIllnessGroups[] | [],
   bodyPlaces: IBodyPlaces[] | [],
-}> = ({ addNewIllness, addGroup, addBodyPlace, onClose, groups, bodyPlaces }) => {
+}> = ({ addNewIllness, addGroup, addBodyPlace, onClose, bodyPlaces }) => {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState('');

@@ -1,4 +1,4 @@
-import { IBodyPlaces, IIllnessGroups } from "types/common";
+import { IBodyPlaces } from "types/common";
 
 export function normalizeStatFoods(statFood: any, foods: any): any {
   const normalizeData = [];
@@ -56,9 +56,4 @@ export function getBodyPlaceTitle(id: string, bodyPlaces: IBodyPlaces[]): string
   if (!Array.isArray(bodyPlaces) || !bodyPlaces.length) return '';
   const place = bodyPlaces.filter(item => item._id === id)[0];
   return place?.title || '';
-}
-
-export function getSymptomGroupTitle(id: string, groups: IIllnessGroups[]): string {
-  const group = groups.filter(item => item._id === id)[0];
-  return group?.title || '';
 }

@@ -14,16 +14,14 @@ import MobileMenu from 'components/common/MobileMenu';
 import {
   addNewIllnessService,
   deleteIllnessService,
-  getStatForPeriod,
   editIllnessService,
   getAllSymptomsDataService,
   addGroupService,
   addBodyPlaceService
 } from './services';
-import { setAllHealth, setAllGroups, setAllBodyPlaces } from 'store/Health/health.actions';
-import { setStat, setPeriod } from 'store/User/user.actions';
+import { setAllHealth, setAllBodyPlaces } from 'store/Health/health.actions';
 
-import {IBodyPlaces, IIllness, IIllnessGroups} from 'types/common';
+import {IBodyPlaces, IIllness} from 'types/common';
 
 import './index.scss';
 
@@ -41,7 +39,6 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
-  const groups: IIllnessGroups[] | [] = useSelector((state: any) => state.health.groups);
   const bodyPlaces: IBodyPlaces[] | [] = useSelector((state: any) => state.health.bodyPlaces);
 
   const exit = () => {
@@ -54,7 +51,6 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       const data = await getAllSymptomsDataService(token);
       console.log(data);
       if(data.illnesses) dispatch(setAllHealth(data.illnesses));
-      if(data.groups) dispatch(setAllGroups(data.groups));
       if(data.bodyPlaces) dispatch(setAllBodyPlaces(data.bodyPlaces));
     }
   }
@@ -109,16 +105,6 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  async function changePeriod(period: string): Promise<void> {
-    setLoading(true);
-    const {stat} = await getStatForPeriod(period, token || '');
-    if(stat) {
-      dispatch(setStat(stat));
-      dispatch(setPeriod(period));
-    }
-    setLoading(false);
-  }
-
   const deleteIllness = async (id: string): Promise<void> => {
     setLoading(true);
     const { status } = await deleteIllnessService(id, token || '');
@@ -164,12 +150,12 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         : null
       }
       {
-        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} addGroup={addNewGroup} addBodyPlace={addBodyPlace} groups={groups} bodyPlaces={bodyPlaces}/> : null
+        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} addGroup={addNewGroup} addBodyPlace={addBodyPlace} bodyPlaces={bodyPlaces}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />
       <div className="healthPage__info">
-        <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('health.health')}/>
+        <Header openMenu={setIsMenuOpen} exit={exit} title={t('health.health')}/>
         <Info
           deleteIllness={deleteIllness}
           setIsAddIllnessOpen={setIsAddIllnessOpen}
