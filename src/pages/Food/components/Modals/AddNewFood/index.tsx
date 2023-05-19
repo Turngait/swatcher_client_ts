@@ -6,15 +6,18 @@ import PopUp from 'components/common/PopUp';
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 import Select from 'components/controls/Select';
+import CloseIco from 'assets/icons/close_ico2.png';
 
 import './index.scss';
+import AddNewFoodGroupModal from './AddFoodGroup';
 
 const AddNewFoodModal: React.FC<{
-    addNewFood: (title: string, units: string, harmfulness: number, descr: string, isIngredient: boolean, ingredients: any, setMsg: (msg: string | null) => void) => void,
+    addNewFood: (title: string, units: string, harmfulness: number, groupId: string, descr: string, isIngredient: boolean, ingredients: any, setMsg: (msg: string | null) => void) => void,
     closeModal: (isOpen: boolean) => void,
+    addFoodGroup: (title: string) => Promise<{ id: string, status: number }>
     ingredients: any,
     foodsGroups: any[],
-  }> = ({ addNewFood, closeModal, ingredients, foodsGroups }) => {
+  }> = ({ addNewFood, closeModal, ingredients, foodsGroups, addFoodGroup }) => {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
@@ -24,6 +27,19 @@ const AddNewFoodModal: React.FC<{
   const [isIngredient, setIsIngredient] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [choosingIngredients, setChoosingIngredients] = useState<any>([]);
+  const [isAddGroupOpen, setIsAddPlaceOpen] = useState<boolean>(false);
+  const [groupId, setGroupId] = useState(foodsGroups[0]._id || '');
+  const [groups, setGroups] = useState(foodsGroups);
+  
+  const addFoodGroupHandle = async (groupTitle: string): Promise<any> => {
+    const data = await addFoodGroup(groupTitle);
+    if (data.status === 500) {
+      setMsg("Something goes wrong. Try later.");
+    } else {
+      setGroups([...foodsGroups, { _id: data.id, title: groupTitle }]);
+    }
+    setIsAddPlaceOpen(false);
+  }
 
   return (
     <PopUp title={t('foods.mAddFood')} closeModal={() => closeModal(false)}>
@@ -47,14 +63,26 @@ const AddNewFoodModal: React.FC<{
             onChange={(event) => setHarmfulness(+event.target.value)}
           />
         </label>
-        {/* <label>
-          <p>{t('foods.foodsGroups')}</p>
-          <Select 
-            items={foodsGroups.map(group => ({ value: group._id, title: group.title }))}
-            defaultValue={1}
-            onChange={(event) => setHarmfulness(+event.target.value)}
-          />
-        </label> */}
+        <label>
+          <p>Choose food group</p>
+          <div className="addNewIllness__form__selectBox">
+            <select className="addFoodForDay__form__time" onChange={(event: any) => setGroupId(event.target.value)}>
+              {
+                groups.map(group => {
+                  return <option key={group._id || ''} value={group._id}>{group.title}</option>
+                })
+              }
+            </select>
+            <button className="addNewIllness__form__selectBox__plsBtn" onClick={() => setIsAddPlaceOpen(!isAddGroupOpen)}>
+              {
+                isAddGroupOpen ? <img className="addNewIllness__form__selectBox__plsBtn__clsIcon" src={CloseIco} alt="close"/> : <span>+</span>
+              }
+            </button>
+          </div>
+          {
+            isAddGroupOpen ? <AddNewFoodGroupModal addNewGroup={addFoodGroupHandle} /> : null
+          }
+        </label>
         <label>
           <input className='addNewFood__form__checkbox' type="checkbox" onChange={(event) => setIsIngredient(event.target.checked) } />
           {t('foods.isIngredient')}
@@ -84,7 +112,7 @@ const AddNewFoodModal: React.FC<{
         </textarea>
         <Button
           title={t('common.add')}
-          onClick={() => addNewFood(title, units, harmfulness, descr, isIngredient, choosingIngredients.map((item: any) => {return item.value}), setMsg)} 
+          onClick={() => addNewFood(title, units, harmfulness, groupId, descr, isIngredient, choosingIngredients.map((item: any) => {return item.value}), setMsg)} 
         />
       </div>
     </PopUp>

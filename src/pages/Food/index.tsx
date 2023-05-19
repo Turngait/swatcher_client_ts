@@ -16,7 +16,8 @@ import {
   addNewFoodService,
   getAllFoodsDataService,
   deleteFood,
-  editFood
+  editFood,
+  addFoodGroupService
 } from './services';
 
 import { setAllFoods, setAllIngredients, setGroups } from 'store/Food/food.action';
@@ -68,13 +69,14 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       title: string,
       units:string,
       harmfulness: number,
+      groupId: string,
       descr: string,
       isIngredient: boolean,
       ingredients: string[],
       setMsg: (msg: string | null) => void
     ): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewFoodService(title, units, harmfulness, descr, isIngredient, ingredients, token);
+    const { status, id, errors } = await addNewFoodService(title, units, harmfulness, groupId, descr, isIngredient, ingredients, token);
     if (status === 200) {
       setIsAddFoodOpen(false);
       const food: IFood = {
@@ -137,6 +139,13 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
+  const addFoodGroup = async (title: string): Promise<{ id: string, status: number }> => {
+    setLoading(true);
+    const data = await addFoodGroupService(title, token || '');
+    setLoading(false);
+    return data;
+  }
+
   return (
     <div className="foodPage">
       {
@@ -146,7 +155,7 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
         isEditFoodOpen && editableFood ? <EditFoodModal food={editableFood} editFoodHandler={editFoodHandler} closeModal={setIsEditFoodOpen}/> : null
       }
       {
-        isAddFoodOpen ? <AddNewFoodModal foodsGroups={foodsGroups} ingredients={ingredients} addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
+        isAddFoodOpen ? <AddNewFoodModal addFoodGroup={addFoodGroup} foodsGroups={foodsGroups} ingredients={ingredients} addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit} /> : null}
       <LeftMenu />

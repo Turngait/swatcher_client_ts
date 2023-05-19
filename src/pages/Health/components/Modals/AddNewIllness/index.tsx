@@ -14,11 +14,10 @@ import './index.scss';
 
 const AddNewIllnessModal: React.FC<{
   addNewIllness: (title: string,descr: string, placeId: string, danger: number, setMsg: (msg: string | null) => void) => void,
-  addGroup: (title: string) => Promise<{ id: string, status: number }>
   addBodyPlace: (title: string) => Promise<{ id: string, status: number }>
   onClose: (isOpen: boolean) => void,
   bodyPlaces: IBodyPlaces[] | [],
-}> = ({ addNewIllness, addGroup, addBodyPlace, onClose, bodyPlaces }) => {
+}> = ({ addNewIllness, addBodyPlace, onClose, bodyPlaces }) => {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState('');

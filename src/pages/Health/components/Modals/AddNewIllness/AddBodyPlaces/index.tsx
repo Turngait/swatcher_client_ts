@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { useTranslation } from 'react-i18next';
 
-import Textinput from 'components/controls/TextInput';
+import TextInput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 
 import './index.scss';
@@ -14,7 +14,7 @@ const AddNewBodyPlaceModal: React.FC<{
 
   return (
       <div className="addNewGroup__form">
-        <Textinput maxlength={20} placeholder={`Place title...`} onChange={(event) => setTitle(event.target.value)}/>
+        <TextInput maxlength={20} placeholder={`Place title...`} onChange={(event) => setTitle(event.target.value)}/>
         <Button title="Add Place" onClick={() => addNewPlace(title)} />
       </div>
   )

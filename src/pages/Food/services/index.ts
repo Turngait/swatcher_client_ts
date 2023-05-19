@@ -6,6 +6,7 @@ export async function addNewFoodService(
     title: string,
     units: string,
     harmfulness: number,
+    groupId: string,
     descr: string,
     isIngredient: boolean,
     ingredients: string[],
@@ -23,9 +24,26 @@ export async function addNewFoodService(
       title,
       units,
       harmfulness,
+      groupId,
       descr,
       isIngredient,
       ingredients
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function addFoodGroupService(title: string, token: string): Promise<{status: number, errors: any, id: string}> {
+  return await fetch(API_URL + '/food-groups', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token ? token : ''
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      title,
     }),
   })
   .then(res => res.json());
