@@ -1,3 +1,10 @@
+.healthInfo {
+  &__box {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
 
 
 @media all and (min-width: 0) and (max-width: 650px) {

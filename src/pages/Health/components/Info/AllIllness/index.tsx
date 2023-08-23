@@ -27,6 +27,7 @@ const AllIllness: React.FC<{
 
   return (
     <div className="allHealth">
+      <h3 className="allHealth__heading">Symptoms</h3>
       <div className="allHealth__infoBox">
           {
             illnesses.length ? illnesses.map((item: IIllness) => {
