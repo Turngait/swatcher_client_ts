@@ -1,6 +1,30 @@
 @import '../../../../../styles/colors.scss';
 
 .addNewIllness {
+
+  &__switcher {
+    display: flex;
+    gap: 2rem;
+
+    &__item {
+      background: none;
+      border: none;
+      border-bottom: 1px solid $black;
+      cursor: pointer;
+      padding-bottom: 1rem;
+      font-size: 1.4rem;
+      transition-duration: 0.4s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &__active {
+        color: $green;
+        border-color: $green;
+      }
+    }
+  }
   &__header {
     text-align: center;
     font-size: 1.4rem;
@@ -53,6 +77,13 @@
       font-size: 1.4rem;
       background: $white;
       box-sizing: border-box;
+    }
+
+    &__checkbox {
+      width: 1.4rem;
+      height: 1.4rem;
+      border: 1px solid $black;
+      border-radius: 5px;
     }
   }
 }

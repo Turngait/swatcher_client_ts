@@ -98,7 +98,12 @@ export const en = {
       "mChooseTime": "Choose start time",
       "mAdditionalInfo": "Additional info (optional)",
       "mAddIllness": "Add illness",
-      "mChooseDanger": "Choose danger"
+      "mChooseDanger": "Choose danger",
+      "mChooseBodyPlace": "Choose place where hurt",
+      "mSymptom": "Symptom",
+      "mDisease": "Disease",
+      "mTreatment": "Treatment(optional)",
+      "mIsChronically": "Is Chronically"
     },
     "profile": {
       "profile": "Profile",

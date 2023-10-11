@@ -16,11 +16,12 @@ import {
   deleteIllnessService,
   editIllnessService,
   getAllSymptomsDataService,
-  addBodyPlaceService
+  addBodyPlaceService,
+  addNewDiseaseService
 } from './services';
 import { setAllHealth, setAllBodyPlaces } from 'store/Health/health.actions';
 
-import {IBodyPlaces, IIllness} from 'types/common';
+import {IBodyPlaces, IDisease, IIllness} from 'types/common';
 
 import './index.scss';
 
@@ -97,6 +98,37 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
+  const addNewDisease = async (title: string, treatment: string, descr: string, isChronically: boolean, danger: number, symptoms: string[],  setMsg: (msg: string | null) => void): Promise<void> => {
+    setLoading(true);
+    const { status, id, errors } = await addNewDiseaseService(title, treatment, descr, isChronically, danger, symptoms, [], token);
+
+    if (status === 200) {
+      setIsAddIllnessOpen(false);
+
+      const disease: IDisease = {
+        id,
+        title,
+        treatment,
+        isChronically,
+        descr,
+        data: [],
+        symptoms,
+        danger
+      };
+
+
+      const newDiseases = [disease];
+      // dispatch(setAllHealth(newIllnesses));
+    } else if(errors && errors.length) {
+      setMsg(errors[0].msg || t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
+    }
+    setLoading(false);
+  }
+
   const deleteIllness = async (id: string): Promise<void> => {
     setLoading(true);
     const { status } = await deleteIllnessService(id, token || '');
@@ -142,7 +174,15 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         : null
       }
       {
-        isAddIllnessOpen ? <AddNewIllnessModal onClose={setIsAddIllnessOpen} addNewIllness={addNewIllness} addBodyPlace={addBodyPlace} bodyPlaces={bodyPlaces}/> : null
+        isAddIllnessOpen ? 
+          <AddNewIllnessModal
+            onClose={setIsAddIllnessOpen}
+            addNewIllness={addNewIllness}
+            addBodyPlace={addBodyPlace}
+            addNewDisease={addNewDisease}
+            bodyPlaces={bodyPlaces}
+            symptoms={illnesses}
+          /> : null
       }
       {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
       <LeftMenu />

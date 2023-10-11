@@ -22,6 +22,29 @@ export async function addNewIllnessService(title: string, descr: string, placeId
   .then(res => res.json());
 }
 
+export async function addNewDiseaseService(title: string, treatment: string, descr: string, isChronically: boolean, danger: number, symptoms: string[], data: any[], token: string | null): Promise<{status: number, id: string, errors: any}> {
+  return await fetch(API_URL + '/diseases', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token ? token : ''
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      title,
+      treatment,
+      description: descr,
+      is_chronicle: isChronically,
+      danger,
+      symptoms,
+      data,
+      is_active: false,
+    }),
+  })
+  .then(res => res.json());
+}
+
 export async function deleteIllnessService(id: string, token: string): Promise<{status: number}> {
   return await fetch(API_URL + '/symptoms', {
     method: "DELETE",

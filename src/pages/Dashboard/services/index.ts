@@ -1,6 +1,6 @@
 import { API_URL } from 'config/api';
 import { API_KEY } from 'config/keys';
-import {IUserData, IIllness, IFood, IFoodStat, IStat, IIllnessStat } from 'types/common';
+import {IUserData, IIllness, IFood, IFoodStat, IStat, IIllnessStat, IBodyPlaces } from 'types/common';
 
 export async function saveFirstSetupData(sex: string, age: number, weight: number, height: number, token: string): Promise<{status: number}> {
   return await fetch(API_URL + '/users/savedata', {
@@ -21,7 +21,7 @@ export async function saveFirstSetupData(sex: string, age: number, weight: numbe
   .then(res => res.json());
 }
 
-export async function getInitData(token: string, period: string): Promise<{user: IUserData | null, status: number, stat: [any] | [] | null, foods: {foods: {publicFoods: IFood[] | []}, ingredients: any[]}, health: {illnesses: IIllness[] | null}}> {
+export async function getInitData(token: string, period: string): Promise<{user: IUserData | null, status: number, stat: [any] | [] | null, foods: {foods: {publicFoods: IFood[] | []}, ingredients: any[]}, health: {illnesses: IIllness[] | null, bodyPlaces: IBodyPlaces[] | null}, diseases: any}> {
   return await fetch(API_URL + '/stats/getdata', {
     method: "POST",
     headers: {

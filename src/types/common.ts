@@ -20,6 +20,23 @@ export interface IIllness {
   descr: string
 }
 
+
+export interface IDiseaseData {
+  id?: string,
+  title: string,
+  text: string
+}
+export interface IDisease {
+  id?: string,
+  title: string,
+  treatment: string,
+  descr: string,
+  isChronically: boolean,
+  symptoms: string[],
+  danger: number,
+  data: IDiseaseData[] | []
+}
+
 export interface IBodyPlaces {
   _id?: string,
   title: string
