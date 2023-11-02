@@ -8,8 +8,8 @@ import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewIllnessModal from './components/Modals/AddNewIllness';
 import EditIllnessModal from './components/Modals/EditIllnessModal';
-import Loader from 'components/common/Loader';
-import MobileMenu from 'components/common/MobileMenu';
+import Loader from '../../components/common/Loader';
+import MobileMenu from '../../components/common/MobileMenu';
 
 import {
   addNewIllnessService,
@@ -17,11 +17,12 @@ import {
   editIllnessService,
   getAllSymptomsDataService,
   addBodyPlaceService,
-  addNewDiseaseService
+  addNewDiseaseService,
+  deleteDiseaseService
 } from './services';
-import { setAllHealth, setAllBodyPlaces } from 'store/Health/health.actions';
+import { setAllHealth, setAllBodyPlaces, setDiseases, setActiveDiseases } from '../../store/Health/health.actions';
 
-import {IBodyPlaces, IDisease, IIllness} from 'types/common';
+import {IBodyPlaces, IDisease, IIllness} from '../../types/common';
 
 import './index.scss';
 
@@ -39,6 +40,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
+  const diseases: IDisease[] | [] = useSelector((state: any) => state.health.diseases);
   const bodyPlaces: IBodyPlaces[] | [] = useSelector((state: any) => state.health.bodyPlaces);
 
   const exit = () => {
@@ -47,11 +49,13 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   const init = async (token: string): Promise<void> => {
-    if (Array.isArray(illnesses) && illnesses.length === 0) {
+    if ((Array.isArray(illnesses) && illnesses.length === 0) || (Array.isArray(diseases) && diseases.length)) {
       const data = await getAllSymptomsDataService(token);
       console.log(data);
-      if(data.illnesses) dispatch(setAllHealth(data.illnesses));
-      if(data.bodyPlaces) dispatch(setAllBodyPlaces(data.bodyPlaces));
+      if(data.symptoms.illnesses) dispatch(setAllHealth(data.symptoms.illnesses));
+      if(data.symptoms.bodyPlaces) dispatch(setAllBodyPlaces(data.symptoms.bodyPlaces));
+      if(data.diseases.diseases) dispatch(setDiseases(data.diseases.diseases));
+      if(data.diseases.active_diseases) dispatch(setActiveDiseases(data.diseases.active_diseases));
     }
   }
   useEffect(() => {
@@ -117,8 +121,8 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       };
 
 
-      const newDiseases = [disease];
-      // dispatch(setAllHealth(newIllnesses));
+      const newDiseases = [...diseases, disease];
+      dispatch(setDiseases(newDiseases));
     } else if(errors && errors.length) {
       setMsg(errors[0].msg || t('msgs.err1'));
       setTimeout(() => setMsg(null), 3000)
@@ -135,6 +139,16 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     if(status === 200) {
       const newIlls = illnesses.filter((item) => item.id !== id);
       dispatch(setAllHealth(newIlls));
+    }
+    setLoading(false);
+  }
+
+  const deleteDisease = async (id: string): Promise<void> => {
+    setLoading(true);
+    const { status } = await deleteDiseaseService(id, token || '');
+    if(status === 200) {
+      const newDiseases = diseases.filter((item) => item.id !== id);
+      dispatch(setDiseases(newDiseases));
     }
     setLoading(false);
   }
@@ -189,6 +203,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       <div className="healthPage__info">
         <Header openMenu={setIsMenuOpen} exit={exit} title={t('health.health')}/>
         <Info
+          deleteDisease={deleteDisease}
           deleteIllness={deleteIllness}
           setIsAddIllnessOpen={setIsAddIllnessOpen}
           openEditIllness={openEditIllness}

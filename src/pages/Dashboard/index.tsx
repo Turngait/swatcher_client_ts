@@ -10,15 +10,15 @@ import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddForDayModal from './components/Modals/AddForDay';
 import FirstSetUp from './components/FirstSetUp';
-import Loader from 'components/common/Loader';
-import PlsButton from 'components/controls/PlsButton';
+import Loader from '../../components/common/Loader';
+import PlsButton from '../../components/controls/PlsButton';
 
-import { IFood, IFoodStat, IIllness, IStat, IUserData } from 'types/common';
+import { IFood, IFoodStat, IIllness, IStat, IUserData } from '../../types/common';
 
 import { saveFirstSetupData, getInitData, addFoodForDay, getStatForPeriod, deleteIllnessForDayService, deleteFoodForDayService, addIllnessForDayService } from './services';
-import { setUserData, setPeriod, setStat } from 'store/User/user.actions';
+import { setUserData, setPeriod, setStat } from '../../store/User/user.actions';
 import './index.scss';
-import { setAllBodyPlaces } from 'store/Health/health.actions';
+import { setAllBodyPlaces } from '../../store/Health/health.actions';
 
 const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();

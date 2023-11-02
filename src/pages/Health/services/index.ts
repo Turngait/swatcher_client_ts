@@ -1,6 +1,6 @@
-import { API_URL } from 'config/api';
-import { API_KEY } from 'config/keys';
-import { IBodyPlaces, IIllness } from 'types/common';
+import { API_URL } from '../../../config/api';
+import { API_KEY } from '../../../config/keys';
+import { IBodyPlaces, IDisease, IIllness } from '../../../types/common';
 
 // TODO типизировать errors
 export async function addNewIllnessService(title: string, descr: string, placeId: string, danger: number, token: string | null): Promise<{status: number, id: string, errors: any}> {
@@ -45,6 +45,22 @@ export async function addNewDiseaseService(title: string, treatment: string, des
   .then(res => res.json());
 }
 
+export async function deleteDiseaseService(id: string, token: string): Promise<{status: number}> {
+  return await fetch(API_URL + '/diseases', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      diseasesId: id,
+    }),
+  })
+  .then(res => res.json());
+}
+
 export async function deleteIllnessService(id: string, token: string): Promise<{status: number}> {
   return await fetch(API_URL + '/symptoms', {
     method: "DELETE",
@@ -61,17 +77,18 @@ export async function deleteIllnessService(id: string, token: string): Promise<{
   .then(res => res.json());
 }
 
-export async function getAllSymptomsDataService(token: string): Promise<{ illnesses: IIllness[], bodyPlaces: IBodyPlaces[] }> {
-  return await fetch(API_URL + '/symptoms', {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-      "API-KEY": API_KEY,
-      "TOKEN": token
-    },
-    mode: "cors",
-  })
-  .then(res => res.json());
+export async function getAllSymptomsDataService(token: string)
+  : Promise<{ symptoms: {illnesses: IIllness[], bodyPlaces: IBodyPlaces[] }, diseases: {diseases: IDisease[], active_diseases: string[]}}> {
+    return await fetch(API_URL + '/symptoms', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "API-KEY": API_KEY,
+        "TOKEN": token
+      },
+      mode: "cors",
+    })
+    .then(res => res.json());
 }
 
 export async function getStatForPeriod(period: string, token: string): Promise<{stat: any | []}> {

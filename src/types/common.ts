@@ -27,7 +27,7 @@ export interface IDiseaseData {
   text: string
 }
 export interface IDisease {
-  id?: string,
+  id: string,
   title: string,
   treatment: string,
   descr: string,
