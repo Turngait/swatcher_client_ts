@@ -31,9 +31,11 @@ export interface IDisease {
   title: string,
   treatment: string,
   descr: string,
-  isChronically: boolean,
+  description?: string;
+  is_chronicle: boolean,
   symptoms: string[],
   danger: number,
+  is_active: boolean,
   data: IDiseaseData[] | []
 }
 

@@ -8,6 +8,7 @@ import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewIllnessModal from './components/Modals/AddNewIllness';
 import EditIllnessModal from './components/Modals/EditIllnessModal';
+import EditDiseaseModal from './components/Modals/EditDiseaseModal';
 import Loader from '../../components/common/Loader';
 import MobileMenu from '../../components/common/MobileMenu';
 
@@ -18,7 +19,9 @@ import {
   getAllSymptomsDataService,
   addBodyPlaceService,
   addNewDiseaseService,
-  deleteDiseaseService
+  deleteDiseaseService,
+  editDiseaseService,
+  toggleDiseaseActiveStatus
 } from './services';
 import { setAllHealth, setAllBodyPlaces, setDiseases, setActiveDiseases } from '../../store/Health/health.actions';
 
@@ -33,10 +36,12 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
 
   const [isAddIllnessOpen, setIsAddIllnessOpen] = useState(false);
   const [isEditIllnessOpen, setIsEditIllnessOpen] = useState(false);
+  const [isEditDiseaseOpen, setIsEditDiseaseOpen] = useState(false);
 
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [editableIllness, setEditableIllness] = useState<IIllness | null>(null);
+  const [editableDisease, setEditableDisease] = useState<IDisease | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
@@ -102,9 +107,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  const addNewDisease = async (title: string, treatment: string, descr: string, isChronically: boolean, danger: number, symptoms: string[],  setMsg: (msg: string | null) => void): Promise<void> => {
+  const addNewDisease = async (title: string, treatment: string, descr: string, is_chronicle: boolean, danger: number, symptoms: string[],  setMsg: (msg: string | null) => void): Promise<void> => {
     setLoading(true);
-    const { status, id, errors } = await addNewDiseaseService(title, treatment, descr, isChronically, danger, symptoms, [], token);
+    const { status, id, errors } = await addNewDiseaseService(title, treatment, descr, is_chronicle, danger, symptoms, [], token);
 
     if (status === 200) {
       setIsAddIllnessOpen(false);
@@ -113,7 +118,8 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         id,
         title,
         treatment,
-        isChronically,
+        is_chronicle,
+        is_active: false,
         descr,
         data: [],
         symptoms,
@@ -161,6 +167,15 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     }
   }
 
+  const openEditDisease = (id: string) => {
+    const editableDisease = diseases.filter(((item: IDisease) => item.id === id));
+    if(editableDisease) {
+      setEditableDisease(editableDisease[0]);
+      setIsEditDiseaseOpen(true);
+    }
+
+  }
+
   const saveChangesOnIllness = async(title: string, descr: string, danger: number, id: string, bodyPlaceId: string) => {
     const { status } = await editIllnessService(title, descr, +danger, id, token || '', bodyPlaceId);
     if (status === 200) {
@@ -177,6 +192,41 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     setIsEditIllnessOpen(false);
   }
 
+  const saveChangesOnDisease = async (title: string, descr: string, danger: number, id: string, treatment: string, is_chronicle: boolean) => {
+    setLoading(true);
+    const { status } = await editDiseaseService(title, descr, +danger, id, token || '', treatment, is_chronicle);
+    if (status === 200) {
+      for (const idx in diseases) {
+        if (diseases[idx].id === id) {
+          diseases[idx].title = title;
+          diseases[idx].descr = descr;
+          diseases[idx].danger = danger;
+          break;
+        }
+      }
+      dispatch(setDiseases(diseases));
+    }
+    setIsEditDiseaseOpen(false);
+    setLoading(false);
+    return;
+  }
+
+  const toggleDiseaseActiveStatusHandler = async (id: string, is_active: boolean) => {
+    setLoading(true);
+    const { status } = await toggleDiseaseActiveStatus(id, !is_active, token || '');
+    if (status === 200) {
+      for (const idx in diseases) {
+        if (diseases[idx].id === id) {
+          diseases[idx].is_active = !is_active;
+          break;
+        }
+      }
+      dispatch(setDiseases(diseases));
+    }
+    setLoading(false);
+    return;
+  }
+
   return (
     <div className="healthPage">
       {
@@ -186,6 +236,11 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         isEditIllnessOpen && editableIllness ?
           <EditIllnessModal illness={editableIllness} closeModal={setIsEditIllnessOpen} saveChangesOnIllness={saveChangesOnIllness}/>
         : null
+      }
+      {
+        isEditDiseaseOpen && editableDisease ?
+         <EditDiseaseModal disease={editableDisease} closeModal={setIsEditDiseaseOpen} saveChangesOnDisease={saveChangesOnDisease} />
+         : null
       }
       {
         isAddIllnessOpen ? 
@@ -207,6 +262,8 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
           deleteIllness={deleteIllness}
           setIsAddIllnessOpen={setIsAddIllnessOpen}
           openEditIllness={openEditIllness}
+          openEditDisease={openEditDisease}
+          toggleDiseaseActiveStatus={toggleDiseaseActiveStatusHandler}
         />
       </div>
     </div>

@@ -22,7 +22,7 @@ export async function addNewIllnessService(title: string, descr: string, placeId
   .then(res => res.json());
 }
 
-export async function addNewDiseaseService(title: string, treatment: string, descr: string, isChronically: boolean, danger: number, symptoms: string[], data: any[], token: string | null): Promise<{status: number, id: string, errors: any}> {
+export async function addNewDiseaseService(title: string, treatment: string, descr: string, is_chronicle: boolean, danger: number, symptoms: string[], data: any[], token: string | null): Promise<{status: number, id: string, errors: any}> {
   return await fetch(API_URL + '/diseases', {
     method: "POST",
     headers: {
@@ -35,7 +35,7 @@ export async function addNewDiseaseService(title: string, treatment: string, des
       title,
       treatment,
       description: descr,
-      is_chronicle: isChronically,
+      is_chronicle,
       danger,
       symptoms,
       data,
@@ -56,6 +56,45 @@ export async function deleteDiseaseService(id: string, token: string): Promise<{
     mode: "cors",
     body: JSON.stringify({
       diseasesId: id,
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function editDiseaseService(title: string, description: string, danger: number, id: string, token: string, treatment: string, is_chronicle: boolean): Promise<{status: number}> {
+  return await fetch(API_URL + '/diseases', {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      title,
+      description,
+      danger,
+      _id: id,
+      treatment,
+      is_chronicle
+    }),
+  })
+  .then(res => res.json());
+}
+
+export async function toggleDiseaseActiveStatus(id: string, is_active: boolean, token: string): Promise<{status: number}>  {
+  return await fetch(API_URL + '/diseases/status', {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "API-KEY": API_KEY,
+      "TOKEN": token
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      is_active,
+      _id: id,
+      date: new Date().toISOString().slice(0, 10)
     }),
   })
   .then(res => res.json());
