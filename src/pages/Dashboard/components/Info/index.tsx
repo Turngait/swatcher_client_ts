@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Day from './Day';
 
 import './index.scss';
+import { IDisease } from 'types/common';
 
 const Info: React.FC<{
   deleteIllnessForDay: (id: string, date: string) => Promise<void>;
@@ -14,6 +15,13 @@ const Info: React.FC<{
 
   const stats = useSelector((state: any) => state.user.stat);
   const activeDiseases: string[] = useSelector((state: any) => state.health.activeDiseases);
+  const diseases: IDisease[] = useSelector((state: any) => state.health.diseases);
+
+  const showDiseaseTitle = (diseaseId: string, diseases: IDisease[]) => {
+    for (const disease of diseases) {
+      if (disease.id === diseaseId) return disease.title;
+    }
+  }
   return(
     <div className="dashboardInfo">
       <div className="dashboardInfo__activeDiseasesBox">
@@ -21,7 +29,7 @@ const Info: React.FC<{
         {
           activeDiseases.length ? activeDiseases.map((item) => {
             return (
-              <p key={item}>{item}</p>
+              <p className="dashboardInfo__activeDiseasesBox__title" key={item}>{showDiseaseTitle(item, diseases)}</p>
             )
           })
           : (<p className="dashboardInfo__activeDiseasesBox__empty">Nothing</p>)

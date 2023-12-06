@@ -48,10 +48,10 @@ const AddForDayModal: React.FC<{
                 }
               </select>
             </label>
-            
-
-
-          <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
+          <label>
+            <p>{t('foods.mAmount')}</p>
+            <Textinput value={amount} type="number" placeholder={`${t('foods.mAmount')}...`} onChange={(event) => setAmount(+event.target.value)}/>
+          </label>
           <label>
             <p>{t('foods.mChooseTime')}</p>
             <DatePicker

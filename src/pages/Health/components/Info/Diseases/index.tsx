@@ -21,7 +21,7 @@ const Diseases: React.FC<{
             return (
               <Disease deleteDisease={deleteDisease} disease={item} key={item.id} openEditDisease={openEditDisease} toggleDiseaseActiveStatus={toggleDiseaseActiveStatus}/>
             )
-          }) : null
+          }) : <div className='diseasesBox__box__noDiseasesInfo'>No diseases was added yet</div>
         }
       </div>
     </div>

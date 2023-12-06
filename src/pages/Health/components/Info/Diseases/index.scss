@@ -20,5 +20,9 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    &__noDiseasesInfo {
+      font-size: 1.8rem;
+    }
   }
 }

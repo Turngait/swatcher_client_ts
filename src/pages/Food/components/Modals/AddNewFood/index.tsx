@@ -31,7 +31,18 @@ const AddNewFoodModal: React.FC<{
   const [groupId, setGroupId] = useState(foodsGroups[0]._id || '');
   const [groups, setGroups] = useState(foodsGroups);
   
+  const checkIsGroupExist = (title: string, groups: any[]): boolean => {
+    for (const group of groups) {
+      if (title === group.title) return true;
+    }
+    return false;
+  }
   const addFoodGroupHandle = async (groupTitle: string): Promise<any> => {
+    if(checkIsGroupExist(groupTitle, groups)) {
+      setMsg("Group already exist.");
+      setTimeout(() => setMsg(null), 2000);
+      return;
+    }
     const data = await addFoodGroup(groupTitle);
     if (data.status === 500) {
       setMsg("Something goes wrong. Try later.");

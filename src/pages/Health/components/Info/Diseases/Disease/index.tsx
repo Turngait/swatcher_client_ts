@@ -31,6 +31,12 @@ const Disease: React.FC<{
     <div className='disease__info'>
       <div className='disease__info__item'>Danger: { showPower(disease.danger) }</div>
     </div>
+    <div className='disease__info'>
+      <div className='disease__info__item'>Treatment: { disease.treatment ? disease.treatment : 'Empty' }</div>
+    </div>
+    <div className='disease__info'>
+      <div className='disease__info__item'>Description: { disease.description ? disease.description : 'No descriptions' }</div>
+    </div>
     <div className='disease__controls'>
       {/* Move checkbox to component */}
       <label className='disease__controls__item'>

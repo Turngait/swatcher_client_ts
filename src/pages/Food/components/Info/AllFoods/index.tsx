@@ -26,7 +26,7 @@ const AllFoods: React.FC<{
                 <Food onEditFood={onEditFood} onDeleteFood={onDeleteFood} key={food.id} food={food} />
               );
             })
-            : <p>{t('foods.allMyFoodEmpty')}</p>
+            : <p className="allFoods__infoBox__noFoodWasAdded">{t('foods.allMyFoodEmpty')}</p>
           }
       </div>
     </div>

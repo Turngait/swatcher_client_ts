@@ -17,7 +17,6 @@ const EditFoodModal: React.FC<{
   const { t } = useTranslation();
 
   const [title, setTitle] = useState<string>(food.title || ' ');
-  const [calories, setCallories] = useState<number>(food.calories || 0);
   const [descr, setDescr] = useState<string>(food.descr || '');
   const [harmfulness, setHarmfulness] = useState(food.harmfulness);
 
@@ -25,7 +24,6 @@ const EditFoodModal: React.FC<{
     editFoodHandler({
       id: food.id,
       title,
-      calories: calories,
       harmfulness,
       descr,
       groupId: food.groupId,
@@ -46,7 +44,6 @@ const EditFoodModal: React.FC<{
     <PopUp title={t('common.edit') + " " + food.title} closeModal={() => closeModal(false)}>
       <div className="addNewFood__form">
         <Textinput value={title} placeholder={`${t('common.title')}...`} onChange={(event) => setTitle(event.target.value)}/>
-        <Textinput value={calories} type="number" placeholder={`${t('foods.mCalories')}...`} onChange={(event) => setCallories(+event.target.value)}/>
         <label>
           <p>{t('foods.mHarmulness')}</p>
           <select className="addFoodForDay__form__time" onChange={(event) => setHarmfulness(+event.target.value)}>

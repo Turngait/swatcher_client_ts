@@ -18,7 +18,7 @@ import { IFood, IFoodStat, IIllness, IStat, IUserData } from '../../types/common
 import { saveFirstSetupData, getInitData, addFoodForDay, getStatForPeriod, deleteIllnessForDayService, deleteFoodForDayService, addIllnessForDayService } from './services';
 import { setUserData, setPeriod, setStat } from '../../store/User/user.actions';
 import './index.scss';
-import { setAllBodyPlaces } from '../../store/Health/health.actions';
+import { setActiveDiseases, setAllBodyPlaces, setDiseases } from '../../store/Health/health.actions';
 
 const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();
@@ -39,7 +39,6 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   async function init(token: string, period: string): Promise<void> {
     setLoading(true);
     const { user, status, stat, foods, health, diseases } = await getInitData(token, period);
-    console.log(diseases);
 
     if(status === 403) {
       localStorage.removeItem('token');
@@ -49,6 +48,8 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
         dispatch(setUserData(user, stat, foods.foods.publicFoods, health.illnesses));
         dispatch(setAllBodyPlaces(health.bodyPlaces));
       }
+      if(diseases.diseases) dispatch(setDiseases(diseases.diseases));
+      if(diseases.active_diseases) dispatch(setActiveDiseases(diseases.active_diseases));
       dispatch(setPeriod(period));
       setToken(token);
     }

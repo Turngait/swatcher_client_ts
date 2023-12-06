@@ -15,5 +15,9 @@
     gap: 1rem;
     flex-wrap: wrap;
     overflow-y: auto;
+
+    &__noFoodWasAdded {
+      font-size: 1.8rem;
+    }
   }
 }
