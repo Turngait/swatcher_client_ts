@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IBodyPlaces, illsDangerEnum } from "types/common";
 
+// TODO Move controls to components
 const AddSymptomForm: React.FC<{
   addNewIllness: (title: string,descr: string, placeId: string, danger: number, setMsg: (msg: string | null) => void) => void,
   addBodyPlace: (title: string) => Promise<{ id: string, status: number }>,

@@ -10,6 +10,7 @@ export interface SymptomsOption {
   readonly label: string;
 }
 
+// TODO Move controls to components
 const AddDiseaseForm: React.FC<{
   addNewDisease: (title: string, treatment: string, descr: string, isChronically: boolean, danger: number, symptoms: string[], setMsg: (msg: string | null) => void) => void,
   setMsg: (msg: string | null) => void,

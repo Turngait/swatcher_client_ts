@@ -11,6 +11,7 @@ import { IIllness } from 'types/common';
 
 import './index.scss';
 
+// TODO Move controls to components
 const EditIllnessModal: React.FC<{
   illness: IIllness,
   closeModal: (isOpen: boolean) => void,

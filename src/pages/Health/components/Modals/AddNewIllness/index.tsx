@@ -28,6 +28,7 @@ const AddNewIllnessModal: React.FC<{
         msg ? <p className="addNewIllness__msg">{msg}</p> : null
       }
       <div className="addNewIllness__switcher">
+        {/* TODO Move to Component Button */}
         <button onClick={() => setType('symptom')} className="addNewIllness__switcher__item addNewIllness__switcher__item__active">{t('health.mSymptom')}</button>
         <button onClick={() => setType('disease')} className="addNewIllness__switcher__item">{t('health.mDisease')}</button>
       </div>
