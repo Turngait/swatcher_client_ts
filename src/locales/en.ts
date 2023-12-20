@@ -14,7 +14,10 @@ export const en = {
       "medium": "Medium",
       "high": "High",
       "highest": "Highest",
-      "empty": "Empty"
+      "empty": "Empty",
+      "areYouSure": "Are you sure?",
+      "ok": "Ok",
+      "cancel": "Cancel"
     },
     "msgs": {
       "err1": "Something goes wrong. Please try again later"

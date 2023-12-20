@@ -11,6 +11,7 @@ import EditIllnessModal from './components/Modals/EditIllnessModal';
 import EditDiseaseModal from './components/Modals/EditDiseaseModal';
 import Loader from '../../components/common/Loader';
 import MobileMenu from '../../components/common/MobileMenu';
+// import DialogModal from 'components/common/DialogModal';
 
 import {
   addNewIllnessService,
