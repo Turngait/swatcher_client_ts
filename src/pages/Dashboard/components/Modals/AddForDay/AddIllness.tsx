@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
 
@@ -9,6 +10,7 @@ import {IIllness} from 'types/common';
 
 import "react-datepicker/dist/react-datepicker.css";
 import './index.scss';
+import Select, { ISelectOption } from 'components/controls/Select';
 
 const AddIllness: React.FC<{
     illnesses: IIllness[],
@@ -23,7 +25,14 @@ const AddIllness: React.FC<{
     const [time, setTime] = useState(new Date().toLocaleTimeString().slice(0, 5));
     const [date, setDate] = useState(new Date().toISOString().slice(0,10));
     const [msg, setMsg] = useState<string | null>(null);
+    const [illOptions, setIllOptions] = useState<ISelectOption[]>([]);
+
+    useEffect(() => {
+      const temporaryIllOptions = illnesses.map((item: IIllness) => { return {value: item.id || '', title: item.title || '' }});
+      setIllOptions(temporaryIllOptions);
+    }, [])
     
+
   return (
     <>
       {
@@ -37,25 +46,25 @@ const AddIllness: React.FC<{
           </label>
           <label>
             <p>{t('health.mChooseIllness')}</p>
-            <select className="addFoodForDay__form__time" onChange={(event) => setSelectedIll(event.target.value)}>
-              {
-                illnesses.map((item: IIllness) => {
-                  return (
-                    <option value={item.id} key={item.id}>{item.title}</option>
-                  )
-                })
-              }
-            </select>
+            <Select 
+              items={illOptions}
+              defaultValue={selectedIll || 0}
+              onChange={(event) => setSelectedIll(event.target.value)}
+            />
           </label>
           <label>
             <p>{t('health.mChoosePower')}</p>
-            <select className="addFoodForDay__form__time" onChange={(event) => setPower(+event.target.value)}>
-              <option value={1}>{t('common.minimum')}</option>
-              <option value={2}>{t('common.low')}</option>
-              <option value={3}>{t('common.medium')}</option>
-              <option value={4}>{t('common.high')}</option>
-              <option value={5}>{t('common.highest')}</option>
-            </select>
+            <Select 
+              items={[
+                {value: 1, title: t('common.minimum')},
+                {value: 2, title: t('common.low')},
+                {value: 3, title: t('common.medium')},
+                {value: 4, title: t('common.high')},
+                {value: 5, title: t('common.highest')}
+              ]}
+              defaultValue={1}
+              onChange={(event) => setPower(+event.target.value)}
+            />
           </label>
           <Textinput maxValue={24} value={duration} type="number" placeholder={`${t('health.mDurationInHours')}...`} onChange={(event) => setDuration(event.target.value)}/>
           <label>

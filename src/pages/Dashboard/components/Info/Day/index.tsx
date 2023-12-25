@@ -39,7 +39,7 @@ const Day: React.FC<{
                 <div className="day__info__food__item__mainBox">
                   <p className="day__info__food__item__title">{food.title}</p>
                   <div className="day__info__food__item__contolls">
-                    <p>Amount: {food.amount} {food.units}</p>
+                    <p>{t("stats.amount")}: {food.amount} {food.units}</p>
                     {/* <img onClick={() => console.log(food.id)} className="day__info__food__item__contolls__ico" src={EditIco} alt="edit food"/> */}
                     <img onClick={() => deleteFoodForDayHandler(food.id, stat.date)} className="day__info__food__item__contolls__ico" src={DelIco} alt="delete food"/>
                   </div>
@@ -64,13 +64,13 @@ const Day: React.FC<{
                   <div className="day__info__health__item__mainBox">
                     <p className="day__info__health__item__title">{item.title}</p>
                     <div className="day__info__food__item__contolls">
-                      <p>From: {item.begin}</p>
-                      <p className="day__info__health__item__duration">{item.duration} h.</p>
+                      <p>{t("common.from")}: {item.begin}</p>
+                      <p className="day__info__health__item__duration">{item.duration} {t("stats.hours")}</p>
                       {/* <img onClick={() => console.log(item.id)} className="day__info__food__item__contolls__ico" src={EditIco} alt="edit food"/> */}
                       <img onClick={() => deleteIllnessForDay(item.id, stat.date)} className="day__info__food__item__contolls__ico" src={DelIco} alt="delete illness"/>
                     </div>
                   </div>
-                  <p>Intensive: {showPower(item.power)}</p>
+                  <p>{t("stats.intensive")}: {showPower(item.power)}</p>
                 </div>
               )
             })

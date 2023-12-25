@@ -4,6 +4,12 @@
   height: 80%;
   overflow-y: auto;
 
+  &__msgBox {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: $red;
+  }
+
   &__activeDiseasesBox {
     background-color: $white;
     border: 1px solid rgba(67, 67, 67, 0.25);

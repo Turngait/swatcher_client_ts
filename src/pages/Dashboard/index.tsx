@@ -4,21 +4,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-import LeftMenu from '../../components/common/LeftMenu';
-import MobileMenu from '../../components/common/MobileMenu';
-import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddForDayModal from './components/Modals/AddForDay';
 import FirstSetUp from './components/FirstSetUp';
 import Loader from '../../components/common/Loader';
 import PlsButton from '../../components/controls/PlsButton';
+import Overlay from 'components/common/Overlay';
 
 import { IFood, IFoodStat, IIllness, IStat, IUserData } from '../../types/common';
 
 import { saveFirstSetupData, getInitData, addFoodForDay, getStatForPeriod, deleteIllnessForDayService, deleteFoodForDayService, addIllnessForDayService } from './services';
-import { setUserData, setPeriod, setStat } from '../../store/User/user.actions';
-import './index.scss';
-import { setActiveDiseases, setAllBodyPlaces, setDiseases } from '../../store/Health/health.actions';
+import { setStat } from '../../store/User/user.actions';
+
 
 const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();
@@ -30,62 +27,27 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   const period: string = useSelector((state: any) => state.user.period);
   const stats: IStat[] = useSelector((state: any) => state.user.stat);
 
-  const [token, setToken] = useState('');
+  const token = localStorage.getItem('token');
   const [isFirstSetUpOpen, setIsFirstSetUpOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAddForDayOpen, setIsAddForDayOpen] = useState(false);
-
-  async function init(token: string, period: string): Promise<void> {
-    setLoading(true);
-    const { user, status, stat, foods, health, diseases } = await getInitData(token, period);
-
-    if(status === 403) {
-      localStorage.removeItem('token');
-      history.push('/');
-    } else {
-      if (user && Array.isArray(stat) && foods && health.illnesses && health.bodyPlaces) {
-        dispatch(setUserData(user, stat, foods.foods.publicFoods, health.illnesses));
-        dispatch(setAllBodyPlaces(health.bodyPlaces));
-      }
-      if(diseases.diseases) dispatch(setDiseases(diseases.diseases));
-      if(diseases.active_diseases) dispatch(setActiveDiseases(diseases.active_diseases));
-      dispatch(setPeriod(period));
-      setToken(token);
-    }
-    setLoading(false);
-  }
-
-  const exit = () => {
-    localStorage.removeItem('token');
-    history.push('/');
-  }
-
-  async function changePeriod(period: string): Promise<void> {
-    init(token, period);
-  }
+  const [msg, setMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if(userData && userData.data.sex === '') setIsFirstSetUpOpen(true);
   }, [userData]);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      init(token, period);
-    } else {
-      history.push('/');
-    }
-  }, []);
-
   const saveFirstSetUp = async (sex: string, age: number, weight: number, height: number): Promise<void> => {
-    const { status } = await saveFirstSetupData(sex, age, weight, height, token);
+    const { status } = await saveFirstSetupData(sex, age, weight, height, token || "");
     console.log(status);
-    // TODO add show errors function
     if (status === 200) setIsFirstSetUpOpen(false);
+    else { 
+      setMsg('Something goes wrong. Please, try again latter');
+      setTimeout(() => setMsg(null), 3000);
+    }
   }
 
-  const addFoodForDayHandler = async (
+  const addFoodForDayHandler = async (  
       foodId: string,
       amount: number,
       date: string,
@@ -142,7 +104,6 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  // TODO add error processing
   const deleteIllnessForDay = async (id: string, date: string): Promise<void> => {
     setLoading(true);
     const {status} = await deleteIllnessForDayService(id, date, token || '');
@@ -153,6 +114,10 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
         }
       }
       dispatch(setStat(stats));
+    }
+    else { 
+      setMsg('Something goes wrong. Please, try again latter');
+      setTimeout(() => setMsg(null), 3000);
     }
     setLoading(false);
   }
@@ -172,12 +137,9 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   return (
-    <div className="dashboard">
+    <Overlay title={t('menu.stats')} getInitData={getInitData} setLoading={setLoading} history={history}>
       {
         loading ? <Loader /> : null
-      }
-      {
-        isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null
       }
       {
         isAddForDayOpen
@@ -191,16 +153,12 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
         />
         : null
       }
-      <LeftMenu />
-      <div className="dashboard__info">
         {
           isFirstSetUpOpen ? <FirstSetUp saveData={saveFirstSetUp}/> : null
         }
-        <Header openMenu={setIsMenuOpen} exit={exit} changePeriod={changePeriod} title={t('menu.stats')}/>
-        <Info deleteIllnessForDay={deleteIllnessForDay} deleteFoodForDayHandler={deleteFoodForDayHandler} />
+        <Info msg={msg} deleteIllnessForDay={deleteIllnessForDay} deleteFoodForDayHandler={deleteFoodForDayHandler} />
         <PlsButton onClick={() => setIsAddForDayOpen(true)} />
-      </div>
-    </div>
+    </Overlay>
   );
 }
 

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 import Textinput from 'components/controls/TextInput';
 import Button from 'components/controls/Button';
 import {IFood} from 'types/common';
 
-import "react-datepicker/dist/react-datepicker.css";
+import Select, { ISelectOption } from 'components/controls/Select';
+
 import './index.scss';
+
 
 const AddForDayModal: React.FC<{
     foods: IFood[] | [], 
@@ -21,6 +25,12 @@ const AddForDayModal: React.FC<{
   const [time, setTime] = useState(new Date().toLocaleTimeString().slice(0, 5));
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
   const [msg, setMsg] = useState<string | null>(null);
+  const [foodOptions, setFoodOptions] = useState<ISelectOption[]>([]);
+
+  useEffect(() => {
+    const temporaryFoodOptions = foods.map((item: IFood) => { return {value: item.id || '', title: item.title || '' }});
+    setFoodOptions(temporaryFoodOptions);
+  }, [])
 
   return (
     <>
@@ -37,16 +47,11 @@ const AddForDayModal: React.FC<{
               </label>
               <label>
               <p>{t('foods.mChooseFood')}</p>
-    
-              <select className="addFoodForDay__form__time" onChange={(event) => setSelectedFood(event.target.value)}>
-                {
-                  foods.map((food) => {
-                    return (
-                      <option value={food.id} key={food.id}>{food.title}</option>
-                    )
-                  })
-                }
-              </select>
+              <Select 
+                items={foodOptions}
+                defaultValue={selectedFood || 0}
+                onChange={(event) => setSelectedFood(event.target.value)}
+              />
             </label>
           <label>
             <p>{t('foods.mAmount')}</p>

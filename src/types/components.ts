@@ -20,6 +20,13 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   maxValue?: number,
 }
 
+export interface ICheckboxInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+  name?: string,
+  title: string,
+  checked?: boolean
+}
+
 export interface IPlsButton {
   onClick: () => void;
   className?: string;

@@ -17,7 +17,8 @@ export const en = {
       "empty": "Empty",
       "areYouSure": "Are you sure?",
       "ok": "Ok",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "from": "From"
     },
     "msgs": {
       "err1": "Something goes wrong. Please try again later"
@@ -53,6 +54,11 @@ export const en = {
     "stats": {
       "noData": "Empty now. Please add some elements in in relevant sections",
       "emptyHere": "Empty here",
+      "activeDiseases": "Active diseases",
+      "nothing": "Nothing",
+      "intensive": "Intensive",
+      "amount": "Amount",
+      "hours": "h.",
       //First setup modal
       "fillData": "Add your data please",
       "fsSetSex": "Your sex",

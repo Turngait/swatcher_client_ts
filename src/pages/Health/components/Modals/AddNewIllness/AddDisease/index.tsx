@@ -1,10 +1,12 @@
-import Button from "components/controls/Button";
-import Textinput from "components/controls/TextInput";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IIllness, illsDangerEnum } from "types/common";
 import Select, { MultiValue } from 'react-select';
 
+import { IIllness, illsDangerEnum } from "types/common";
+
+import Button from "components/controls/Button";
+import Textinput from "components/controls/TextInput";
+import CheckboxInput from "components/controls/CheckboxInput";
 export interface SymptomsOption {
   readonly value: string;
   readonly label: string;
@@ -81,11 +83,7 @@ const AddDiseaseForm: React.FC<{
             <option value={5}>{illsDangerEnum.mortal}</option>
           </select>
         </label>
-        <label>
-          {/* Move to component */}
-          <input className='addNewIllness__form__checkbox' type="checkbox" onChange={(event) => setIsChronically(event.target.checked) } />
-          {t('health.mIsChronically')}
-        </label>
+        <CheckboxInput checked={isChronically} title={t('health.mIsChronically')} onChange={(event) => setIsChronically(event.target.checked) } />
         <Button title={t('common.add')} onClick={() => addNewDisease(title, treatment, descr, isChronically, danger, selectedSymptoms, setMsg)} />
       </div>
   )

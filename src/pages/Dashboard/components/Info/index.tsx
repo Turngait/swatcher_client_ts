@@ -2,15 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
+import { IDisease } from 'types/common';
+
 import Day from './Day';
 
 import './index.scss';
-import { IDisease } from 'types/common';
 
 const Info: React.FC<{
+  msg: string | null,
   deleteIllnessForDay: (id: string, date: string) => Promise<void>;
   deleteFoodForDayHandler: (id: string, date: string) => Promise<void>;
-  }> = ({deleteIllnessForDay, deleteFoodForDayHandler}) => {
+  }> = ({deleteIllnessForDay, deleteFoodForDayHandler, msg}) => {
   const { t } = useTranslation();
 
   const stats = useSelector((state: any) => state.user.stat);
@@ -24,15 +26,18 @@ const Info: React.FC<{
   }
   return(
     <div className="dashboardInfo">
+      {
+        msg ? <div className="dashboardInfo__msgBox">{msg}</div> : null
+      }
       <div className="dashboardInfo__activeDiseasesBox">
-        <p className="dashboardInfo__activeDiseasesBox__title">Active diseases: </p>
+        <p className="dashboardInfo__activeDiseasesBox__title">{t("stats.activeDiseases")}: </p>
         {
           activeDiseases.length ? activeDiseases.map((item) => {
             return (
               <p className="dashboardInfo__activeDiseasesBox__title" key={item}>{showDiseaseTitle(item, diseases)}</p>
             )
           })
-          : (<p className="dashboardInfo__activeDiseasesBox__empty">Nothing</p>)
+          : (<p className="dashboardInfo__activeDiseasesBox__empty">{t('stats.nothing')}</p>)
         }
       </div>
       {

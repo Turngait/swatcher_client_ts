@@ -1,6 +1,5 @@
-@import '../../styles/colors.scss';
-
-.dashboard {
+@import '../../../styles/colors.scss';
+.overlayBox {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -17,7 +16,7 @@
 }
 
 @media all and (min-width: 0) and (max-width: 800px) {
-  .dashboard {
+  .overlayBox {
     flex-direction: column-reverse;
   }
 }
@@ -26,7 +25,7 @@
   .day__info {
     flex-direction: column;
   }
-  .dashboard__info {
+  .overlayBox__info {
     height: 80%;
     padding: 1rem 1.3rem;
   }

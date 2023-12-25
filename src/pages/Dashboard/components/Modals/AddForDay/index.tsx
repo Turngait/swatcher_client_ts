@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PopUp from 'components/common/PopUp';
 import {IFood, IIllness} from 'types/common';
@@ -19,6 +20,7 @@ const AddForDayModal: React.FC<{
   const [isAddFoodOpen, setAddFoodOpen] = useState(true);
   const [isAddIllnesOpen, setAddIllnesOpen] = useState(false);
   const [title, setTitle] = useState('food');
+  const { t } = useTranslation();
 
   const toggleTabHandler = (tab: string) => {
     if (tab === "food") {
@@ -36,11 +38,11 @@ const AddForDayModal: React.FC<{
     <PopUp title={`Add ${title} for day`} closeModal={() => closeModal(false)}>
       <form className='addForDay__radioBox'>
         <label className={`addForDay__radioBox__item ${isAddFoodOpen ? 'addForDay__radioBox__item__active' : ''}`} onClick={() => toggleTabHandler("food")}>
-          <div className='addForDay__radioBox__item__title'>Food</div>
+          <div className='addForDay__radioBox__item__title'>{t('foods.food')}</div>
           <input type="radio" name="tab" className='addForDay__radioBox__item__inp' />
         </label>
         <label className={`addForDay__radioBox__item ${isAddIllnesOpen ? 'addForDay__radioBox__item__active' : ''}`} onClick={() => toggleTabHandler("symptom")}>
-          <div className='addForDay__radioBox__item__title'>Health</div>
+          <div className='addForDay__radioBox__item__title'>{t('health.health')}</div>
           <input type="radio" name="tab" className='addForDay__radioBox__item__inp' />
         </label>
       </form>
