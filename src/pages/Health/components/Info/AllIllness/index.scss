@@ -1,6 +1,6 @@
 @import '../../../../../styles/colors.scss';
 
-.allHealth {
+.allIllnesses {
   margin-top: 1rem;
   background-color: $white;
   padding: 1.6rem 2rem;
@@ -8,6 +8,7 @@
   border: 1px solid rgba(67, 67, 67, 0.25);
   height: 80vh;
   overflow-y: auto;
+  width: calc(90% - 33rem);
 
   &__heading {
     font-size: 2.2rem;

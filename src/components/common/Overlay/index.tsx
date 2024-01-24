@@ -12,17 +12,19 @@ import { setUserData, setPeriod } from '../../../store/User/user.actions';
 import { setActiveDiseases, setAllBodyPlaces, setDiseases } from '../../../store/Health/health.actions';
 
 import './index.scss';
+import { API_URL } from 'config/api';
+import { IBodyPlaces, IFood, IIllness, IUserData } from 'types/common';
+import { API_KEY } from 'config/keys';
 
 interface IOverlayProps {
   title?: string,
-  getInitData: any,
   setLoading: (isLoading: boolean) => void,
   history: H.History
 }
 
 
 //In development
-const Overlay:React.FC<IOverlayProps> = ({title, setLoading, getInitData, history, children}) => {
+const Overlay:React.FC<IOverlayProps> = ({title, setLoading, history, children}) => {
   const dispatch = useDispatch();
   const period: string = useSelector((state: any) => state.user.period);
 
@@ -47,6 +49,27 @@ const Overlay:React.FC<IOverlayProps> = ({title, setLoading, getInitData, histor
       setToken(token);
     }
     setLoading(false);
+  }
+
+  async function getInitData( token: string, period: string): Promise<{    
+    user: IUserData | null,
+    status: number, 
+    stat: [any] | [] | null, 
+    foods: {foods: {publicFoods: IFood[] | []}, ingredients: any[]}, 
+    health: {illnesses: IIllness[] | null, bodyPlaces: IBodyPlaces[] | null}, diseases: any }> {
+      return await fetch(API_URL + '/stats/getdata', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "API-KEY": API_KEY,
+          "TOKEN": token
+        },
+        mode: "cors",
+        body: JSON.stringify({
+          period
+        }),
+      })
+      .then(res => res.json());
   }
 
   useEffect(() => {

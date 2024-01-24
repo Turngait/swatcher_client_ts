@@ -4,13 +4,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-import LeftMenu from '../../components/common/LeftMenu';
-import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewFoodModal from './components/Modals/AddNewFood';
 import EditFoodModal from './components/Modals/EditFood';
 import Loader from 'components/common/Loader';
-import MobileMenu from 'components/common/MobileMenu';
+import Overlay from 'components/common/Overlay';
 
 import { 
   addNewFoodService,
@@ -36,9 +34,9 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [editableFood, setEditableFood] = useState<IFood | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [ingredients, setIngredients] = useState<any>([]);
   const [foodsGroups, setFoodsGroups] = useState<any>([]);
+  const [msg, setMsg] = useState<string | null>(null);
 
   const init = async (token: string): Promise<void> => {
     if (Array.isArray(foods) && foods.length === 0) {
@@ -63,7 +61,6 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     }
   }, []);
 
-  // TODO Добавить обработку ошибок и вывод сообщений
   const addNewFood = async (
       title: string,
       units:string,
@@ -101,18 +98,15 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
     setLoading(false);
   }
 
-  const exit = () => {
-    localStorage.removeItem('token');
-    history.push('/');
-  }
-
   const deleteFoodHandler = async (id: string): Promise<void> => {
     setLoading(true);
     const {status} = await deleteFood(id, token || '');
-    // TODO добавить вывод ошибки сервера на экран
     if (status === 200) {
       const newFoods = foods.filter((food) => food.id !== id);
       dispatch(setAllFoods(newFoods));
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
   }
@@ -134,6 +128,9 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       }
       dispatch(setAllFoods(foods));
       setIsEditFoodOpen(false);
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
   }
@@ -156,16 +153,14 @@ const FoodPage: React.FC<RouteComponentProps> = ({ history }) => {
       {
         isAddFoodOpen ? <AddNewFoodModal addFoodGroup={addFoodGroup} foodsGroups={foodsGroups} ingredients={ingredients} addNewFood={addNewFood} closeModal={setIsAddFoodOpen}/> : null
       }
-      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit} /> : null}
-      <LeftMenu />
-      <div className="foodPage__info">
-        <Header openMenu={setIsMenuOpen} exit={exit} title={t('foods.food')}/>
+      <Overlay setLoading={setLoading} history={history} title={t('foods.food')}>
         <Info
+          msg={msg}
           onDeleteFood={deleteFoodHandler}
           setIsAddFoodOpen={setIsAddFoodOpen}
           onEditFood={editFoodOpener}
         />
-      </div>
+      </Overlay>
     </div>
   )
 }

@@ -3,14 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RouteComponentProps } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-import LeftMenu from '../../components/common/LeftMenu';
-import Header from '../../components/common/Header';
 import Info from './components/Info';
 import AddNewIllnessModal from './components/Modals/AddNewIllness';
 import EditIllnessModal from './components/Modals/EditIllnessModal';
 import EditDiseaseModal from './components/Modals/EditDiseaseModal';
 import Loader from '../../components/common/Loader';
-import MobileMenu from '../../components/common/MobileMenu';
+import Overlay from 'components/common/Overlay';
 // import DialogModal from 'components/common/DialogModal';
 
 import {
@@ -30,7 +28,7 @@ import {IBodyPlaces, IDisease, IIllness} from '../../types/common';
 
 import './index.scss';
 
-//TODO сделать уведомления в случае ошибки сервера по разным функциям. Поправить везде функционал по добавлению
+
 const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -43,16 +41,11 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [editableIllness, setEditableIllness] = useState<IIllness | null>(null);
   const [editableDisease, setEditableDisease] = useState<IDisease | null>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [msg, setMsg] = useState<string | null>(null);
 
   const illnesses: IIllness[] | [] = useSelector((state: any) => state.health.illnesses);
   const diseases: IDisease[] | [] = useSelector((state: any) => state.health.diseases);
   const bodyPlaces: IBodyPlaces[] | [] = useSelector((state: any) => state.health.bodyPlaces);
-
-  const exit = () => {
-    localStorage.removeItem('token');
-    history.push('/');
-  }
 
   const init = async (token: string): Promise<void> => {
     if ((Array.isArray(illnesses) && illnesses.length === 0) || (Array.isArray(diseases) && diseases.length)) {
@@ -100,10 +93,10 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
       dispatch(setAllHealth(newIllnesses));
     } else if(errors && errors.length) {
       setMsg(errors[0].msg || t('msgs.err1'));
-      setTimeout(() => setMsg(null), 3000)
+      setTimeout(() => setMsg(null), 3000);
     } else {
       setMsg(t('msgs.err1'));
-      setTimeout(() => setMsg(null), 3000)
+      setTimeout(() => setMsg(null), 3000);
     }
     setLoading(false);
   }
@@ -146,6 +139,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     if(status === 200) {
       const newIlls = illnesses.filter((item) => item.id !== id);
       dispatch(setAllHealth(newIlls));
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
   }
@@ -156,6 +152,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
     if(status === 200) {
       const newDiseases = diseases.filter((item) => item.id !== id);
       dispatch(setDiseases(newDiseases));
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
   }
@@ -189,6 +188,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         }
       }
       dispatch(setAllHealth(illnesses));
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setIsEditIllnessOpen(false);
   }
@@ -206,6 +208,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         }
       }
       dispatch(setDiseases(diseases));
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setIsEditDiseaseOpen(false);
     setLoading(false);
@@ -223,6 +228,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
         }
       }
       dispatch(setDiseases(diseases));
+    } else {
+      setMsg(t('msgs.err1'));
+      setTimeout(() => setMsg(null), 3000)
     }
     setLoading(false);
     return;
@@ -254,11 +262,9 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
             symptoms={illnesses}
           /> : null
       }
-      {isMenuOpen ? <MobileMenu closeMenu={setIsMenuOpen} logOut={exit}/> : null}
-      <LeftMenu />
-      <div className="healthPage__info">
-        <Header openMenu={setIsMenuOpen} exit={exit} title={t('health.health')}/>
+      <Overlay setLoading={setLoading} history={history} title={t('health.health')} >
         <Info
+          msg={msg}
           deleteDisease={deleteDisease}
           deleteIllness={deleteIllness}
           setIsAddIllnessOpen={setIsAddIllnessOpen}
@@ -266,7 +272,7 @@ const HealthPage:React.FC<RouteComponentProps> = ({ history }) => {
           openEditDisease={openEditDisease}
           toggleDiseaseActiveStatus={toggleDiseaseActiveStatusHandler}
         />
-      </div>
+      </Overlay>
     </div>
   )
 }

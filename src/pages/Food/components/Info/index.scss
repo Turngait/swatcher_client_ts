@@ -1,10 +1,13 @@
-.foodInfo {
-  // display: flex;
-  // justify-content: space-between;
-  // gap: 1rem;
+@import "../../../../styles/colors.scss";
 
+.foodInfo {
   &__myFoodMobileBtn {
     display: none;
+  }
+
+  &__msg {
+    font-size: 2rem;
+    color: $red;
   }
 }
 

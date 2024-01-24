@@ -13,7 +13,7 @@ import Overlay from 'components/common/Overlay';
 
 import { IFood, IFoodStat, IIllness, IStat, IUserData } from '../../types/common';
 
-import { saveFirstSetupData, getInitData, addFoodForDay, getStatForPeriod, deleteIllnessForDayService, deleteFoodForDayService, addIllnessForDayService } from './services';
+import { saveFirstSetupData, addFoodForDay, getStatForPeriod, deleteIllnessForDayService, deleteFoodForDayService, addIllnessForDayService } from './services';
 import { setStat } from '../../store/User/user.actions';
 
 
@@ -137,7 +137,7 @@ const Dashboard:React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   return (
-    <Overlay title={t('menu.stats')} getInitData={getInitData} setLoading={setLoading} history={history}>
+    <Overlay title={t('menu.stats')} setLoading={setLoading} history={history}>
       {
         loading ? <Loader /> : null
       }

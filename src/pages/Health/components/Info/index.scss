@@ -1,7 +1,14 @@
+@import "../../../../styles/colors.scss";
+
 .healthInfo {
   &__box {
     display: flex;
     gap: 1rem;
+  }
+
+  &__msg {
+    font-size: 2rem;
+    color: $red;
   }
 }
 
